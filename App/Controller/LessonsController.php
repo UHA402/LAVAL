@@ -10,6 +10,10 @@
 			
 			$this->view->render('lessons/index');
 		}
+
+		function view() {
+			$this->view->render('lessons/view');
+		}
 	
 	
 	}
