@@ -10,12 +10,20 @@ class User extends Model{
 	}
 
 	/*
-	 * Enregistre un utilisateur en basse de donnée
+	 * Enregistre un utilisateur en base de donnée
 	 */
 
 	public function create(array $user){
-		$this->db->query("INSERT INTO users (firstName, lastName, mail, pass) 
-						  VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
+		$this->db->query("INSERT INTO users (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
+	}
+
+	/*
+	 * Fonction de modification d'un utilisateur*
+	 * $this->update($_POST['user']);
+	 */
+
+	public function update(array $user){
+		$this->db->query("UPDATE users (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
 	}
 
 	/*
@@ -55,15 +63,5 @@ class User extends Model{
 
 	public function delete($id){
 		$this->db->query("DELETE FROM users WHERE id=".$id);
-	}
-
-	/*
-	 * POUR L'EXEMPLE : Vérif présence mail
-	 * Utilisation : User->check(mail)
-	 */
-	
-	public function check($mail) {
-		$data = $this->db->query("SELECT * FROM users WHERE mail = '".$mail."'");
-		return ($data)? $data : false;
 	}
 }
