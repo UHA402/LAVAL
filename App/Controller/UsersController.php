@@ -15,7 +15,7 @@ class UsersController extends Controller {
 	 * Fonction de connection
 	 */ 
 
-	public function login() {
+ 	public function login() {
 		$msg = null;
 		if (isset($_POST['user'])) {
 			if (isset($_POST['user']['mail']) && isset($_POST['user']['password'])) {
@@ -37,7 +37,7 @@ class UsersController extends Controller {
 		session_destroy();
 		$msg = "Vous êtes bien deconnecté";
 		$this->view->msg = $msg;
-		$this->view->render('logout');
+		$this->view->render('users/logout');
 
 	}
 
@@ -56,8 +56,13 @@ class UsersController extends Controller {
 			isset($_POST['user']['firstName']) && 
 			isset($_POST['user']['lastName'])) {
 				if ($_POST['user']['password'] == $_POST['user']['password2']) {
-					$this->User->create($_POST['user']);
-					$msg = "Votre inscription a bien été prise en comtpe";
+					if($this->User->findByMail($_POST['user']['mail'])) {
+							$erreurs[] = "Un utilisateur utilise déjà cet e-mail";
+						}
+						else {
+							$this->User->create($_POST['user']);
+							$msg = "Votre inscription a bien été prise en comtpe";
+						}
 
 				} else $msg = "Les mots de passes renseignés ne sont pas identiques";
 
@@ -68,31 +73,24 @@ class UsersController extends Controller {
 		$this->view->render('users/home');
 	}
 
+
+	/*
+	 * Fonction de recuperation de mot de passe
+	 */
+
 	public function recovery() {
 	}
 
-	public function home() {
-	}
-
 	/*
-	 * Pour le mini test
+	 * Accueil de la partie user
 	 */
 
-	public function getUser() {
-		$erreur = false;
-		$user = false;
-		if (isset($_POST['mail'])) {
-			if (strlen($_POST['mail']) >= 6) {
-				if ($this->User->check($_POST['mail'])) {
-					$user = $this->User->check($_POST['mail']);
-				}
-				else $erreur = 'Le mail n\'a pas été trouvé dans la DB';
-			}
-			else $erreur = 'Le mail est trop court';
+	public function home() {
+		if (isset($_SESSION['user'])) {
+			$lessons = $this->Lesson->findToDo();
+
+			$this->view->lessons = $lessons;
+			$this->view->render('users/lessons');
 		}
-		else $erreur = 'Entrez le mail SVP';
-		$this->view->erreur = $erreur;
-		$this->view->user = $user;
-		$this->view->render('users/index');
 	}
 }
