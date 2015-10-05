@@ -99,4 +99,9 @@ class UsersController extends Controller {
 		$this->view->user = $user;
 		$this->view->render('users/index');
 	}
+
+	public function listUsers(){
+		$users;
+
+	}
 }
