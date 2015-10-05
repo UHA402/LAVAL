@@ -100,8 +100,8 @@ class UsersController extends Controller {
 		$this->view->render('users/index');
 	}
 
-	public function listUsers(){
-		$users;
+	public function listUsers($users){
+		return $users;
 
 	}
 }
