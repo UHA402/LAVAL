@@ -1,0 +1,36 @@
+.dropdown-menu {
+  padding: 17px;
+}
+
+.panel-lecon {
+	height: 200px;
+	padding-top: 30px;
+}
+
+.panel-body-vignette > .label {
+  float: right;
+  margin: 5px;
+}
+
+.panel-body-vignette > .label + .label {
+  margin-right: 5px;
+}
+
+.linklecon {
+	orphans: 3;
+    widows: 3;
+    color: #ffffff;
+}
+
+.linklecon:hover{
+	color: #ffffff;
+}
+
+.vertical-align {
+  display: flex;
+  align-it
+}
+
+.form-control-feedback {
+	padding-right: 40px;
+}
