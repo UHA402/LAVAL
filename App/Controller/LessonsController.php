@@ -17,4 +17,8 @@
 		function add() {
 			$this->view->render('lessons/add');
 		}
+
+		function delete() {
+			$this->view->render('lessons/delete');
+		}
 	}
