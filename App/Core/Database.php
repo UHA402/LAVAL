@@ -1,4 +1,4 @@
-<?php namespace App\core\Database;
+<?php namespace App\Core\Database;
 
 
 /*
@@ -20,6 +20,8 @@ class Database{
 	private $pdo;
 
 	public function __construct($database, $user = 'root', $pass = '', $host = 'localhost'){
+		/*parent::__construct($database, $user = 'root', $pass = '', $host = 'localhost');
+		parent::setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING);*/
 		$this->database = $database;
 		$this->user = $user;
 		$this->pass = $pass;
@@ -31,9 +33,9 @@ class Database{
 	 	$pdo = $this->pdo;
 	 	//Connection à la database
 	 	if ($pdo === null){ // Si on a pas encore d'objet PDO (on est pas connecté)
-		 	$pdo = new PDO('mysql:dbname='.$this->database.';host='.$this->host.';charset=UTF8', $this->user, $this->pass); // Alors on se connecte
+		 	$pdo = new \PDO('mysql:dbname='.$this->database.';host='.$this->host.';charset=UTF8', $this->user, $this->pass); // Alors on se connecte
 		 	if($this->host == 'localhost'){ // Si on est en dev
-		 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); // Alors on renvoi des erreurs
+		 		$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING); // Alors on renvoi des erreurs
 		 	}
 	 		$this->pdo = $pdo;
 	 	}
@@ -42,8 +44,9 @@ class Database{
 
 	 public function query($sqlRequest){ 
 	 // Effectue la requete SQL définie et retourne un array
+
 	 	$request = $this->getPDO()->query($sqlRequest);
-	 	$data = $request->fetchAll(PDO::FETCH_ASSOC);
+	 	$data = $request->fetchAll(\PDO::FETCH_ASSOC);
 	 	return $data;
 	 }
 
