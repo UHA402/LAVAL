@@ -28,9 +28,29 @@
 
 .vertical-align {
   display: flex;
-  align-it
+  align-items: center;
 }
 
 .form-control-feedback {
 	padding-right: 40px;
+}
+
+.player {
+	margin-top: 5px;
+}
+
+.fullheight {
+	height: 100%;
+}
+
+.progheight {
+	height: 32px;
+}
+
+.iconfull {
+	font-size: 500px;
+}
+
+.sequence {
+	min-height: 800px;
 }
