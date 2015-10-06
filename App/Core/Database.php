@@ -22,8 +22,6 @@ class Database
 
 	public function __construct($database, $user = 'root', $pass = '', $host = 'localhost')
 	{
-		/*parent::__construct($database, $user = 'root', $pass = '', $host = 'localhost');
-		parent::setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING);*/
 		$this->database = $database;
 		$this->user = $user;
 		$this->pass = $pass;
@@ -53,6 +51,7 @@ class Database
 	 * @return array|bool -> Array si SELECT, sinon BOOL en fonction de succès requête
 	 * Exemple : query('SELECT * FROM table WHERE field = %field%', array('field' => $value));
 	 */
+
 	public function query($sqlRequest, array $data = null)
 	{
 		if ($data != null) {
@@ -70,32 +69,4 @@ class Database
 		}
 		else return ($request != FALSE);
 	 }
-
-	/*
-	public function find(array $params)
-	{
-		$params = array('name' => 'NOM');
-		$requete = 'SELECT * FROM bricks WHERE brick_name = %name%';
-	}
-
-	$sql->query('SELECT * FROM bricks WHERE brick_name = %name%');*/
-
-	public function save($sqlRequest, $type = "find")
-	{
-		// Effectue la requete SQL définie et retourne un array
-
-		$request = $this->getPDO()->query($sqlRequest);
-		if ($type == "find") {
-			# code...
-		}
-		$data = $request->fetchAll(\PDO::FETCH_ASSOC);
-		return $data;
-	}
-
-	/*
-	 * Idées d'amélioration
-	 * 1. Ajouter des fonctions save(), find()
-	 * 2. Utiliser un fichier de config pour stocker et les infos de
-	 * la database et les récupérer en valeurs par défaut dans l'objet
-	 */
 }

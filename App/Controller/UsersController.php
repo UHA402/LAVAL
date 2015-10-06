@@ -30,7 +30,7 @@ class UsersController extends Controller {
 
 	/*
 	 * Fonction de déconnection
-	 * envoie une variable $msg à la vue
+	 * envoi une variable $msg à la vue
 	 */
 
 	public function logout() {
@@ -48,7 +48,6 @@ class UsersController extends Controller {
 
 	public function register() {
 		$msg = null;
-		var_dump($_POST);
 		if (isset($_POST['user'])) {
 			if (isset($_POST['user']['mail']) && 
 			isset($_POST['user']['password']) && 
@@ -75,7 +74,7 @@ class UsersController extends Controller {
 
 
 	/*
-	 * Fonction de recuperation de mot de passe
+	 * Fonction de récuperation de mot de passe
 	 */
 
 	public function recovery() {
