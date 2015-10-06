@@ -42,10 +42,24 @@ class Database{
 	 	return $this->pdo;
 	 }
 
-	 public function query($sqlRequest){ 
+	 public function find($sqlRequest, $type="find"){ 
 	 // Effectue la requete SQL définie et retourne un array
 
 	 	$request = $this->getPDO()->query($sqlRequest);
+	 	if ($type == "find") {
+	 		# code...
+	 	}
+	 	$data = $request->fetchAll(\PDO::FETCH_ASSOC);
+	 	return $data;
+	 }
+
+	 public function save($sqlRequest, $type="find"){ 
+	 // Effectue la requete SQL définie et retourne un array
+
+	 	$request = $this->getPDO()->query($sqlRequest);
+	 	if ($type == "find") {
+	 		# code...
+	 	}
 	 	$data = $request->fetchAll(\PDO::FETCH_ASSOC);
 	 	return $data;
 	 }
