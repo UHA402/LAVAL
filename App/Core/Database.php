@@ -50,7 +50,7 @@ class Database
 	 * des variables, qui seront échappées
 	 * @param $sqlRequest = Requête SQL à exécuter
 	 * @param array $data = [OPTIONNEL] Données à insérer dans la requête
-	 * @return array|bool -> Array si SELECT, sinon BOOL
+	 * @return array|bool -> Array si SELECT, sinon BOOL en fonction de succès requête
 	 * Exemple : query('SELECT * FROM table WHERE field = %field%', array('field' => $value));
 	 */
 	public function query($sqlRequest, array $data = null)
