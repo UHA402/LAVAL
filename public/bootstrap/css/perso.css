@@ -29,6 +29,7 @@
 .vertical-align {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .form-control-feedback {
@@ -51,6 +52,10 @@
 	font-size: 500px;
 }
 
-.sequence {
-	min-height: 800px;
+.stimuli {
+	height: 400px;
+}
+
+#briqueContent {
+	margin-bottom: 25px;
 }
