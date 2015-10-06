@@ -15,11 +15,22 @@ class UsersController extends Controller {
 	 * Fonction de connection
 	 */ 
 
- 
+ 	public function login() {
+		$msg = null;
+		if (isset($_POST['user'])) {
+			if (isset($_POST['user']['mail']) && isset($_POST['user']['password'])) {
+				$user = $this->User->fetchValidUser($_POST['user']);
+				$_SESSION['user'] = $user;
+				$msg = "Vous êtes connecté !";
+				$this->view->render('users/home');
+			} else $msg = "L'email et le mot de passe ne correspondent pas";
+		} else $msg = "Il n'y a pas de données postées";
+		$this->view->msg = $msg;
+	}
 
 	/*
 	 * Fonction de déconnection
-	 * envoie une variable $msg à la vue
+	 * envoi une variable $msg à la vue
 	 */
 
 	public function logout() {
@@ -37,7 +48,6 @@ class UsersController extends Controller {
 
 	public function register() {
 		$msg = null;
-		var_dump($_POST);
 		if (isset($_POST['user'])) {
 			if (isset($_POST['user']['mail']) && 
 			isset($_POST['user']['password']) && 
@@ -64,10 +74,15 @@ class UsersController extends Controller {
 
 
 	/*
-	 * Fonction de recuperation de mot de passe
+	 * Fonction de récuperation de mot de passe
 	 */
+
 	public function recovery() {
 	}
+
+	/*
+	 * Accueil de la partie user
+	 */
 
 	public function home() {
 		if (isset($_SESSION['user'])) {
@@ -76,32 +91,5 @@ class UsersController extends Controller {
 			$this->view->lessons = $lessons;
 			$this->view->render('users/lessons');
 		}
-	}
-
-	/*
-	 * Pour le mini test
-	 */
-
-	public function getUser() {
-		$erreur = false;
-		$user = false;
-		if (isset($_POST['mail'])) {
-			if (strlen($_POST['mail']) >= 6) {
-				if ($this->User->check($_POST['mail'])) {
-					$user = $this->User->check($_POST['mail']);
-				}
-				else $erreur = 'Le mail n\'a pas été trouvé dans la DB';
-			}
-			else $erreur = 'Le mail est trop court';
-		}
-		else $erreur = 'Entrez le mail SVP';
-		$this->view->erreur = $erreur;
-		$this->view->user = $user;
-		$this->view->render('users/index');
-	}
-
-	public function listUsers($users){
-		return $users;
-
 	}
 }
