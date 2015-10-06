@@ -1,11 +1,9 @@
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-body text-center sequence">
-				<h1 class="iconfull"><span class="glyphicon glyphicon-volume-up"></span></h1>
-				<audio controls="controls" style="width: 500px;">
-  Votre navigateur ne supporte pas l'élément <code>audio</code>.
-  <source src="toto.wav" type="audio/wav">
-</audio>
+				<div id="briqueContent">
+				
+				</div>
 			</div>
 			<div class="progress fullheight">
 				<div class="progress-bar progheight" role="progressbar" aria-valuenow="60"
