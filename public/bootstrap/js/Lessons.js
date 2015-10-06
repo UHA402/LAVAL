@@ -30,7 +30,6 @@ function Brique(id, type, name, data) {
 
 //Charge toutes les briques dans l'objet brique
 function LoadBrique() {
-	
 	//fonction php qui recup la liste des id brique que contient la sequence
 	var listBricks = "<?php echo GetTabBricks(sequenceId) ?>";
 	
@@ -69,11 +68,11 @@ function LoadTemplate(brique) {
 		break;
 	case 2:
 		//chargement du model WAVE
-		LoadModelSound(brique.data);
+		LoadModelTTS(brique.data);
 		break;
 	case 3:
 		//chargement du model TTS
-		LoadModelTTS(brique.data);
+		LoadModelSound(brique.data);
 		break;
 	case 4:
 		//chargement du model Stimuli textuel
