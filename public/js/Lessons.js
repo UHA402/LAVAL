@@ -4,6 +4,7 @@ var positionSequence = 0; //Position dans la sequence
 var listOfBrique = []; //List des objets brique
 
 $(document).ready( function() {	
+	
 	//Chargement des briques
 	LoadBrique();
 	
@@ -15,8 +16,7 @@ $(document).ready( function() {
 	
 	//Event click sur "Suivant"
 	$('#next-brique').click(function() {
-		LoadTemplate(listOfBrique[positionSequence]);
-		RefreshStatus();
+		NextBrique();
 	});
 });
 
@@ -62,23 +62,23 @@ function GetDataBrick(id) {
 function LoadTemplate(brique) {
 	
 	switch(brique.type) {
-	case 1:
+	case "MIDI":
 		//chargement du model MIDI
 		LoadModelSound(brique.data);
 		break;
-	case 2:
+	case "WAVE":
 		//chargement du model WAVE
 		LoadModelTTS(brique.data);
 		break;
-	case 3:
+	case "RESP":
 		//chargement du model TTS
 		LoadModelSound(brique.data);
 		break;
-	case 4:
+	case "TEXT":
 		//chargement du model Stimuli textuel
 		LoadModelStimuliText(brique.data);
 		break;
-	case 5:
+	case "IMG":
 		//chargement du model Stimuli IMAGE
 		LoadModelStimuliImg(brique.data);
 		break;
@@ -104,10 +104,28 @@ function LoadModelStimuliText(stimuli) {
 	
 	//insert les stimuli dans le model
 	$("#briqueContent").load("http://192.168.33.10/LAVAL/App/View/lessons/stimuli.php", function() {
-		$("#stimu1").append("<h1>" + stimu[0] + "</h1>")
-		$("#stimu2").append("<h1>" + stimu[1] + "</h1>")
-		$("#stimu3").append("<h1>" + stimu[2] + "</h1>")
-		$("#stimu4").append("<h1>" + stimu[3] + "</h1>")
+		$("#stimu1").append('<a id="repStimu1" href="#"><h1>' + stimu[0] + '</h1></a>')
+		$("#stimu2").append('<a id="repStimu2" href="#"><h1>' + stimu[1] + '</h1></a>')
+		$("#stimu3").append('<a id="repStimu3" href="#"><h1>' + stimu[2] + '</h1></a>')
+		$("#stimu4").append('<a id="repStimu4" href="#"><h1>' + stimu[3] + '</h1></a>')
+		
+		//lance un event au click
+		$("#repStimu1").click(function () {
+			SaveStimuli(1);
+			NextBrique();
+		});
+		$("#repStimu2").click(function () {
+			SaveStimuli(2);
+			NextBrique();
+		});
+		$("#repStimu3").click(function () {
+			SaveStimuli(3);
+			NextBrique();
+		});
+		$("#repStimu4").click(function () {
+			SaveStimuli(4);
+			NextBrique();
+		});
 	});
 }
 
@@ -118,10 +136,27 @@ function LoadModelStimuliImg(stimuli) {
 	
 	//insert les stimuli dans le model
 	$("#briqueContent").load("http://192.168.33.10/LAVAL/App/View/lessons/stimuli.php", function() {
-		$("#stimu1").append('<img src="' + stimu[0] + '" class="img-responsive" alt="Stimuli 1">');
-		$("#stimu2").append('<img src="' + stimu[1] + '" class="img-responsive" alt="Stimuli 2">');
-		$("#stimu3").append('<img src="' + stimu[2] + '" class="img-responsive" alt="Stimuli 3">');
-		$("#stimu4").append('<img src="' + stimu[3] + '" class="img-responsive" alt="Stimuli 4">');
+		$("#stimu1").append('<a id="repStimu1" href="#"><img src="' + stimu[0] + '" class="img-responsive" alt="Stimuli 1"></a>');
+		$("#stimu2").append('<a id="repStimu1" href="#"><img src="' + stimu[1] + '" class="img-responsive" alt="Stimuli 2"></a>');
+		$("#stimu3").append('<a id="repStimu1" href="#"><img src="' + stimu[2] + '" class="img-responsive" alt="Stimuli 3"></a>');
+		$("#stimu4").append('<a id="repStimu1" href="#"><img src="' + stimu[3] + '" class="img-responsive" alt="Stimuli 4"></a>');
+		
+		$("#repStimu1").click(function () {
+			SaveStimuli(1);
+			NextBrique();
+		});
+		$("#repStimu2").click(function () {
+			SaveStimuli(2);
+			NextBrique();
+		});
+		$("#repStimu3").click(function () {
+			SaveStimuli(3);
+			NextBrique();
+		});
+		$("#repStimu4").click(function () {
+			SaveStimuli(4);
+			NextBrique();
+		});
 	}); 
 }
 
@@ -160,6 +195,8 @@ function ProgressBar() {
 
 //Verifie si la sequence est fini
 function VerifDone() {
+	
+	//Verifi si la sequence est fini
 	if(positionSequence + 1 === nbBricks) {
 		$('#next-brique').removeClass("btn-success");
 		$('#next-brique').addClass("btn-primary");
@@ -169,4 +206,24 @@ function VerifDone() {
 			alert("FINI !");
 		});
 	}
+	//si la sequence n'est pas fini et que le type brique est 4 ou 5 (stimuli)
+	else if(listOfBrique[positionSequence].type === "TEXT" || listOfBrique[positionSequence].type === "IMG") {
+		console.log(listOfBrique[positionSequence].type);
+		$("#next-brique").hide();
+	}
+	//si c'est une brique normal
+	else {
+		$("#next-brique").show();
+	}
+}
+
+//Passe à la brique suivante
+function NextBrique() {
+	LoadTemplate(listOfBrique[positionSequence]);
+	RefreshStatus();
+}
+
+//Sauvegarde le choix utilisateur
+function SaveStimuli(numStimu) {
+	
 }
