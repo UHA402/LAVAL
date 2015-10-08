@@ -5,6 +5,6 @@
 
 		}
 	?>
-	<h1>Bienvenue <?php echo $this->username;?></h1>
+	<h1>Bienvenue <?php if (isset($this->username)) echo $this->username;?></h1>
 
 </div>

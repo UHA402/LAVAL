@@ -25,10 +25,12 @@ class UsersController extends Controller {
 				$this->view->msg = $msg;
 
 				if ($user['role'] == "admin") {
-					$this->admin_index();
+					//$this->admin_index();
+					header('Location: /user/admin_index');
 				}
 				else {
-					$this->index();
+					//$this->index();
+					header('Location: /user/index');
 				}
 
 			} else {
@@ -63,7 +65,8 @@ class UsersController extends Controller {
 						$this->User->create($_POST['user']);
 						$msg = "Votre inscription a bien été prise en comtpe";
 						$this->view->msg = $msg;
-						$this->login();
+						//$this->login();
+						header('Location: /user/login');
 					}
 
 				} else {
@@ -96,7 +99,8 @@ class UsersController extends Controller {
 		} else {
 			$msg = "Vous devez vous connecter avant de pouvoir acceder à cette partie";
 			$this->view->msg = $msg;
-			$this->view->render('users/index');
+			//header('Location: /user/login');
+			$this->view->render('users/login');
 		}
 	}
 
@@ -106,9 +110,10 @@ class UsersController extends Controller {
 				$this->view->username = $username;
 				$this->view->render('users/admin/index');
 			} else {
-				$msg = "Vous devez vous connecter avant de pouvoir acceder à cette partie";
+				$msg = "Vous devez être administrateur pour pouvoir acceder à cette partie";
 				$this->view->msg = $msg;
-				$this->view->render('users/index');
+				//header('Location: /user/login');
+				$this->view->render('users/login');
 			}
 	}
 
@@ -121,7 +126,8 @@ class UsersController extends Controller {
 		session_destroy();
 		$msg = "Vous êtes bien deconnecté";
 		$this->view->msg = $msg;
-		$this->view->render('index/index');
+		//$this->view->render('index/index');
+		header('Location: /');
 	}
 
 	/*
