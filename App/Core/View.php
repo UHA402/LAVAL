@@ -17,14 +17,10 @@
     // Moteur de rendu des vues.
     public function render($name)
   	{
-      
       require 'App/View/header.php';
       require 'App/View/navbar.php';
       require 'App/View/'.$name.'.php';
       require 'App/View/footer.php';
-
   	}
 
-
   }
- ?>

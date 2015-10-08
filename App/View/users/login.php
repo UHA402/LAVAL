@@ -6,7 +6,7 @@
 					<p>Rentre profondément dans mon site</p>
 				</div>
 				<div class="col-md-4">
-					<form method="post" class="form-horizontal" data-toggle="validator" action="user/login">
+					<form method="post" class="form-horizontal" data-toggle="validator" action="/user/login">
 						<fieldset>
 							<legend class="text-center">Connexion</legend>
 							<div class="form-group">

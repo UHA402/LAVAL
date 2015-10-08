@@ -1,13 +1,13 @@
 <?php
 use App\Core\Controller\Controller;
 use App\Core\View\View;
+session_start();
 
 /*
  *  Gestion de la logique utilisateur
  */
 class UsersController extends Controller {
 	// Chargement des models
-	$User = $this->loadModel('User');
 
 	function __construct(){
 		parent::__construct();
@@ -15,21 +15,101 @@ class UsersController extends Controller {
 
 	/*
 	 * Fonction de connection
-	 */ 
-
- 	public function login() {
-		$msg = null;
+	 */
+	public function login() {
 		if (isset($_POST['user'])) {
 			if (isset($_POST['user']['mail']) && isset($_POST['user']['password'])) {
 				$user = $this->User->fetchValidUser($_POST['user']);
 				$_SESSION['user'] = $user;
 				$msg = "Vous êtes connecté !";
-				$this->view->render('users/home');
-			} else $msg = "L'email et le mot de passe ne correspondent pas";
+				$this->view->msg = $msg;
+
+				if ($user['role'] == "admin") {
+					$this->admin_index();
+				}
+				else {
+					$this->index();
+				}
+
+			} else {
+				$msg = "L'email et le mot de passe ne correspondent pas";
+				$this->view->msg;
+				$this->view->render('/users/login');
+			}
 		} else {
+			$this->view->render('/users/login');
+		}
+	}
+
+	/*
+	 * Fonction d'inscription
+	 * $this->User->register($_POST['user']);
+	 */
+	public function register() {
+		$msg = null;
+		if (isset($_POST['user'])) {
+			if (isset($_POST['user']['mail']) &&
+				isset($_POST['user']['password']) &&
+				isset($_POST['user']['password2']) &&
+				isset($_POST['user']['firstName']) &&
+				isset($_POST['user']['lastName'])) {
+				if ($_POST['user']['password'] == $_POST['user']['password2']) {
+					if($this->User->findByMail($_POST['user']['mail'])) {
+						$msg = "Un utilisateur utilise déjà cet e-mail";
+						$this->view->msg = $msg;
+						$this->view->render('users/register');
+					}
+					else {
+						$this->User->create($_POST['user']);
+						$msg = "Votre inscription a bien été prise en comtpe";
+						$this->view->msg = $msg;
+						$this->login();
+					}
+
+				} else {
+					$msg = "Les mots de passes renseignés ne sont pas identiques";
+					$this->view->msg = $msg;
+					$this->view->render('users/register');
+				}
+
+			} else
+			{
+				$msg = "Veuillez renseigner tous les champs";
+				$this->view->msg = $msg;
+				$this->view->render('users/register');
+			}
+		} else {
+			$this->view->render('users/register');
+		}
+	}
+
+	/*
+	 * Accueil de la partie user
+ 	 */
+	public function index(){
+		if (isset($_SESSION['user'])) {
+			//$lessons = $this->Lesson->findToDo();
+			//$this->view->lessons = $lessons;
+			$username = $_SESSION['user']['firstName'];
+			$this->view->username = $username;
+			$this->view->render('users/index');
+		} else {
+			$msg = "Vous devez vous connecter avant de pouvoir acceder à cette partie";
 			$this->view->msg = $msg;
-			$this->view->render('users/login');
-		} $msg = "Il n'y a pas de données postées";
+			$this->view->render('users/index');
+		}
+	}
+
+	public function admin_index(){
+		if (isset($_SESSION['user']) && $_SESSION['user']['role'] == "admin") {
+				$username = $_SESSION['user']['firstName'];
+				$this->view->username = $username;
+				$this->view->render('users/admin/index');
+			} else {
+				$msg = "Vous devez vous connecter avant de pouvoir acceder à cette partie";
+				$this->view->msg = $msg;
+				$this->view->render('users/index');
+			}
 	}
 
 	/*
@@ -41,68 +121,13 @@ class UsersController extends Controller {
 		session_destroy();
 		$msg = "Vous êtes bien deconnecté";
 		$this->view->msg = $msg;
-		$this->view->render('users/logout');
-
+		$this->view->render('index/index');
 	}
-
-	/*
-	 * Fonction d'inscription
-	 * $this->User->register($_POST['user']);
-	 */
-
-	public function register() {
-		$msg = null;
-		if (isset($_POST['user'])) {
-			if (isset($_POST['user']['mail']) && 
-			isset($_POST['user']['password']) && 
-			isset($_POST['user']['password2']) && 
-			isset($_POST['user']['firstName']) && 
-			isset($_POST['user']['lastName'])) {
-				if ($_POST['user']['password'] == $_POST['user']['password2']) {
-					if($this->User->findByMail($_POST['user']['mail'])) {
-							$erreurs[] = "Un utilisateur utilise déjà cet e-mail";
-						}
-						else {
-							$this->User->create($_POST['user']);
-							$msg = "Votre inscription a bien été prise en comtpe";
-						}
-
-				} else $msg = "Les mots de passes renseignés ne sont pas identiques";
-
-			} else $msg = "Veuillez renseigner tous les champs";
-
-		} else $msg = "Il n'y a pas de données postées";
-		$this->view->msg = $msg;
-		$this->view->render('users/home');
-	}
-
 
 	/*
 	 * Fonction de récuperation de mot de passe
 	 */
-
 	public function recovery() {
 	}
 
-	/*
-	 * Accueil de la partie user
-	 */
-
-	public function home() {
-		$msg = "Mes leçons";
-		if (isset($_SESSION['user'])) {
-			$lessons = $this->Lesson->findToDo();
-
-			$this->view->lessons = $lessons;
-			$this->view->render('users/lessons');
-		}
-		$this->view->msg = $msg;
-			$this->view->render('users/home');
-	}
-
-	public function admin_index(){
-		if ($_SESSION['user']['role'] == "admin") {
-			$this->view->render('users/admin/index');
-		}
-	}
 }
