@@ -6,6 +6,8 @@ use App\Core\View\View;
  *  Gestion de la logique utilisateur
  */
 class UsersController extends Controller {
+	// Chargement des models
+	$User = $this->loadModel('User');
 
 	function __construct(){
 		parent::__construct();
@@ -24,8 +26,10 @@ class UsersController extends Controller {
 				$msg = "Vous êtes connecté !";
 				$this->view->render('users/home');
 			} else $msg = "L'email et le mot de passe ne correspondent pas";
-		} else $msg = "Il n'y a pas de données postées";
-		$this->view->msg = $msg;
+		} else {
+			$this->view->msg = $msg;
+			$this->view->render('users/login');
+		} $msg = "Il n'y a pas de données postées";
 	}
 
 	/*
@@ -85,11 +89,20 @@ class UsersController extends Controller {
 	 */
 
 	public function home() {
+		$msg = "Mes leçons";
 		if (isset($_SESSION['user'])) {
 			$lessons = $this->Lesson->findToDo();
 
 			$this->view->lessons = $lessons;
 			$this->view->render('users/lessons');
+		}
+		$this->view->msg = $msg;
+			$this->view->render('users/home');
+	}
+
+	public function admin_index(){
+		if ($_SESSION['user']['role'] == "admin") {
+			$this->view->render('users/admin/index');
 		}
 	}
 }
