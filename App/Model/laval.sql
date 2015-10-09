@@ -1,28 +1,32 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 4.1.14
+-- http://www.phpmyadmin.net
 --
--- Host: localhost    Database: laval
--- ------------------------------------------------------
--- Server version	5.6.17
+-- Client :  127.0.0.1
+-- Généré le :  Ven 09 Octobre 2015 à 10:13
+-- Version du serveur :  5.6.17
+-- Version de PHP :  5.5.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbricks`
+-- Base de données :  `laval`
 --
 
-DROP TABLE IF EXISTS `tbricks`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbricks` (
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `tbricks`
+--
+
+CREATE TABLE IF NOT EXISTS `tbricks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(60) DEFAULT NULL,
   `type` enum('WAVE','MIDI','TEXT','RESP','IMG') DEFAULT NULL,
@@ -30,130 +34,72 @@ CREATE TABLE `tbricks` (
   `type_response` enum('WAVE','MIDI','TEXT','IMG') DEFAULT NULL,
   `duree` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tbricks`
+-- Structure de la table `tbricks_medias`
 --
 
-LOCK TABLES `tbricks` WRITE;
-/*!40000 ALTER TABLE `tbricks` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbricks` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tbricks_medias`
---
-
-DROP TABLE IF EXISTS `tbricks_medias`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tbricks_medias` (
+CREATE TABLE IF NOT EXISTS `tbricks_medias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_Bricks` int(11) DEFAULT NULL,
   `id_Medias` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_Bricks` (`id_Bricks`),
-  KEY `id_Medias` (`id_Medias`),
-  CONSTRAINT `tbricks_medias_ibfk_1` FOREIGN KEY (`id_Bricks`) REFERENCES `tbricks` (`id`),
-  CONSTRAINT `tbricks_medias_ibfk_2` FOREIGN KEY (`id_Medias`) REFERENCES `tmedias` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  KEY `id_Medias` (`id_Medias`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tbricks_medias`
+-- Structure de la table `tlessons`
 --
 
-LOCK TABLES `tbricks_medias` WRITE;
-/*!40000 ALTER TABLE `tbricks_medias` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbricks_medias` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tlessons`
---
-
-DROP TABLE IF EXISTS `tlessons`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tlessons` (
+CREATE TABLE IF NOT EXISTS `tlessons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(60) DEFAULT NULL,
   `duree` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tlessons`
+-- Structure de la table `tlessons_bricks`
 --
 
-LOCK TABLES `tlessons` WRITE;
-/*!40000 ALTER TABLE `tlessons` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tlessons` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tlessons_bricks`
---
-
-DROP TABLE IF EXISTS `tlessons_bricks`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tlessons_bricks` (
+CREATE TABLE IF NOT EXISTS `tlessons_bricks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_Bricks` int(11) DEFAULT NULL,
   `id_Lessons` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_Bricks` (`id_Bricks`),
-  KEY `id_Lessons` (`id_Lessons`),
-  CONSTRAINT `tlessons_bricks_ibfk_1` FOREIGN KEY (`id_Bricks`) REFERENCES `tbricks` (`id`),
-  CONSTRAINT `tlessons_bricks_ibfk_2` FOREIGN KEY (`id_Lessons`) REFERENCES `tlessons` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  KEY `id_Lessons` (`id_Lessons`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tlessons_bricks`
+-- Structure de la table `tmedias`
 --
 
-LOCK TABLES `tlessons_bricks` WRITE;
-/*!40000 ALTER TABLE `tlessons_bricks` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tlessons_bricks` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tmedias`
---
-
-DROP TABLE IF EXISTS `tmedias`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tmedias` (
+CREATE TABLE IF NOT EXISTS `tmedias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(60) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
+  `type` enum('WAVE','MIDI','TEXT','IMG') DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tmedias`
+-- Structure de la table `tresponse`
 --
 
-LOCK TABLES `tmedias` WRITE;
-/*!40000 ALTER TABLE `tmedias` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tmedias` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tresponse`
---
-
-DROP TABLE IF EXISTS `tresponse`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tresponse` (
+CREATE TABLE IF NOT EXISTS `tresponse` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_Users` int(11) DEFAULT NULL,
   `id_Lessons` int(11) DEFAULT NULL,
@@ -165,82 +111,44 @@ CREATE TABLE `tresponse` (
   PRIMARY KEY (`id`),
   KEY `id_Users` (`id_Users`),
   KEY `id_Lessons` (`id_Lessons`),
-  KEY `id_Bricks` (`id_Bricks`),
-  CONSTRAINT `tresponse_ibfk_1` FOREIGN KEY (`id_Users`) REFERENCES `tusers` (`id`),
-  CONSTRAINT `tresponse_ibfk_2` FOREIGN KEY (`id_Lessons`) REFERENCES `tlessons` (`id`),
-  CONSTRAINT `tresponse_ibfk_3` FOREIGN KEY (`id_Bricks`) REFERENCES `tbricks` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  KEY `id_Bricks` (`id_Bricks`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tresponse`
+-- Structure de la table `tsessions`
 --
 
-LOCK TABLES `tresponse` WRITE;
-/*!40000 ALTER TABLE `tresponse` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tresponse` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tsessions`
---
-
-DROP TABLE IF EXISTS `tsessions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tsessions` (
+CREATE TABLE IF NOT EXISTS `tsessions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tsessions`
+-- Structure de la table `tsessions_tlessons`
 --
 
-LOCK TABLES `tsessions` WRITE;
-/*!40000 ALTER TABLE `tsessions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tsessions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tsessions_tlessons`
---
-
-DROP TABLE IF EXISTS `tsessions_tlessons`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tsessions_tlessons` (
+CREATE TABLE IF NOT EXISTS `tsessions_tlessons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_Sessions` int(11) DEFAULT NULL,
   `id_Lessons` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_Sessions` (`id_Sessions`),
-  KEY `id_Lessons` (`id_Lessons`),
-  CONSTRAINT `tsessions_tlessons_ibfk_1` FOREIGN KEY (`id_Sessions`) REFERENCES `tsessions` (`id`),
-  CONSTRAINT `tsessions_tlessons_ibfk_2` FOREIGN KEY (`id_Lessons`) REFERENCES `tlessons` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  KEY `id_Lessons` (`id_Lessons`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tsessions_tlessons`
+-- Structure de la table `tusers`
 --
 
-LOCK TABLES `tsessions_tlessons` WRITE;
-/*!40000 ALTER TABLE `tsessions_tlessons` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tsessions_tlessons` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tusers`
---
-
-DROP TABLE IF EXISTS `tusers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tusers` (
+CREATE TABLE IF NOT EXISTS `tusers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(60) DEFAULT NULL,
   `firstname` varchar(60) DEFAULT NULL,
@@ -249,53 +157,63 @@ CREATE TABLE `tusers` (
   `role` enum('ADMIN','MEMBER') DEFAULT NULL,
   `token` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `tusers`
+-- Structure de la table `tusers_lessons`
 --
 
-LOCK TABLES `tusers` WRITE;
-/*!40000 ALTER TABLE `tusers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tusers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tusers_lessons`
---
-
-DROP TABLE IF EXISTS `tusers_lessons`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tusers_lessons` (
+CREATE TABLE IF NOT EXISTS `tusers_lessons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_Lessons` int(11) DEFAULT NULL,
   `id_Users` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_Lessons` (`id_Lessons`),
-  KEY `id_Users` (`id_Users`),
-  CONSTRAINT `tusers_lessons_ibfk_1` FOREIGN KEY (`id_Lessons`) REFERENCES `tlessons` (`id`),
-  CONSTRAINT `tusers_lessons_ibfk_2` FOREIGN KEY (`id_Users`) REFERENCES `tusers` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  KEY `id_Users` (`id_Users`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `tusers_lessons`
+-- Contraintes pour les tables exportées
 --
 
-LOCK TABLES `tusers_lessons` WRITE;
-/*!40000 ALTER TABLE `tusers_lessons` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tusers_lessons` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+--
+-- Contraintes pour la table `tbricks_medias`
+--
+ALTER TABLE `tbricks_medias`
+  ADD CONSTRAINT `tbricks_medias_ibfk_1` FOREIGN KEY (`id_Bricks`) REFERENCES `tbricks` (`id`),
+  ADD CONSTRAINT `tbricks_medias_ibfk_2` FOREIGN KEY (`id_Medias`) REFERENCES `tmedias` (`id`);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Contraintes pour la table `tlessons_bricks`
+--
+ALTER TABLE `tlessons_bricks`
+  ADD CONSTRAINT `tlessons_bricks_ibfk_1` FOREIGN KEY (`id_Bricks`) REFERENCES `tbricks` (`id`),
+  ADD CONSTRAINT `tlessons_bricks_ibfk_2` FOREIGN KEY (`id_Lessons`) REFERENCES `tlessons` (`id`);
+
+--
+-- Contraintes pour la table `tresponse`
+--
+ALTER TABLE `tresponse`
+  ADD CONSTRAINT `tresponse_ibfk_1` FOREIGN KEY (`id_Users`) REFERENCES `tusers` (`id`),
+  ADD CONSTRAINT `tresponse_ibfk_2` FOREIGN KEY (`id_Lessons`) REFERENCES `tlessons` (`id`),
+  ADD CONSTRAINT `tresponse_ibfk_3` FOREIGN KEY (`id_Bricks`) REFERENCES `tbricks` (`id`);
+
+--
+-- Contraintes pour la table `tsessions_tlessons`
+--
+ALTER TABLE `tsessions_tlessons`
+  ADD CONSTRAINT `tsessions_tlessons_ibfk_1` FOREIGN KEY (`id_Sessions`) REFERENCES `tsessions` (`id`),
+  ADD CONSTRAINT `tsessions_tlessons_ibfk_2` FOREIGN KEY (`id_Lessons`) REFERENCES `tlessons` (`id`);
+
+--
+-- Contraintes pour la table `tusers_lessons`
+--
+ALTER TABLE `tusers_lessons`
+  ADD CONSTRAINT `tusers_lessons_ibfk_1` FOREIGN KEY (`id_Lessons`) REFERENCES `tlessons` (`id`),
+  ADD CONSTRAINT `tusers_lessons_ibfk_2` FOREIGN KEY (`id_Users`) REFERENCES `tusers` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2015-10-09  9:41:28
