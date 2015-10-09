@@ -1,4 +1,4 @@
-	<div class="container contcolor ">
+	<div class="container contcolor">
 		<div id="deco_blanc3"></div>
 		<div class="col-sm-4 cadre">
 			<div class="entete"></div>
@@ -58,24 +58,24 @@
 				</div>
 				<div class="panel-body panelCategorie">
 					<h1>Se connecter</h1>
-					<form class="form-horizontal formConnexion">
+					<form class="form-horizontal formConnexion" data-toggle="validator" role="form">
 						<fieldset>
 							<div class="form-group">
-								<input name="user[mail]" type="email" class="form-control" id="inputEmail"
-									placeholder="Email">
+								<input type="email" class="form-control" id="inputEmail"
+									placeholder="Email" name="user[mail]" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" required maxlength="40">
 							</div>
 							<div class="form-group">
-								<input name="user[password]" type="password" class="form-control" id="inputPassword"
-									placeholder="Password"> <a href="#"><span
-									class="help-block text-right"><small>Mot de passe oublié.</small></span></a>
+								<input type="password" class="form-control" id="inputPassword"
+									placeholder="Password" name="user[password]" required maxlength="30"><span
+									class="help-block text-right"><a href="users/forgetpwd"><small>Mot de passe oublié ?</small></a></span>
 							</div>
 							<div class="form-group">
-								<div class="col-lg-6 creaCompteDiv">
+								<div class="col-sm-6 creaCompteDiv">
 									<button class="btn btn-raised btn-default btn-sm">
-										<a class="creaCompte" href="#">Créer un compte</a>
+										<a class="creaCompte" href="users/subscribe">Créer un compte</a>
 									</button>
 								</div>
-								<div class="col-lg-6 text-right creaCompteDiv">
+								<div class="col-sm-6 text-right creaCompteDiv">
 									<button type="submit" class="btn btn-sm btn-material-teal-200">Valider</button>
 								</div>
 							</div>
@@ -85,20 +85,3 @@
 			</div>
 		</div>
 	</div>
-	
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="<?php echo URL ?>public/js/bootstrap.min.js"></script>
-	<script
-		src="<?php echo URL ?>public/bootstrap/js/material.min.js"></script>
-
-	<script type="text/javascript">
-$(document).ready(function() {
-	$.material.init();
-});
-</script>
-
-</body>
-</html>

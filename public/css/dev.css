@@ -1,52 +1,31 @@
 .navbar {
-    background-color: #313131;
-    background-image: linear-gradient(80deg, #60dd96, #4acfb9);
+	background-color: #313131;
+	background-image: linear-gradient(80deg, #60dd96, #4acfb9);
 }
 
 #deco_blanc {
-    position: relative;
-    width: 100%;
-    height: 1px;
-    background-color: #ebebeb;
+	position: relative;
+	width: 100%;
+	height: 1px;
+	background-color: #ebebeb;
 }
 
 #deco_blanc2 {
-    position: relative;
-    width: 100%;
-    height: 1px;
-    background-color: #ebebeb;
-    top: 52px;
-}
-
-.navbar-brand {
-	margin: 0;
-	padding: 0;
-	margin-top: -1px;
-}
-
-#f_logo {
-    width: 102px;
-    height: 61px;
-    background-color: #393939;
-}
-
-#f_logo img {
-	width: 76px;
-    height: 36px;
-        position: relative;
-    top: 15px;
-    left: 12px;
+	position: relative;
+	width: 100%;
+	height: 1px;
+	background-color: #ebebeb;
+	top: 52px;
 }
 
 .navbar-default .navbar-nav>li>a:hover {
-  background-color: #313131;
-  border-color: transparent;
+	background-color: #313131;
+	border-color: transparent;
 }
 
 body {
 	background-color: #ebebeb;
 }
-
 
 .contcolor {
 	border: 10px solid #dfdfdf;
@@ -54,11 +33,11 @@ body {
 }
 
 #deco_blanc3 {
-    position: relative;
-    width: 100%;
-    height: 1px;
-    background-color: #ebebeb;
-    top: 10px;
+	position: relative;
+	width: 100%;
+	height: 1px;
+	background-color: #ebebeb;
+	top: 10px;
 }
 
 .cadre {
@@ -70,41 +49,43 @@ body {
 
 .entete {
 	height: 30px;
-    background-color: #393939;
+	background-color: #393939;
 }
+
 .enteteFlou {
 	background-image: url(../img/img_f2.png);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	margin: 0;
-	padding:0;
+	padding: 0;
 }
 
 .cercle {
-    width: 100px;
-    height: 100px;
-    -webkit-border-radius: 224px;
-    -moz-border-radius: 224px;
-    border-radius: 222px;
-    background-color: #393939;
-    -moz-box-shadow: 0px 0px 15px 0px #656565;
-    -webkit-box-shadow: 0px 0px 15px 0px #656565;
-    -o-box-shadow: 0px 0px 15px 0px #656565;
-    box-shadow: 0px 0px 15px 0px #656565;
-    filter: progid: DXImageTransform.Microsoft.Shadow(color=#656565, Direction=NaN, Strength=15);
-    position: relative;
-    top: 28px;
-    left: 40px;
+	width: 100px;
+	height: 100px;
+	-webkit-border-radius: 224px;
+	-moz-border-radius: 224px;
+	border-radius: 222px;
+	background-color: #393939;
+	-moz-box-shadow: 0px 0px 15px 0px #656565;
+	-webkit-box-shadow: 0px 0px 15px 0px #656565;
+	-o-box-shadow: 0px 0px 15px 0px #656565;
+	box-shadow: 0px 0px 15px 0px #656565;
+	filter: progid: DXImageTransform.Microsoft.Shadow(color=#656565,
+		Direction=NaN, Strength=15);
+	position: relative;
+	top: 28px;
+	left: 40px;
 }
 
 .enteteFlou h1 {
 	float: right;
 	font-size: 20px;
-    color: #393939;
-    right: 25px;
-    top: 70px;
-    font-family: "Maven Pro", Arial, serif;
-    font-weight: 900;
+	color: #393939;
+	right: 25px;
+	top: 70px;
+	font-family: "Maven Pro", Arial, serif;
+	font-weight: 900;
 	margin: 0;
 	padding: 0;
 	position: relative;
@@ -118,15 +99,15 @@ body {
 
 .panel-body h1 {
 	font-size: 14px;
-    color: #393939;
-    font-family: 'Source Sans Pro';
-    font-weight: 900;
+	color: #393939;
+	font-family: 'Source Sans Pro';
+	font-weight: 900;
 }
 
 .panel-body p {
 	font-size: 13px;
-    color: #393939;
-    text-align: justify;
+	color: #393939;
+	text-align: justify;
 }
 
 .formConnexion {
@@ -135,22 +116,22 @@ body {
 }
 
 legend {
-		font-size: 14px;
-    color: #393939;
-    font-family: 'Source Sans Pro';
-    font-weight: 900;
+	font-size: 14px;
+	color: #393939;
+	font-family: 'Source Sans Pro';
+	font-weight: 900;
 }
 
 a {
-    font-size: 12px;
-    color: #505050;
-    text-decoration: none;
+	font-size: 12px;
+	color: #505050;
+	text-decoration: none;
 }
 
 a:hover {
-    font-size: 12px;
-    color: #49ceb8;
-    text-decoration: none;
+	font-size: 12px;
+	color: #49ceb8;
+	text-decoration: none;
 }
 
 .help-block {
@@ -162,7 +143,7 @@ a:hover {
 	color: #49ceb8;
 }
 
-.creaCompteDiv{
+.creaCompteDiv {
 	margin: 0;
 	padding: 0;
 }
@@ -177,3 +158,21 @@ a:hover {
 	text-decoration: none;
 }
 
+.enteteInscription {
+	background-image:
+		url(http://localhost/github/LAVAL/public/img/fond_inscription.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+.enteteInscription h1 {
+	float: right;
+	font-size: 20px;
+	color: #393939;
+	top: 70px;
+	font-family: "Maven Pro", Arial, serif;
+	font-weight: 900;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
