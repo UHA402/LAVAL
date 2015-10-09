@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>LAVAL - Projet UHA 4.0</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>LAVAL - Projet UHA 4.0</title>
 
-<!-- Bootstrap -->
+	<!-- Bootstrap -->
 
-<link href="http://192.168.33.10/LAVAL/public/css/bootstrap.min.css"
+	<link href="http://localhost/LAVAL/public/css/bootstrap.min.css"
 	rel="stylesheet">
-<link
-	href="http://192.168.33.10/LAVAL/public/css/material-fullpalette.min.css"
+	<link
+	href="http://localhost/LAVAL/public/css/material-fullpalette.min.css"
 	rel="stylesheet">
-<link href="http://192.168.33.10/LAVAL/public/css/ripples.min.css"
+	<link href="http://localhost/LAVAL/public/css/ripples.min.css"
 	rel="stylesheet">
-<link rel="stylesheet"
-	href="http://192.168.33.10/LAVAL/public/css/dev.css">
-<link href='https://fonts.googleapis.com/css?family=Maven+Pro:400,900'
+	<link rel="stylesheet"
+	href="http://localhost/LAVAL/public/css/dev.css">
+	<link href='https://fonts.googleapis.com/css?family=Maven+Pro:400,900'
 	rel='stylesheet' type='text/css'>
-<link
+	<link
 	href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900'
 	rel='stylesheet' type='text/css'>
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
@@ -72,7 +72,7 @@
 					<h1>LAVAL</h1>
 					<div class="cercle">
 						<img
-							src="http://192.168.33.10/LAVAL/public/img/logo.png"
+							src="http://localhost/LAVAL/public/img/logo.png"
 							alt="logo" height="37px" width="66px"
 							style="top: 26px; position: relative; left: 17px" />
 					</div>
@@ -94,7 +94,7 @@
 					<h1>CONTACT</h1>
 					<div class="cercle">
 						<img
-							src="http://192.168.33.10/LAVAL/public/img/support.png"
+							src="http://localhost/LAVAL/public/img/support.png"
 							alt="logo" height="67px" width="68px"
 							style="top: 18px; position: relative; left: 16px" />
 					</div>
@@ -116,22 +116,22 @@
 					<h1>CONNEXION</h1>
 					<div class="cercle">
 						<img
-							src="http://192.168.33.10/LAVAL/public/img/connexion.png"
+							src="http://localhost/LAVAL/public/img/connexion.png"
 							alt="logo" height="63px" width="71px"
 							style="top: 18px; position: relative; left: 12px" />
 					</div>
 				</div>
 				<div class="panel-body panelCategorie">
 					<h1>Se connecter</h1>
-					<form class="form-horizontal formConnexion">
+					<form class="form-horizontal formConnexion" data-toggle="validator" role="form">
 						<fieldset>
 							<div class="form-group">
 								<input type="email" class="form-control" id="inputEmail"
-									placeholder="Email">
+									placeholder="Email" name="user[mail]" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" required maxlength="40">
 							</div>
 							<div class="form-group">
 								<input type="password" class="form-control" id="inputPassword"
-									placeholder="Password"> <a href="#"><span
+									placeholder="Password" name="user[password]" required maxlength="30"> <a href="#"><span
 									class="help-block text-right"><small>Mot de passe oublié.</small></span></a>
 							</div>
 							<div class="form-group">
@@ -152,18 +152,17 @@
 	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="http://192.168.33.10/LAVAL/public/js/bootstrap.min.js"></script>
-	<script
-		src="http://192.168.33.10/LAVAL/public/bootstrap/js/material.min.js"></script>
+	<script src="http://localhost/LAVAL/public/js/validator.js"></script>
+	<script src="http://localhost/LAVAL/public/js/bootstrap.min.js"></script>
+	<script src="http://localhost/LAVAL/public/js/material.min.js"></script>
 
-	<script type="text/javascript">
-$(document).ready(function() {
-	$.material.init();
-});
-</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$.material.init();
+			});
+		</script>
 
 </body>
 </html>
