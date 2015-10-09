@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container">
 		<div class="jumbotron">
   			<h1>Bienvenu $PRENOM$ !</h1>
@@ -60,3 +61,8 @@
 		</div>
 		</a>
 	</div>
+=======
+<form action="/users/getUser">
+		<input type="text" name="user[mail]">
+</form>
+>>>>>>> develop

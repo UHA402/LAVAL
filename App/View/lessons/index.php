@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-body text-center sequence">
@@ -14,3 +15,8 @@
 			</div>
 		</div>
 	</div>
+=======
+<div>
+	<h1> la page des leçons</h1>
+</div>
+>>>>>>> develop
