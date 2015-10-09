@@ -28,6 +28,7 @@ CREATE TABLE `tbricks` (
   `type` enum('WAVE','MIDI','TEXT','RESP','IMG') DEFAULT NULL,
   `data` text,
   `type_response` enum('WAVE','MIDI','TEXT','IMG') DEFAULT NULL,
+  `duree` time DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -79,7 +80,7 @@ DROP TABLE IF EXISTS `tlessons`;
 CREATE TABLE `tlessons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(60) DEFAULT NULL,
-  `duree` varchar(60) DEFAULT NULL,
+  `duree` time DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -131,7 +132,7 @@ DROP TABLE IF EXISTS `tmedias`;
 CREATE TABLE `tmedias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(60) DEFAULT NULL,
-  `url` varchar(60) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -157,7 +158,10 @@ CREATE TABLE `tresponse` (
   `id_Users` int(11) DEFAULT NULL,
   `id_Lessons` int(11) DEFAULT NULL,
   `id_Bricks` int(11) DEFAULT NULL,
+  `response` varchar(255) DEFAULT NULL,
   `type` enum('WAVE','MIDI','TEXT','RESP','IMG') DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `time` time DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_Users` (`id_Users`),
   KEY `id_Lessons` (`id_Lessons`),
@@ -175,6 +179,58 @@ CREATE TABLE `tresponse` (
 LOCK TABLES `tresponse` WRITE;
 /*!40000 ALTER TABLE `tresponse` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tresponse` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tsessions`
+--
+
+DROP TABLE IF EXISTS `tsessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tsessions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tsessions`
+--
+
+LOCK TABLES `tsessions` WRITE;
+/*!40000 ALTER TABLE `tsessions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tsessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tsessions_tlessons`
+--
+
+DROP TABLE IF EXISTS `tsessions_tlessons`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tsessions_tlessons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_Sessions` int(11) DEFAULT NULL,
+  `id_Lessons` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_Sessions` (`id_Sessions`),
+  KEY `id_Lessons` (`id_Lessons`),
+  CONSTRAINT `tsessions_tlessons_ibfk_1` FOREIGN KEY (`id_Sessions`) REFERENCES `tsessions` (`id`),
+  CONSTRAINT `tsessions_tlessons_ibfk_2` FOREIGN KEY (`id_Lessons`) REFERENCES `tlessons` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tsessions_tlessons`
+--
+
+LOCK TABLES `tsessions_tlessons` WRITE;
+/*!40000 ALTER TABLE `tsessions_tlessons` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tsessions_tlessons` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -242,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-07 13:44:41
+-- Dump completed on 2015-10-09  9:41:28
