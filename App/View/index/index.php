@@ -1,12 +1,18 @@
 <div class="container">
 	<div class="panel panel-default">
 		<div class="panel-body vertical-align">
+			<?php if (isset($_SESSION['user'])): ?>
+			<div class="col-md-12 text-center">
+				<h1>Vous êtes connecté</h1>
+				<p>Profondément dans mon site</p>
+			</div>
+			<?php else: ?>
 			<div class="col-md-7 text-center">
 				<h1>Connexion</h1>
 				<p>Rentre profondément dans mon site</p>
 			</div>
 			<div class="col-md-4">
-				<form method="post" class="form-horizontal" data-toggle="validator" action="/user/login">
+				<form method="post" class="form-horizontal" data-toggle="validator" action="/user/index">
 					<fieldset>
 						<legend class="text-center">Connexion</legend>
 						<div class="form-group">
@@ -40,6 +46,7 @@
 					</fieldset>
 				</form>
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>

@@ -15,86 +15,9 @@ class UsersController extends Controller
 		parent::__construct();
 	}
 
-	/*
-	 * Fonction de connection
-	 */
-	public function login()
-	{
-		if (isset($_SESSION['user'])) {
-			$this->setFlash('Vous êtes déjà connecté', 'warning');
-			header('Location: /user/index');
-			exit();
-		}
-		if (isset($_POST['user'])) {
-			// Si les champs ont été remplis
-			if (isset($_POST['user']['mail']) && isset($_POST['user']['password'])) {
-
-				// Vérification dans la DB
-				if ($user = $this->User->fetchValidUser($_POST['user'])) {
-
-					// Création de la session
-					$_SESSION['user'] = $user;
-					$this->setFlash("Vous êtes connecté !", 'success');
-
-					// Redirection en fonction des roles
-					if ($user['role'] == "admin") {
-						header('Location: /user/admin_index');
-						exit();
-					} else {
-						header('Location: /user/index');
-						exit();
-					}
-				} else {
-					$this->setFlash("L'email et le mot de passe ne correspondent pas", 'danger');
-					$this->view->render('/users/login');
-				}
-			}
-		} else {
-			$this->view->render('/users/login');
-		}
-	}
 
 	/*
-	 * Fonction d'inscription
-	 * $this->User->register($_POST['user']);
-	 */
-	public function register()
-	{
-		if (isset($_POST['user'])) {
-			if (isset($_POST['user']['mail']) &&
-				isset($_POST['user']['password']) &&
-				isset($_POST['user']['password2']) &&
-				isset($_POST['user']['firstName']) &&
-				isset($_POST['user']['lastName'])
-			) {
-				if ($_POST['user']['password'] == $_POST['user']['password2']) {
-					if ($this->User->findByMail($_POST['user']['mail'])) {
-						$this->setFlash("Un utilisateur utilise déjà cet e-mail", 'warning');
-						$this->view->render('users/register');
-					} else {
-						$this->User->create($_POST['user']);
-						$this->setFlash("Votre inscription a bien été prise en compte", 'success');
-						//$this->login();
-						header('Location: /user/login');
-						exit();
-					}
-
-				} else {
-					$this->setFlash("Les mots de passes renseignés ne sont pas identiques", 'warning');
-					$this->view->render('users/register');
-				}
-
-			} else {
-				$this->setFlash("Veuillez renseigner tous les champs", 'warning');
-				$this->view->render('users/register');
-			}
-		} else {
-			$this->view->render('users/register');
-		}
-	}
-
-	/*
-	 * Accueil de la partie user
+	 * Accueil de la partie user et gestion de la connexion
  	 */
 	public function index()
 	{
@@ -127,7 +50,8 @@ class UsersController extends Controller
 					}
 				} else {
 					$this->setFlash("L'email et le mot de passe ne correspondent pas", 'danger');
-					$this->view->render('/users/login');
+					header('Location: /');
+					exit();
 				}
 			}
 		} else {
@@ -138,6 +62,55 @@ class UsersController extends Controller
 		}
 	}
 
+
+	/*
+	 * Fonction d'inscription
+	 * $this->User->register($_POST['user']);
+	 */
+	public function register()
+	{
+		// Si tous les champs ont été remplis
+		if (isset($_POST['user'])) {
+			if (isset($_POST['user']['mail']) &&
+				isset($_POST['user']['password']) &&
+				isset($_POST['user']['password2']) &&
+				isset($_POST['user']['firstName']) &&
+				isset($_POST['user']['lastName'])
+			) {
+				// Si le password et la confirmation sont identiques
+				if ($_POST['user']['password'] == $_POST['user']['password2']) {
+
+					// Si l'email existe déjà dans la db -> erreur
+					if ($this->User->findByMail($_POST['user']['mail'])) {
+						$this->setFlash("Un utilisateur utilise déjà cet e-mail", 'warning');
+						$this->view->render('users/register');
+					}
+					// Sinon on crée l'utilisateur et on le redirige vers l'index
+					else {
+						$this->User->create($_POST['user']);
+						$this->setFlash("Votre inscription a bien été prise en compte", 'success');
+						//$this->login();
+						header('Location: /');
+						exit();
+					}
+
+				} else {
+					$this->setFlash("Les mots de passes renseignés ne sont pas identiques", 'warning');
+					$this->view->render('users/register');
+				}
+
+			} else {
+				$this->setFlash("Veuillez renseigner tous les champs", 'warning');
+				$this->view->render('users/register');
+			}
+		} else {
+			$this->view->render('users/register');
+		}
+	}
+
+	/**
+	 * Accueil de la partie administrateur
+	 */
 	public function admin_index()
 	{
 		if (isset($_SESSION['user']) && $_SESSION['user']['role'] == "admin") {
