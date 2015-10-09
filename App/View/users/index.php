@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div class="container">
 		<div class="jumbotron">
   			<h1>Bienvenu $PRENOM$ !</h1>
@@ -17,7 +16,7 @@
 		</a>
 		<a class="linklecon" href="#">
 		<div class="col-md-3">
-		
+
 			<div class="panel panel-default">
   				<div class="panel-body panel-lecon text-center">
     				<h3>Leçon $NUM$</h3>
@@ -61,8 +60,3 @@
 		</div>
 		</a>
 	</div>
-=======
-<form action="/users/getUser">
-		<input type="text" name="user[mail]">
-</form>
->>>>>>> develop
