@@ -17,8 +17,6 @@
 					role="form">
 					<fieldset>
 
-
-
 						<div class="form-group">
 							<input type="text" class="form-control floating-label"
 								id="inputName" placeholder="Nom" required>
