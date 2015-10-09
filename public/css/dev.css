@@ -1,6 +1,5 @@
-#header {
+.navbar {
     background-color: #313131;
-    height: 62px;
     background-image: linear-gradient(80deg, #60dd96, #4acfb9);
 }
 
@@ -19,31 +18,24 @@
     top: 52px;
 }
 
+.navbar-brand {
+	margin: 0;
+	padding: 0;
+	margin-top: -1px;
+}
+
 #f_logo {
     width: 102px;
     height: 61px;
     background-color: #393939;
-    cursor: pointer;
-    top: -1px;
-    position: relative;
 }
 
-#logo {
-    background-image: url(http://192.168.33.10/LAVAL/public/img/logo.png);
-    width: 76px;
+#f_logo img {
+	width: 76px;
     height: 36px;
-    position: relative;
-    top: 5px;
-}
-
-#menu { 
-    position: relative;
-    font-size: 13px;
-    font-family: ‘Maven Pro’, Arial, serif;
-    font-weight: 400;
-    color:  #fff;
-    cursor: pointer;
-    display: inline;
+        position: relative;
+    top: 15px;
+    left: 12px;
 }
 
 .navbar-default .navbar-nav>li>a:hover {
@@ -81,7 +73,7 @@ body {
     background-color: #393939;
 }
 .enteteFlou {
-	background-image: url(http://192.168.33.10/LAVAL/public/img/img_f2.png);
+	background-image: url(../img/img_f2.png);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	margin: 0;
