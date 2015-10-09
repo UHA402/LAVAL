@@ -19,12 +19,6 @@
 	<![endif]-->
 </head>
 <body>
-<?php 	if(isset($this->msg)){?>
-			<div class="alert alert-info"><?php echo $this->msg;?></div>
-<?php
-		}
-?>
-
 	<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true"
 		style="display: none;">

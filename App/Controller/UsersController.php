@@ -1,42 +1,53 @@
 <?php
 use App\Core\Controller\Controller;
 use App\Core\View\View;
-session_start();
 
 /*
  *  Gestion de la logique utilisateur
  */
-class UsersController extends Controller {
+
+class UsersController extends Controller
+{
 	// Chargement des models
 
-	function __construct(){
+	function __construct()
+	{
 		parent::__construct();
 	}
 
 	/*
 	 * Fonction de connection
 	 */
-	public function login() {
+	public function login()
+	{
+		if (isset($_SESSION['user'])) {
+			$this->setFlash('Vous êtes déjà connecté', 'warning');
+			header('Location: /user/index');
+			exit();
+		}
 		if (isset($_POST['user'])) {
+			// Si les champs ont été remplis
 			if (isset($_POST['user']['mail']) && isset($_POST['user']['password'])) {
-				$user = $this->User->fetchValidUser($_POST['user']);
-				$_SESSION['user'] = $user;
-				$msg = "Vous êtes connecté !";
-				$this->view->msg = $msg;
 
-				if ($user['role'] == "admin") {
-					//$this->admin_index();
-					header('Location: /user/admin_index');
-				}
-				else {
-					//$this->index();
-					header('Location: /user/index');
-				}
+				// Vérification dans la DB
+				if ($user = $this->User->fetchValidUser($_POST['user'])) {
 
-			} else {
-				$msg = "L'email et le mot de passe ne correspondent pas";
-				$this->view->msg;
-				$this->view->render('/users/login');
+					// Création de la session
+					$_SESSION['user'] = $user;
+					$this->setFlash("Vous êtes connecté !", 'success');
+
+					// Redirection en fonction des roles
+					if ($user['role'] == "admin") {
+						header('Location: /user/admin_index');
+						exit();
+					} else {
+						header('Location: /user/index');
+						exit();
+					}
+				} else {
+					$this->setFlash("L'email et le mot de passe ne correspondent pas", 'danger');
+					$this->view->render('/users/login');
+				}
 			}
 		} else {
 			$this->view->render('/users/login');
@@ -47,38 +58,34 @@ class UsersController extends Controller {
 	 * Fonction d'inscription
 	 * $this->User->register($_POST['user']);
 	 */
-	public function register() {
-		$msg = null;
+	public function register()
+	{
 		if (isset($_POST['user'])) {
 			if (isset($_POST['user']['mail']) &&
 				isset($_POST['user']['password']) &&
 				isset($_POST['user']['password2']) &&
 				isset($_POST['user']['firstName']) &&
-				isset($_POST['user']['lastName'])) {
+				isset($_POST['user']['lastName'])
+			) {
 				if ($_POST['user']['password'] == $_POST['user']['password2']) {
-					if($this->User->findByMail($_POST['user']['mail'])) {
-						$msg = "Un utilisateur utilise déjà cet e-mail";
-						$this->view->msg = $msg;
+					if ($this->User->findByMail($_POST['user']['mail'])) {
+						$this->setFlash("Un utilisateur utilise déjà cet e-mail", 'warning');
 						$this->view->render('users/register');
-					}
-					else {
+					} else {
 						$this->User->create($_POST['user']);
-						$msg = "Votre inscription a bien été prise en comtpe";
-						$this->view->msg = $msg;
+						$this->setFlash("Votre inscription a bien été prise en compte", 'success');
 						//$this->login();
 						header('Location: /user/login');
+						exit();
 					}
 
 				} else {
-					$msg = "Les mots de passes renseignés ne sont pas identiques";
-					$this->view->msg = $msg;
+					$this->setFlash("Les mots de passes renseignés ne sont pas identiques", 'warning');
 					$this->view->render('users/register');
 				}
 
-			} else
-			{
-				$msg = "Veuillez renseigner tous les champs";
-				$this->view->msg = $msg;
+			} else {
+				$this->setFlash("Veuillez renseigner tous les champs", 'warning');
 				$this->view->render('users/register');
 			}
 		} else {
@@ -89,32 +96,60 @@ class UsersController extends Controller {
 	/*
 	 * Accueil de la partie user
  	 */
-	public function index(){
+	public function index()
+	{
 		if (isset($_SESSION['user'])) {
 			//$lessons = $this->Lesson->findToDo();
 			//$this->view->lessons = $lessons;
 			$username = $_SESSION['user']['firstName'];
 			$this->view->username = $username;
 			$this->view->render('users/index');
+		} elseif (isset($_POST['user'])) {
+
+			// Si les champs ont été remplis
+			if (isset($_POST['user']['mail']) && isset($_POST['user']['password'])) {
+
+				// Vérification dans la DB
+				if ($user = $this->User->fetchValidUser($_POST['user'])) {
+
+					// Création de la session
+					$_SESSION['user'] = $user;
+					$this->setFlash("Vous êtes connecté !", 'success');
+
+					// Redirection en fonction des roles
+					if ($user['role'] == "admin") {
+						header('Location: /user/admin_index');
+						exit();
+
+					} else {
+						header('Location: /user/index');
+						exit();
+					}
+				} else {
+					$this->setFlash("L'email et le mot de passe ne correspondent pas", 'danger');
+					$this->view->render('/users/login');
+				}
+			}
 		} else {
-			$msg = "Vous devez vous connecter avant de pouvoir acceder à cette partie";
-			$this->view->msg = $msg;
-			//header('Location: /user/login');
+			$this->view->render('index/index');
+			$this->setFlash("Vous devez vous connecter avant de pouvoir acceder à cette partie", 'danger');
+			//header('Location: /user/login'); exit();
 			$this->view->render('users/login');
 		}
 	}
 
-	public function admin_index(){
+	public function admin_index()
+	{
 		if (isset($_SESSION['user']) && $_SESSION['user']['role'] == "admin") {
-				$username = $_SESSION['user']['firstName'];
-				$this->view->username = $username;
-				$this->view->render('users/admin/index');
-			} else {
-				$msg = "Vous devez être administrateur pour pouvoir acceder à cette partie";
-				$this->view->msg = $msg;
-				//header('Location: /user/login');
-				$this->view->render('users/login');
-			}
+			$username = $_SESSION['user']['firstName'];
+			$this->view->username = $username;
+			$this->view->render('users/admin/index');
+		} else {
+			$this->setFlash("Vous devez être administrateur pour pouvoir acceder à cette partie", 'danger');
+
+			//header('Location: /user/login'); exit();
+			$this->view->render('users/login');
+		}
 	}
 
 	/*
@@ -122,18 +157,35 @@ class UsersController extends Controller {
 	 * envoi une variable $msg à la vue
 	 */
 
-	public function logout() {
-		session_destroy();
-		$msg = "Vous êtes bien deconnecté";
-		$this->view->msg = $msg;
+	public function logout()
+	{
+		unset($_SESSION['user']);
+		$this->setFlash("Vous êtes bien deconnecté", 'success');
 		//$this->view->render('index/index');
 		header('Location: /');
+		exit();
 	}
 
 	/*
 	 * Fonction de récuperation de mot de passe
 	 */
-	public function recovery() {
+	public function recovery()
+	{
+	}
+
+	public function admin_brick()
+	{
+
+	}
+
+	public function admin_users()
+	{
+
+	}
+
+	public function admin_lessons()
+	{
+
 	}
 
 }

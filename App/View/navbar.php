@@ -8,19 +8,24 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">LAVAL</a>
+				<a class="navbar-brand" href="/">LAVAL</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">En savoir plus...</a></li>
 				</ul>
 				<ul class="nav navbar-nav pull-right">
-					<li><a class="btn btn-primary" href="#" data-toggle="modal"
+					<?php if (isset($_SESSION['user'])): ?>
+						<li><a class="btn" href="/user/logout">Déconnexion</a></li>
+					<?php else: ?>
+					<li><a class="btn btn-primary" href="/user/login" data-toggle="modal"
 						data-target="#login-modal">Login</a></li>
-					<li><a class="btn" href="#">Inscription</a></li>
+					<li><a class="btn" href="/user/register">Inscription</a></li>
+					<?php endif; ?>
 				</ul>
 
 			</div>
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
+	<?php echo $this->getFlash(); ?>
