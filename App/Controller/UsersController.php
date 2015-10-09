@@ -1,41 +1,108 @@
 <?php
-namespace App\Controller;
-use App\Core;
-use App\Model;
+use App\Core\Controller\Controller;
+use App\Core\View\View;
+
 /*
-*  Gestion de la logique utilisateur
-*/
+ *  Gestion de la logique utilisateur
+ */
 class UsersController extends Controller {
-	function login() {
+	// Chargement des models
+	$User = $this->loadModel('User');
+
+	function __construct(){
+		parent::__construct();
+	}
+
+	/*
+	 * Fonction de connection
+	 */ 
+
+ 	public function login() {
+		$msg = null;
 		if (isset($_POST['user'])) {
 			if (isset($_POST['user']['mail']) && isset($_POST['user']['password'])) {
 				$user = $this->User->fetchValidUser($_POST['user']);
-			}
+				$_SESSION['user'] = $user;
+				$msg = "Vous êtes connecté !";
+				$this->view->render('users/home');
+			} else $msg = "L'email et le mot de passe ne correspondent pas";
+		} else {
+			$this->view->msg = $msg;
+			$this->view->render('users/login');
+		} $msg = "Il n'y a pas de données postées";
+	}
+
+	/*
+	 * Fonction de déconnection
+	 * envoi une variable $msg à la vue
+	 */
+
+	public function logout() {
+		session_destroy();
+		$msg = "Vous êtes bien deconnecté";
+		$this->view->msg = $msg;
+		$this->view->render('users/logout');
+
+	}
+
+	/*
+	 * Fonction d'inscription
+	 * $this->User->register($_POST['user']);
+	 */
+
+	public function register() {
+		$msg = null;
+		if (isset($_POST['user'])) {
+			if (isset($_POST['user']['mail']) && 
+			isset($_POST['user']['password']) && 
+			isset($_POST['user']['password2']) && 
+			isset($_POST['user']['firstName']) && 
+			isset($_POST['user']['lastName'])) {
+				if ($_POST['user']['password'] == $_POST['user']['password2']) {
+					if($this->User->findByMail($_POST['user']['mail'])) {
+							$erreurs[] = "Un utilisateur utilise déjà cet e-mail";
+						}
+						else {
+							$this->User->create($_POST['user']);
+							$msg = "Votre inscription a bien été prise en comtpe";
+						}
+
+				} else $msg = "Les mots de passes renseignés ne sont pas identiques";
+
+			} else $msg = "Veuillez renseigner tous les champs";
+
+		} else $msg = "Il n'y a pas de données postées";
+		$this->view->msg = $msg;
+		$this->view->render('users/home');
+	}
+
+
+	/*
+	 * Fonction de récuperation de mot de passe
+	 */
+
+	public function recovery() {
+	}
+
+	/*
+	 * Accueil de la partie user
+	 */
+
+	public function home() {
+		$msg = "Mes leçons";
+		if (isset($_SESSION['user'])) {
+			$lessons = $this->Lesson->findToDo();
+
+			$this->view->lessons = $lessons;
+			$this->view->render('users/lessons');
 		}
+		$this->view->msg = $msg;
+			$this->view->render('users/home');
 	}
-	function logout() {
-	}
-	function register() {
-	}
-	function recovery() {
-	}
-	function home() {
-	}
-	function getUser() {
-		$erreur = false;
-		$user = false;
-		if (isset($_POST['mail'])) {
-			if (strlen($_POST['mail']) >= 6) {
-				if ($this->User->check($_POST['mail'])) {
-					$user = $this->User->check($_POST['mail']);
-				}
-				else $erreur = 'Le mail n\'a pas été trouvé dans la DB';
-			}
-			else $erreur = 'Le mail est trop court';
+
+	public function admin_index(){
+		if ($_SESSION['user']['role'] == "admin") {
+			$this->view->render('users/admin/index');
 		}
-		else $erreur = 'Entrez le mail SVP';
-		$this->view->erreur = $erreur;
-		$this->view->user = $user;
-		$this->view->render('getUser');
 	}
 }

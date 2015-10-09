@@ -4,10 +4,10 @@ class Bootstrap {
 
 	private $_url = null;
 	private $_controller = null;
-
+    private $ctrl = null;
 	private $_controllerPath = 'APP/Controller/'; 
 	private $_modelPath = 'App/Model/'; 
-	private $_errorFile = 'error.php';
+	private $_errorFile = 'ErrorsController.php';
 	private $_defaultFile = 'IndexController.php';
 
 	/**
@@ -66,12 +66,13 @@ class Bootstrap {
 	 */
 	private function _loadExistingController()
 	{
-		$file = $this->_controllerPath . $this->_url[0] . 'Controller.php';
-
+		$file = $this->_controllerPath . ucfirst($this->_url[0]) . 'sController.php';
+        $this->ctrl = ucfirst($this->_url[0]). 'sController';
 		if (file_exists($file)) {
 			require $file;
-			$this->_controller = new $this->_url[0];
-			$this->_controller->loadModel($this->_url[0], $this->_modelPath);
+			$this->_controller = new $this->ctrl();
+			
+			$this->_controller->loadModel($this->_url[0]);
 		} else {
 			$this->_error();
 			return false;
@@ -84,8 +85,9 @@ class Bootstrap {
 	private function _callControllerMethod()
 	{
 		$length = count($this->_url);
+	
 
-		// véfirie l'existance de la methode appelé.
+		// véfifie l'existance de la methode appelé.
 		if ($length > 1) {
 			if (!method_exists($this->_controller, $this->_url[1])) {
 				$this->_error();
@@ -123,7 +125,7 @@ class Bootstrap {
 	 */
 	private function _error() {
 		require $this->_controllerPath . $this->_errorFile;
-		$this->_controller = new Error();
+		$this->_controller = new ErrorsController();
 		$this->_controller->index();
 		return false;
 	}

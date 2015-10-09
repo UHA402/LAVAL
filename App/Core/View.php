@@ -1,5 +1,7 @@
 <?php namespace App\Core\View;
 
+
+
   class View {
     
     protected $param = array();
@@ -12,19 +14,14 @@
       return $this->$param;
     }
    
-
-    public function render($name, $isInclude = false)
+    // Moteur de rendu des vues.
+    public function render($name)
   	{
       
-      if($isInclude == true){
-        
-        require 'View/' . $name . '.php';
-      }else{
-        require 'App/View/header.php';
-        require 'App/View/navbar.php';
-        require 'App/View/' . $name . '.php';
-        require 'App/View/footer.php';
-      }
+      require 'App/View/header.php';
+      require 'App/View/navbar.php';
+      require 'App/View/'.$name.'.php';
+      require 'App/View/footer.php';
 
   	}
 

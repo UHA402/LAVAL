@@ -1,22 +1,34 @@
 <?php
-namespace App\Model;
-use App\Core;
+use App\Core\Model\Model;
 /*
  * Gestion des données utilisateur
  */
 class User extends Model{
 
+	public function __contruct(){
+		parent::__construct();
+	}
+
 	/*
-	 * Enregistre un utilisateur en basse de donnée
+	 * Enregistre un utilisateur en base de donnée
 	 */
 
-	public function create($firstName, $lastName, $mail, $pass){
-		$this->db->query("INSERT INTO users (firstName, lastName, mail, pass) VALUES ('".$firstName."', '".$lastName."', '".$mail."', '".md5($pass)."')");
+	public function create(array $user){
+		$this->db->query("INSERT INTO users (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
+	}
+
+	/*
+	 * Fonction de modification d'un utilisateur*
+	 * $this->update($_POST['user']);
+	 */
+
+	public function update(array $user){
+		$this->db->query("UPDATE users (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
 	}
 
 	/*
 	 * Valide l'email et le mot de passe d'un utilisateur pour la connexion
-	 * Utilisation : User->checkUser($_POST['user'])
+	 * Utilisation : User->fetchValidUser($_POST['user'])
 	 */
 
 	public function fetchValidUser(array $user) {
@@ -49,17 +61,7 @@ class User extends Model{
 	 * Utilisation : User->delete(25)
 	 */
 
-	public function delete($id){
+	private function delete($id){
 		$this->db->query("DELETE FROM users WHERE id=".$id);
-	}
-
-	/*
-	 * POUR L'EXEMPLE : Vérif présence mail
-	 * Utilisation : User->check(mail)
-	 */
-	
-	public function check($mail) {
-		$data = $this->db->query("SELECT * FROM users WHERE mail = '".$mail."'");
-		return ($data)? $data : false;
 	}
 }

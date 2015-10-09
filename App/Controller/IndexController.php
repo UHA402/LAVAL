@@ -8,7 +8,7 @@ class IndexController extends Controller {
     }
     
     function index() {
-        $this->view->q = "moi";
+        $this->view->q = "Belle belle";
         $this->view->render('index/index');
     }
     
