@@ -4,7 +4,7 @@
         <div class="entete"></div>
         <div class="panel">
             <div class="panel-heading enteteFlou">
-                <h1>SESSIONS</h1>
+                <h1>SEQUENCES</h1>
                 <div class="cercle">
                     <img
                         src="<?php echo URL ?>public/img/connexion.png"
@@ -16,32 +16,34 @@
 
 
                 <form class="form-horizontal" method="post">
-    <fieldset>
+                    <fieldset>
 
-        <!-- Text input-->
-        <div class="form-group">
-                <input id="nameInput" name="session[name]" type="text" placeholder="Nom de la session" class="floating-label form-control input-md">
-        </div>
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <input id="nameInput" name="sequence[name]" type="text" placeholder="Nom de la sequence" class="floating-label form-control input-md">
+                        </div>
 
-        <!-- Button (Double) -->
-        <div class="form-group">
-                <button type="submit" id="button1id" name="button1id" class="btn btn-info">Sauvegarder</button>
-        </div>
+                        <!-- Button (Double) -->
+                        <div class="form-group">
+                            <button type="submit" id="button1id" name="button1id" class="btn btn-info">Sauvegarder</button>
+                        </div>
 
-    </fieldset>
-</form>
+                    </fieldset>
+                </form>
                 <table class="table table-striped table-hover ">
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>Nom</th>
+                        <th>Nombre de briques</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>1</td>
-                        <td>Session 1</td>
+                        <td>Sequence 1</td>
+                        <td>34</td>
                         <td>
                             <button class="btn btn-info btn-sm">Editer</button>
                             <button class="btn btn-danger btn-sm">Supprimer</button>
@@ -49,19 +51,20 @@
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>Session 2</td>
+                        <td>Sequence 2</td>
+                        <td>58</td>
                         <td>
                             <button class="btn btn-info btn-sm">Editer</button>
                             <button class="btn btn-danger btn-sm">Supprimer</button>
                         </td>
                     </tr>
                     </tbody>
-                    </table>
+                </table>
                 <div class="text-right">
                     <button id="button2id" name="button2id" class="btn btn-success">Valider</button>
                 </div>
-                </div>
-
             </div>
+
         </div>
     </div>
+</div>

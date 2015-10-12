@@ -180,3 +180,9 @@ a:hover {
 .continscription {
 	max-width: 430px;
 }
+
+.panelSession {
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+}

@@ -63,4 +63,19 @@ class SessionsController extends Controller{
         
         return $result;
     }
+
+	/** Charge la vue d'edition
+	 *
+     */
+	public function edit() {
+		$this->view->render('sessions/edit');
+	}
+
+
+	/** Charge la vue de suppresion
+	 *
+     */
+	public function delete() {
+		$this->view->render('sessions/delete');
+	}
 }

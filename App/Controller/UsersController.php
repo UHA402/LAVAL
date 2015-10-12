@@ -106,6 +106,10 @@ class UsersController extends Controller {
         }
     }
 
+
+    /** Charge la vue de connection d'un utilisateur
+     *
+     */
     public function connect() {
         if (!isset($_SESSION['user'])) {
             $this->view->render('users/connect');
