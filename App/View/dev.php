@@ -63,7 +63,7 @@
 		</div>
 	</div>
 
-	<div class="container contcolor ">
+	<div class="container contcolor">
 		<div id="deco_blanc3"></div>
 		<div class="col-sm-4 cadre">
 			<div class="entete"></div>
