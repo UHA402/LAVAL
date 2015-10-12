@@ -61,7 +61,7 @@ class User extends Model{
 	 * Utilisation : User->delete(25)
 	 */
 
-	private function delete($id){
+	public function delete($id){
 		$this->db->query("DELETE FROM users WHERE id=".$id);
 	}
 }

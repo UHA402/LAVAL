@@ -160,7 +160,7 @@ a:hover {
 
 .enteteInscription {
 	background-image:
-		url(http://localhost/github/LAVAL/public/img/fond_inscription.jpg);
+		url(../img/fond_inscription.jpg);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
@@ -175,4 +175,8 @@ a:hover {
 	margin: 0;
 	padding: 0;
 	position: relative;
+}
+
+.continscription {
+	max-width: 430px;
 }

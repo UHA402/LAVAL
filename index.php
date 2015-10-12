@@ -12,4 +12,4 @@
 	}*/
 	
 	$app = new Bootstrap();
-	$app->init();
+	//$app->init();

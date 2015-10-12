@@ -1,5 +1,4 @@
-<?php namespace App\Core\Database;
-
+<?php namespace App\core\Database;
 
 /*
 * Classe de configuration de
@@ -19,9 +18,13 @@ class Database
 	private $pass;
 	private $host;
 	private $pdo;
+	private $dbtype;
 
-	public function __construct($database, $user = 'root', $pass = '', $host = 'localhost')
+	public function __construct($dbtype, $host, $database, $user , $pass )
 	{
+		/*parent::__construct($database, $user = 'root', $pass = '', $host = 'localhost');
+		parent::setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING);*/
+		$this->dbtype = $dbtype;
 		$this->database = $database;
 		$this->user = $user;
 		$this->pass = $pass;
@@ -32,9 +35,11 @@ class Database
 	private function getPDO()
 	{
 		$pdo = $this->pdo;
+		
 		//Connection à la database
 		if ($pdo === null) { // Si on a pas encore d'objet PDO (on est pas connecté)
-			$pdo = new \PDO('mysql:dbname=' . $this->database . ';host=' . $this->host . ';charset=UTF8', $this->user, $this->pass); // Alors on se connecte
+			$pdo = new \PDO($this->dbtype.':host='. $this->host .';dbname=' . $this->database . ';charset=UTF8', $this->user, $this->pass); // Alors on se connecte
+			
 			if ($this->host == 'localhost') { // Si on est en dev
 				$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING); // Alors on renvoi des erreurs
 			}
@@ -51,7 +56,6 @@ class Database
 	 * @return array|bool -> Array si SELECT, sinon BOOL en fonction de succès requête
 	 * Exemple : query('SELECT * FROM table WHERE field = %field%', array('field' => $value));
 	 */
-
 	public function query($sqlRequest, array $data = null)
 	{
 		if ($data != null) {
@@ -69,4 +73,32 @@ class Database
 		}
 		else return ($request != FALSE);
 	 }
+
+	/*
+	public function find(array $params)
+	{
+		$params = array('name' => 'NOM');
+		$requete = 'SELECT * FROM bricks WHERE brick_name = %name%';
+	}
+
+	$sql->query('SELECT * FROM bricks WHERE brick_name = %name%');*/
+
+	public function save($sqlRequest, $type = "find")
+	{
+		// Effectue la requete SQL définie et retourne un array
+
+		$request = $this->getPDO()->query($sqlRequest);
+		if ($type == "find") {
+			# code...
+		}
+		$data = $request->fetchAll(\PDO::FETCH_ASSOC);
+		return $data;
+	}
+
+	/*
+	 * Idées d'amélioration
+	 * 1. Ajouter des fonctions save(), find()
+	 * 2. Utiliser un fichier de config pour stocker et les infos de
+	 * la database et les récupérer en valeurs par défaut dans l'objet
+	 */
 }

@@ -1,13 +1,13 @@
-<?php namespace App\Core\Model;
+<?php namespace App\core\Model;
  
- use App\Core\Database\Database;
+ use App\core\Database\Database;
   class Model {
   	
 
     /* init database connection in model */
 
     public function __construct() {
-    	 $this->db = new Database(DB_NAME,DB_USER, DB_PASS, DB_HOST, $db_type = 'mysql');
+      $this->db = new Database(DB_TYPE, DB_HOST, DB_NAME, DB_USER, DB_PASS);
     }
 
   }

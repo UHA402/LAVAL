@@ -1,29 +1,30 @@
 <?php namespace App\Core\View;
 
-
+   
 
   class View {
     
-    protected $param = array();
-
-  	public  function __construct(){
-  		
+   private $params;
+    // Moteur de rendu des vues.
+    public function render($view, $params=array())
+  	{
+      
+        $this->params = $params;
+        require 'App/View/header.php';
+        require 'App/View/navbar.php';
+        require 'App/View/'. $view. '.php';
+        require 'App/View/footer.php';
   	}
     
     public function getParams(){
-      return $this->$param;
-    }
-   
-    // Moteur de rendu des vues.
-    public function render($name)
-  	{
-      
-      require 'App/View/header.php';
-      require 'App/View/navbar.php';
-      require 'App/View/'.$name.'.php';
-      require 'App/View/footer.php';
-
-  	}
+      return $this->params;
+    } 
+    
+  
+    
+    public function getFlash(){
+        return Session::get('flash');
+     }
 
 
   }

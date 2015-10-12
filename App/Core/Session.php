@@ -1,4 +1,4 @@
-<?php namespace  App\core\Session;
+<?php namespace  App\core;
 
 class Session {
 	
@@ -6,17 +6,17 @@ class Session {
 		@session_start();
 	}
 	
-	public static  function setSession($keys, $value){
+	public static  function set($keys, $value){
 		$_SESSION[$key] = $value;
 	}
 	
-	public static function getSession($key){
+	public static function get($key){
 		if (isset($_SESSION[$key])){
 			return $_SESSION[$key];
 		}
 	}
 	
-	public static function destroySession(){
+	public static function destroy(){
 		session_destroy();
 	}
 	
