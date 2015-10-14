@@ -59,14 +59,18 @@ class Database
 				$sqlRequest = str_replace('%'.$key.'%', $this->getPDO()->quote($value), $sqlRequest);
 			}
 		}
-
-	 	$request = $this->getPDO()->query($sqlRequest);
-
 		$type = explode(' ', $sqlRequest);
 		if ($type[0] == 'SELECT') {
+			$request = $this->getPDO()->query($sqlRequest);
 			$data = $request->fetchAll(\PDO::FETCH_ASSOC);
 			return $data;
-		}
-		else return ($request != FALSE);
+		} elseif ($type[0] == 'DELETE') {
+			$request = $this->getPDO()->exec($sqlRequest);
+			return ($request != FALSE);
+		} else{
+			$request = $this->getPDO()->exec($sqlRequest);
+			return ($request != FALSE);
+		} 
+
 	 }
 }

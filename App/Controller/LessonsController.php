@@ -1,7 +1,7 @@
 <?php
 
 	use App\core\Controller\Controller;
-	class LessonsControlleur extends Controller {
+	class LessonsController extends Controller {
 		function __construct(){
 			parent::__construct();
 		}
@@ -14,8 +14,8 @@
 			$this->view->render('lessons/view');
 		}
 
-		function add() {
-			$this->view->render('lessons/add');
+		function edit() {
+			$this->view->render('lessons/edit');
 		}
 
 		function delete() {

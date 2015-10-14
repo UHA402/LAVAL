@@ -17,14 +17,21 @@
     // Moteur de rendu des vues.
     public function render($name)
   	{
-      
       require 'App/View/header.php';
       require 'App/View/navbar.php';
       require 'App/View/'.$name.'.php';
       require 'App/View/footer.php';
-
   	}
 
+    public function getFlash() {
+      if(isset($_SESSION['flash'])){ ?>
+          <div class="alert alert-<?php echo $_SESSION['flash']['type'] ?> fade out">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php if ($_SESSION['flash']['title']) echo '<strong>'.$_SESSION['flash']['title'].'</strong>'; ?>
+            <?php echo $_SESSION['flash']['message']; ?>
+        </div><?php
+        unset($_SESSION['flash']);
+      }
+    }
 
   }
- ?>

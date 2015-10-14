@@ -1,6 +1,7 @@
 <?php namespace App\Core\Controller;
-
 use App\Core\View\View;
+// Initialisation de la session dans tous les controleurs
+session_start();
 
 
  /**
@@ -31,5 +32,15 @@ use App\Core\View\View;
           // $this->model = new $name();     
         }
    }
+
+     public function setFlash($message, $type = 'info', $title = null) {
+         if ($message) {
+             $_SESSION['flash'] = array(
+                 'message' => $message,
+                 'type' => $type,
+                 'title' => $title
+             );
+         }
+     }
    
  }

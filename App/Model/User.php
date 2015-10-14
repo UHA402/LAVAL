@@ -33,7 +33,7 @@ class User extends Model{
 
 	public function fetchValidUser(array $user) {
 		$data = $this->db->query("SELECT * FROM users WHERE mail = '".$user["mail"]."' AND password = '".md5($user['password'])."'");
-		return ($data)? $data : false;
+		return ($data)? $data[0] : false;
 	}
 
 	/*
@@ -61,7 +61,7 @@ class User extends Model{
 	 * Utilisation : User->delete(25)
 	 */
 
-	public function delete($id){
+	private function delete($id){
 		$this->db->query("DELETE FROM users WHERE id=".$id);
 	}
 }
