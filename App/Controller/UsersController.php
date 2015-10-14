@@ -50,13 +50,13 @@ class UsersController extends Controller
 					}
 				} else {
 					$this->setFlash("L'email et le mot de passe ne correspondent pas", 'danger');
-					header('Location: /');
+					header('Location: /user/index');
 					exit();
 				}
 			}
 		} else {
 			$this->setFlash("Vous devez vous connecter avant de pouvoir acceder à cette partie", 'danger');
-			header('Location: /');
+			$this->view->render('users/connect');
 		}
 	}
 
