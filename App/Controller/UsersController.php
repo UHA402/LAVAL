@@ -55,10 +55,8 @@ class UsersController extends Controller
 				}
 			}
 		} else {
-			$this->view->render('index/index');
 			$this->setFlash("Vous devez vous connecter avant de pouvoir acceder à cette partie", 'danger');
-			//header('Location: /user/login'); exit();
-			$this->view->render('users/login');
+			header('Location: /');
 		}
 	}
 
