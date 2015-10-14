@@ -1,5 +1,5 @@
 <body>
-
+<?= $this->getFlash(); ?>
 	<div class="navbar navbar-default">
 		<div id="deco_blanc"></div>
 		<div id="deco_blanc2"></div>

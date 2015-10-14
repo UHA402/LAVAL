@@ -191,3 +191,14 @@ a:hover {
     paddin-left: 50px;
     padding-right: 50px;
 }
+
+.alert {
+	position:fixed;
+	top: 0;
+	left: 0;
+	height: 65px;
+	width: 100%;
+	z-index:9999;
+	border-radius:0px;
+	opacity: 0.9;
+}

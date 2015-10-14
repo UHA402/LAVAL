@@ -5,7 +5,7 @@
 <script src="<?php echo URL ?>public/js/bootstrap.min.js"></script>
 <script src="<?php echo URL ?>public/js/material.min.js"></script>
 <script src="<?php echo URL ?>public/js/laval.js"></script>
-<script src="<?php echo URL ?>public/js/validator.js"></script>
+<script src="<?= URL ?>public/js/validForm.js"></script>
 
 </body>
 </html>
