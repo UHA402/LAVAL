@@ -14,8 +14,8 @@
 			</div>
 			<div class="navbar-collapse collapse navbar-responsive-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<?php echo URL ?>home/index">Accueil</a></li>
-					<li><a href="<?php echo URL ?>users/subscribe">Inscription</a></li>
+					<li><a href="<?php echo URL ?>">Accueil</a></li>
+					<li><a href="<?php echo URL ?>user/register">Inscription</a></li>
 				</ul>
 			</div>
 		</div>

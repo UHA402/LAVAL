@@ -58,7 +58,7 @@
 				</div>
 				<div class="panel-body panelCategorie">
 					<h1>Se connecter</h1>
-					<form class="form-horizontal formConnexion" data-toggle="validator" role="form" action="user/login">
+					<form method = "post" class="form-horizontal formConnexion" data-toggle="validator" role="form" action="user/index">
 						<fieldset>
 							<div class="form-group">
 								<input type="email" class="form-control" id="inputEmail"
@@ -67,12 +67,12 @@
 							<div class="form-group">
 								<input type="password" class="form-control" id="inputPassword"
 									placeholder="Password" name="user[password]" required maxlength="30"><span
-									class="help-block text-right"><a href="users/forgetpwd"><small>Mot de passe oublié ?</small></a></span>
+									class="help-block text-right"><a href="user/recovery"><small>Mot de passe oublié ?</small></a></span>
 							</div>
 							<div class="form-group">
 								<div class="col-sm-6 creaCompteDiv">
 									<button class="btn btn-raised btn-default btn-sm">
-										<a class="creaCompte" href="users/subscribe">Créer un compte</a>
+										<a class="creaCompte" href="user/register">Créer un compte</a>
 									</button>
 								</div>
 								<div class="col-sm-6 text-right creaCompteDiv">
