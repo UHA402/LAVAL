@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <div class="col-lg-6 creaCompteDiv">
                                 <button class="btn btn-raised btn-default btn-sm">
-                                    <a class="creaCompte" href="<?php echo URL ?>users/subscribe">Créer un compte</a>
+                                    <a class="creaCompte" href="<?php echo URL ?>user/register">Créer un compte</a>
                                 </button>
                             </div>
                             <div class="col-lg-6 text-right creaCompteDiv">

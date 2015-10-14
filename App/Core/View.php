@@ -25,7 +25,7 @@
 
     public function getFlash() {
       if(isset($_SESSION['flash'])){ ?>
-          <div class="alert alert-<?php echo $_SESSION['flash']['type'] ?> fade">
+          <div class="alert alert-<?php echo $_SESSION['flash']['type'] ?> fade out">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?php if ($_SESSION['flash']['title']) echo '<strong>'.$_SESSION['flash']['title'].'</strong>'; ?>
             <?php echo $_SESSION['flash']['message']; ?>

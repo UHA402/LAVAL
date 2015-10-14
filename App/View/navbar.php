@@ -10,7 +10,7 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a href="<?php echo URL ?>home/index" class="navbar-brand">LAVAL</a>
+				<a href="<?php echo URL ?>" class="navbar-brand">LAVAL</a>
 			</div>
 			<div class="navbar-collapse collapse navbar-responsive-collapse">
 				<ul class="nav navbar-nav navbar-right">
