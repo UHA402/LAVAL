@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
 
-                                <table class="table table-striped table-hover text-center">
+                                <table id="brickTable" class="table table-striped table-hover text-center">
                                     <thead>
                                     <tr>
                                         <th class="text-center">#</th>
@@ -79,6 +79,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <div class="pagingBrick"></div>
                                 <div class="form-group text-right">
                                     <button type="submit" id="sequence[save]" name="sequence[save]" class="btn btn-success">Save
                                     </button>
@@ -89,7 +90,7 @@
                     </div>
                 </div>
                 <h1>Sequence list</h1>
-                <table class="table table-striped table-hover text-center">
+                <table id="lessonTable" class="table table-striped table-hover text-center">
                     <thead>
                     <tr>
                         <th class="text-center">#</th>
@@ -119,6 +120,7 @@
                     </tr>
                     </tbody>
                 </table>
+                <div class="pagingLesson"></div>
             </div>
 
         </div>
