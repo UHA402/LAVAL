@@ -202,3 +202,14 @@ a:hover {
 	border-radius:0px;
 	opacity: 0.9;
 }
+
+.btn-td {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+.containerEditForm {
+	width: 95%;
+	margin: auto;
+}
