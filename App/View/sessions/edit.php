@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <div class="col-md-4">
                                         <select id="session[lessonlist]" name="session[lessonlist]"
-                                                class="form-control">
+                                                class="form-control" multiple>
                                             <option value="1">Liste des leçons disponibles</option>
                                         </select>
 
