@@ -56,6 +56,7 @@
 
         </fieldset>
         </form>
+
         <table class="table table-striped table-hover ">
             <thead>
             <tr>
@@ -89,6 +90,7 @@
             </tr>
             </tbody>
         </table>
+        </div>
         <div class="text-right">
             <button id="button2id" name="button2id" class="btn btn-success">Valider</button>
         </div>

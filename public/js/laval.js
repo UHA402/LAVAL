@@ -1,11 +1,36 @@
-$(document).ready(function() {
-	
-	//Initialisation du JS Material Design
-	$.material.init();
-});
+$(document).ready(function () {
 
-function AlertMSG(type, message) {
-	$('.modal-title').append(type)
-	$('.modal-body').append('<p>' +message+ '</p>');
-	$('#myModal').modal('show');
-}
+    //Initialisation du JS Material Design
+    $.material.init();
+
+    /* Initialisation du systeme de pagination
+    *
+    * */
+    if($('#sessionTable').length) {
+        $('#sessionTable').datatable({
+            pageSize: 10,
+            sort: '*',
+            pagingDivSelector: '.pagingSession',
+            pagingListClass: 'pagination pagination-sm'
+        });
+    }
+
+    if($('#lessonTable').length) {
+        $('#lessonTable').datatable({
+            pageSize: 10,
+            sort: '*',
+            pagingDivSelector: '.pagingLesson',
+            pagingListClass: 'pagination pagination-sm'
+        });
+    }
+
+    if($('#brickTable').length) {
+        $('#brickTable').datatable({
+            pageSize: 10,
+            sort: '*',
+            pagingDivSelector: '.pagingBrick',
+            pagingListClass: 'pagination pagination-sm'
+        });
+    }
+
+});
