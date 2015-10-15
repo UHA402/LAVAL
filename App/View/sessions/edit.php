@@ -84,7 +84,7 @@
                                 <div class="pagingLesson"></div>
                                 <div class="form-group text-right">
                                     <button type="submit" id="session[save]" name="session[save]"
-                                            class="btn btn-success">Save
+                                            class="btn btn-primary">Save
                                     </button>
                                 </div>
 

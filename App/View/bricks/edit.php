@@ -26,35 +26,29 @@
                                 <div class="form-group">
                                     <div class="col-md-6">
                                         <input id="brick[name]" name="brick[name]" type="text"
-                                               placeholder="Session's name"
+                                               placeholder="Brick's name"
                                                class="floating-label form-control input-md">
                                     </div>
-                                    <div class="col-md-3 text-center">
-                                        <div class="togglebutton togglebutton-material-green">
-                                            <label class="text-left">
-                                                <input id="session[publish]" name="session[publish]" type="checkbox"
-                                                       checked="">Publish
-                                            </label>
+                                    <div class="form-group">
+                                        <label for="select" class="col-md-1 control-label">Type</label>
+
+                                        <div class="col-md-5">
+                                            <select class="form-control" id="brick[type]">
+                                                <option>Stimuli auditif enregistré</option>
+                                                <option>Stimuli auditif généré</option>
+                                                <option>Stimuli visuel textuel</option>
+                                                <option>Stimuli visuel imagé</option>
+                                                <option>Record user's voice</option>
+                                            </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-4">
-                                        <select id="session[lessonlist]" name="session[lessonlist]"
-                                                class="form-control">
-                                            <option value="1">Liste des leçons disponibles</option>
-                                        </select>
+                                    <div id="dynamicForm">
 
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button type="submit" id="session[addLesson]" name="session[addLesson]"
-                                                class="btn btn-flat btn-info btn-sm">add
-                                        </button>
                                     </div>
                                 </div>
                                 <div class="form-group text-right">
                                     <button type="submit" id="session[save]" name="session[save]"
-                                            class="btn btn-success">Save
+                                            class="btn btn-primary">Save
                                     </button>
                                 </div>
 
@@ -97,8 +91,8 @@
                     </tbody>
 
                 </table>
-                <div class="brickSession"></div>
+                <div class="pagingBrick"></div>
             </div>
         </div>
     </div>
-</div>
+ </div>
