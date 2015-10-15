@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-4">
-                                        <select id="sequence[bricklist]" name="sequence[bricklist]" class="form-control">
+                                        <select id="sequence[bricklist]" name="sequence[bricklist]" class="form-control" multiple>
                                             <option value="1">Liste des briques disponibles</option>
                                         </select>
 
