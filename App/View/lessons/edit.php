@@ -81,7 +81,7 @@
                                 </table>
                                 <div class="pagingBrick"></div>
                                 <div class="form-group text-right">
-                                    <button type="submit" id="sequence[save]" name="sequence[save]" class="btn btn-success">Save
+                                    <button type="submit" id="sequence[save]" name="sequence[save]" class="btn btn-primary">Save
                                     </button>
                                 </div>
 

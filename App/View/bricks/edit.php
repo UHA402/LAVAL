@@ -19,45 +19,48 @@
 
                         <h1>Add/Edit Brick</h1>
 
-                        <form class="form-horizontal" method="post">
+                        <form class="form-horizontal" method="post" action="brick/edit">
                             <fieldset>
-
                                 <!-- Text input-->
-                                <div class="form-group">
-                                    <div class="col-md-6">
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
                                         <input id="brick[name]" name="brick[name]" type="text"
-                                               placeholder="Session's name"
+                                               placeholder="Brick's name"
                                                class="floating-label form-control input-md">
                                     </div>
-                                    <div class="col-md-3 text-center">
-                                        <div class="togglebutton togglebutton-material-green">
-                                            <label class="text-left">
-                                                <input id="session[publish]" name="session[publish]" type="checkbox"
-                                                       checked="">Publish
-                                            </label>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="select" class="col-sm-2 control-label">Type</label>
+
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="brickTypeSelector">
+                                                <option value="1">Stimuli auditif enregistré</option>
+                                                <option value="2">Stimuli auditif généré</option>
+                                                <option value="3">Stimuli visuel textuel</option>
+                                                <option value="4">Stimuli visuel imagé</option>
+                                                <option value="5">Record user's voice</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-4">
-                                        <select id="session[lessonlist]" name="session[lessonlist]"
-                                                class="form-control">
-                                            <option value="1">Liste des leçons disponibles</option>
-                                        </select>
+                                <div id="dynamicForm">
+                                    <div class="rows col-lg-6">
+                                        <div class="form-group"><input id="brick[media]" name="brick[media]" type="text"
+                                                                       readonly="" class="form-control floating-label"
+                                                                       placeholder="Upload File..."> <input type="file"
+                                                                                                            id="inputFile">
+                                        </div>
+                                    </div>
 
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button type="submit" id="session[addLesson]" name="session[addLesson]"
-                                                class="btn btn-flat btn-info btn-sm">add
-                                        </button>
-                                    </div>
                                 </div>
                                 <div class="form-group text-right">
-                                    <button type="submit" id="session[save]" name="session[save]"
-                                            class="btn btn-success">Save
+                                    <button type="submit" id="brick[save]" name="brick[save]"
+                                            class="btn btn-primary">Save
                                     </button>
                                 </div>
-
                             </fieldset>
                         </form>
                     </div>
@@ -97,7 +100,7 @@
                     </tbody>
 
                 </table>
-                <div class="brickSession"></div>
+                <div class="pagingBrick"></div>
             </div>
         </div>
     </div>
