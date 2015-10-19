@@ -14,7 +14,7 @@
             </div>
             <div class="panel-body panelCategorie">
                 <h1>Se connecter</h1>
-                <form method = "post" class="form-horizontal formConnexion" data-toggle="validator" role="form" action="user/login">
+                <form method = "post" class="form-horizontal formConnexion" data-toggle="validator" role="form" action="user/index">
                     <fieldset>
                         <div class="form-group">
                             <input type="email" class="form-control" id="inputEmail"

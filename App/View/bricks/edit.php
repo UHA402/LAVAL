@@ -4,7 +4,7 @@
         <div class="entete"></div>
         <div class="panel">
             <div class="panel-heading enteteFlou">
-                <h1>BRIQUES</h1>
+                <h1>BRICKS</h1>
 
                 <div class="cercle">
                     <img
@@ -14,82 +14,93 @@
                 </div>
             </div>
             <div class="panel-body panelCategorie panelSession">
+                <div class="panel panel-default">
+                    <div class="panel-body containerEditForm">
 
-                <div class="formulaire">
-                    <form class="form-horizontal" method="post">
-                        <fieldset>
+                        <h1>Add/Edit Brick</h1>
 
-                            <div class="col-md-6">
+                        <form class="form-horizontal" method="post" action="brick/edit">
+                            <fieldset>
                                 <!-- Text input-->
-                                <div class="form-group editBricks">
-                                    <select id="bricks[type]" name="bricks[type]" class="form-control">
-                                        <option value="1">Brique 1</option>
-                                        <option value="2">Brique 2</option>
-                                        <option value="2">Brique 3</option>
-                                        <option value="2">Brique 4</option>
-                                        <option value="2">Brique 5</option>
-                                    </select>
-                                </div>
-                                <div class="form-group editBricks"">
-                                    <input id="nameInput" name="bricks[name]" type="text" placeholder="Nom de la brique"
-                                           class="floating-label form-control input-md">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group editBricks"">
-                                    <input id="nameInput" name="bricks[data]" type="text"
-                                           placeholder="Text de la brique" class="floating-label form-control input-md">
-                                </div>
-                                <div class="form-group editBricks"">
-                                    <input id="filebutton" name="filebutton" class="btn btn-primary btn-sm" type="file">
-                                </div>
-                            </div>
-                            <!-- Button (Double) -->
-                            <div class="form-group text-center">
-                                <button type="submit" id="button1id" name="button1id" class="btn btn-info">
-                                    Sauvegarder
-                                </button>
-                            </div>
 
-                        </fieldset>
-                    </form>
-                    <table class="table table-striped table-hover ">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nom</th>
-                            <th>Type</th>
-                            <th>Média</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Brique 1</td>
-                            <td>MIDI</td>
-                            <td>fichier.midi</td>
-                            <td>
-                                <button class="btn btn-info btn-sm">Editer</button>
-                                <button class="btn btn-danger btn-sm">Supprimer</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Brique 2</td>
-                            <td>TTS</td>
-                            <td>TEXT TEXT TEXT TEXT</td>
-                            <td>
-                                <button class="btn btn-info btn-sm">Editer</button>
-                                <button class="btn btn-danger btn-sm">Supprimer</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="text-right">
-                        <button id="button2id" name="button2id" class="btn btn-success">Valider</button>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input id="brick[name]" name="brick[name]" type="text"
+                                               placeholder="Brick's name"
+                                               class="floating-label form-control input-md">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="select" class="col-sm-2 control-label">Type</label>
+
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="brickTypeSelector">
+                                                <option value="1">Stimuli auditif enregistré</option>
+                                                <option value="2">Stimuli auditif généré</option>
+                                                <option value="3">Stimuli visuel textuel</option>
+                                                <option value="4">Stimuli visuel imagé</option>
+                                                <option value="5">Record user's voice</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="dynamicForm">
+                                    <div class="rows col-lg-6">
+                                        <div class="form-group"><input id="brick[media]" name="brick[media]" type="text"
+                                                                       readonly="" class="form-control floating-label"
+                                                                       placeholder="Upload File..."> <input type="file"
+                                                                                                            id="inputFile">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group text-right">
+                                    <button type="submit" id="brick[save]" name="brick[save]"
+                                            class="btn btn-primary">Save
+                                    </button>
+                                </div>
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
+                <h1>Bricks list</h1>
+                <table id="brickTable" class="table table-striped table-hover text-center">
+                    <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Type</th>
+                        <th class="text-center">Media</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Session 1</td>
+                        <td>WAV</td>
+                        <td>fichier.wav</td>
+                        <td>
+                            <button class="btn btn-flat btn-info btn-sm btn-td">edit</button>
+                            <button class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Session 2</td>
+                        <td>TTS</td>
+                        <td>BLA BLA BLA BLA</td>
+                        <td>
+                            <button class="btn btn-flat btn-info btn-sm btn-td">edit</button>
+                            <button class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+                <div class="pagingBrick"></div>
             </div>
         </div>
     </div>
