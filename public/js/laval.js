@@ -33,13 +33,22 @@ $(document).ready(function () {
         });
     }
 
+    if ($('#usersList').length) {
+        $('#usersList').datatable({
+            pageSize: 10,
+            sort: '*',
+            pagingDivSelector: '.pagingUsers',
+            pagingListClass: 'pagination pagination-sm'
+        });
+    }
+
+
     //Formulaire dynamique pour la création d'une brique
     var htmlType1 = '<div class="rows col-lg-6"><div class="form-group"><input id="brick[media]" name="brick[media]" type="text" readonly=""class="form-control floating-label"placeholder="Upload File..."> <input type="file" id="inputFile"></div></div>';
     var htmlType2 = '<div class="rows col-lg-6"><div class="form-group"><input id="brick[media]" name="brick[media]" type="text"placeholder="Text to speech"class="form-control input-md"></div></div>';
     var htmlType3 = '<div class="rows col-lg-6"><div class="form-group"><input id="brick[media]" name="brick[media]" type="text"placeholder="Text 1, Text 2, Text 3, Text 4"class="form-control input-md"></div></div>';
     var htmlType4 = '<div class="rows col-lg-6"><div class="form-group"><input id="brick[media]" name="brick[media]" type="text" readonly=""class="form-control floating-label"placeholder="Upload 4 Files..."> <input type="file" id="inputFile" multiple=""></div></div>';
     var htmlType5 = '<div class="rows col-lg-6"><div class="form-group"><input id="brick[media]" name="brick[media]" type="text"placeholder="Text to record"class="form-control input-md"></div></div>';
-
 
     $('#brickTypeSelector').on('change', function () {
         var value = $(this).val();
