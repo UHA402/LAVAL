@@ -19,39 +19,48 @@
 
                         <h1>Add/Edit Brick</h1>
 
-                        <form class="form-horizontal" method="post">
+                        <form class="form-horizontal" method="post" action="brick/edit">
                             <fieldset>
-
                                 <!-- Text input-->
-                                <div class="form-group">
-                                    <div class="col-md-6">
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
                                         <input id="brick[name]" name="brick[name]" type="text"
                                                placeholder="Brick's name"
                                                class="floating-label form-control input-md">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="select" class="col-md-1 control-label">Type</label>
+                                </div>
 
-                                        <div class="col-md-5">
-                                            <select class="form-control" id="brick[type]">
-                                                <option>Stimuli auditif enregistré</option>
-                                                <option>Stimuli auditif généré</option>
-                                                <option>Stimuli visuel textuel</option>
-                                                <option>Stimuli visuel imagé</option>
-                                                <option>Record user's voice</option>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="select" class="col-sm-2 control-label">Type</label>
+
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="brickTypeSelector">
+                                                <option value="1">Stimuli auditif enregistré</option>
+                                                <option value="2">Stimuli auditif généré</option>
+                                                <option value="3">Stimuli visuel textuel</option>
+                                                <option value="4">Stimuli visuel imagé</option>
+                                                <option value="5">Record user's voice</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div id="dynamicForm">
-
+                                </div>
+                                <div id="dynamicForm">
+                                    <div class="rows col-lg-6">
+                                        <div class="form-group"><input id="brick[media]" name="brick[media]" type="text"
+                                                                       readonly="" class="form-control floating-label"
+                                                                       placeholder="Upload File..."> <input type="file"
+                                                                                                            id="inputFile">
+                                        </div>
                                     </div>
+
                                 </div>
                                 <div class="form-group text-right">
-                                    <button type="submit" id="session[save]" name="session[save]"
+                                    <button type="submit" id="brick[save]" name="brick[save]"
                                             class="btn btn-primary">Save
                                     </button>
                                 </div>
-
                             </fieldset>
                         </form>
                     </div>
@@ -95,4 +104,4 @@
             </div>
         </div>
     </div>
- </div>
+</div>
