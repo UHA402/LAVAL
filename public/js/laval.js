@@ -54,7 +54,7 @@ $(document).ready(function () {
         var value = $(this).val();
         console.log(value);
         //si c'est un stimuli auditif
-        if(value == 'WAV') {
+        if(value == 'WAVE') {
             $('#dynamicForm').html(htmlType1);
         } else if(value == "TTS") {
             $('#dynamicForm').html(htmlType2);
@@ -62,7 +62,7 @@ $(document).ready(function () {
             $('#dynamicForm').html(htmlType3);
         } else if(value == "IMG") {
             $('#dynamicForm').html(htmlType4);
-        } else if(value == "REC") {
+        } else if(value == "RESP") {
             $('#dynamicForm').html(htmlType5);
         }
         $.material.init();
