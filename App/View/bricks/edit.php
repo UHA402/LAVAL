@@ -19,7 +19,7 @@
 
                         <h1>Add/Edit Brick</h1>
 
-                        <form class="form-horizontal" method="post" action="brick/edit">
+                        <form class="form-horizontal" method="post" action="../brick/CreateBrick">
                             <fieldset>
                                 <!-- Text input-->
 
@@ -36,7 +36,7 @@
                                         <label for="select" class="col-sm-2 control-label">Type</label>
 
                                         <div class="col-sm-10">
-                                            <select class="form-control" id="brickTypeSelector">
+                                            <select class="form-control" id="brickTypeSelector" name="brick[type]>
                                                 <option value="WAV">Stimuli auditif enregistré</option>
                                                 <option value="TTS">Stimuli auditif généré</option>
                                                 <option value="TEXT">Stimuli visuel textuel</option>
@@ -105,3 +105,8 @@
         </div>
     </div>
 </div>
+<?php
+	echo '<pre>';
+	 $this->getFlash(); 
+
+	 ?>
