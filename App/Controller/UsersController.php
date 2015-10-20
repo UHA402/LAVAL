@@ -1,5 +1,6 @@
 <?php
 use App\Core\Controller\Controller;
+use App\Core\Request;
 use App\Core\View\View;
 
 /*
