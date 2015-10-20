@@ -148,7 +148,7 @@ class UsersController extends Controller
 
     public function admin_brick()
     {
-
+        
     }
 
     public function admin_users()
