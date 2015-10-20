@@ -54,15 +54,15 @@ $(document).ready(function () {
         var value = $(this).val();
         console.log(value);
         //si c'est un stimuli auditif
-        if(value == 1) {
+        if(value == 'WAV') {
             $('#dynamicForm').html(htmlType1);
-        } else if(value == 2) {
+        } else if(value == "TTS") {
             $('#dynamicForm').html(htmlType2);
-        } else if(value == 3) {
+        } else if(value == "TEXT") {
             $('#dynamicForm').html(htmlType3);
-        } else if(value == 4) {
+        } else if(value == "IMG") {
             $('#dynamicForm').html(htmlType4);
-        } else if(value == 5) {
+        } else if(value == "REC") {
             $('#dynamicForm').html(htmlType5);
         }
         $.material.init();

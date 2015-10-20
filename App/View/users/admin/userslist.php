@@ -18,14 +18,15 @@
                 <h1>List of all users</h1>
 
                 <div class="row">
-                    <table id="usersList" class="table table-striped table-hover ">
+                    <table id="usersList" class="table table-striped table-hover text-center">
                         <thead>
                         <tr>
-                            <th>Lastname</th>
-                            <th>Firstname</th>
-                            <th>Mail</th>
-                            <th>Registration date</th>
-                            <th>Role</th>
+                            <th class="text-center">Lastname</th>
+                            <th class="text-center">Firstname</th>
+                            <th class="text-center">Mail</th>
+                            <th class="text-center">Registration date</th>
+                            <th class="text-center">Role</th>
+                            <th class="text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -35,6 +36,7 @@
                             <td><a href="mailto:dupontpierre@gmail.com">dupontpierre@gmail.com</a></td>
                             <td>20/10/2014</td>
                             <td>Administrator</td>
+                            <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
                         </tr>
                         <tr>
                             <td>Smith</td>
@@ -42,6 +44,7 @@
                             <td><a href="mailto:john.smith@gmail.com">john.smith@gmail.com</a></td>
                             <td>20/08/2015</td>
                             <td>user</td>
+                            <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
                         </tr>
                         <tr>
                             <td>Dupont</td>
@@ -49,6 +52,7 @@
                             <td><a href="mailto:dupontpierrette@gmail.com">dupontpierrette@gmail.com</a></td>
                             <td>20/10/2014</td>
                             <td>Administrator</td>
+                            <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
                         </tr>
                         <tr>
                             <td>Martin</td>
@@ -56,6 +60,7 @@
                             <td><a href="mailto:charlie@gmail.com">charlie@gmail.com</a></td>
                             <td>20/10/2014</td>
                             <td>user</td>
+                            <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
                         </tr>
                         <tr>
                             <td>Froute</td>
@@ -63,6 +68,7 @@
                             <td><a href="mailto:froupierre@gmail.com">froupierre@gmail.com</a></td>
                             <td>20/10/2014</td>
                             <td>user</td>
+                            <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
                         </tr>
                         <tr>
                             <td>Matt</td>
@@ -70,6 +76,7 @@
                             <td><a href="mailto:matt@gmail.com">matt@gmail.com</a></td>
                             <td>20/10/2014</td>
                             <td>user</td>
+                            <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
                         </tr>
                         </tbody>
                     </table>
