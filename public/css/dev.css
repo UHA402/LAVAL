@@ -122,17 +122,6 @@ legend {
 	font-weight: 900;
 }
 
-a {
-	font-size: 12px;
-	color: #505050;
-	text-decoration: none;
-}
-
-a:hover {
-	font-size: 12px;
-	color: #49ceb8;
-	text-decoration: none;
-}
 
 .help-block {
 	margin-top: 10px;
