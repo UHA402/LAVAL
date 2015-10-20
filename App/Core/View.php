@@ -3,17 +3,17 @@
 
 
   class View {
-    
+
     protected $param = array();
 
   	public  function __construct(){
-  		
+
   	}
-    
+
     public function getParams(){
       return $this->$param;
     }
-   
+
     // Moteur de rendu des vues.
     public function render($name)
   	{
@@ -22,6 +22,17 @@
       require 'App/View/'.$name.'.php';
       require 'App/View/footer.php';
   	}
+    
+    /*
+    * Redirect to provided uri
+    *
+    *@var $route
+    *
+    */
+    public function redirect_to($route){
+       header('location: '.$route);
+       exit();
+    }
 
     public function getFlash() {
       if(isset($_SESSION['flash'])){ ?>

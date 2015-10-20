@@ -67,6 +67,7 @@ class UsersController extends Controller
      */
     public function register()
     {
+        $data = Request::all();
         // Si tous les champs ont été remplis
         if (isset($_POST['user'])) {
             if (isset($_POST['user']['mail']) &&
