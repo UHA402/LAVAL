@@ -12,12 +12,16 @@ class Validator extends Model {
 	}
 
 	public static function array_has_empty($array){
-		foreach ($array as $key=>$value){
-			if(self::is_empty($value)){
-				return false;
+		if (isset($array)){
+				foreach ($array as $key=>$value){
+					if(self::is_empty($value)){
+						return false;
+					}
+				}
+			}else{
+
+				return true;
 			}
-		}
-		return true;
 	}
 
 	public static function is_equal($input, $input1){
