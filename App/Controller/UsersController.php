@@ -142,6 +142,7 @@ class UsersController extends Controller
      */
     public function recovery()
     {
+        $this->view->render('users/recovery');
     }
 
     public function admin_brick()
@@ -151,7 +152,7 @@ class UsersController extends Controller
 
     public function admin_users()
     {
-
+        $this->view->render('users/admin/userslist');
     }
 
     public function admin_lessons()

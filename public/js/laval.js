@@ -33,6 +33,16 @@ $(document).ready(function () {
         });
     }
 
+    if ($('#usersList').length) {
+        $('#usersList').datatable({
+            pageSize: 10,
+            sort: '*',
+            pagingDivSelector: '.pagingUsers',
+            pagingListClass: 'pagination pagination-sm'
+        });
+    }
+
+
     //Formulaire dynamique pour la création d'une brique
     var htmlType1 = '<div class="rows col-lg-6"><div class="form-group"><input id="brick[media]" name="brick[media]" type="text" readonly=""class="form-control floating-label"placeholder="Upload File..."> <input type="file" id="inputFile"></div></div>';
     var htmlType2 = '<div class="rows col-lg-6"><div class="form-group"><input id="brick[media]" name="brick[media]" type="text"placeholder="Text to speech"class="form-control input-md"></div></div>';
@@ -40,20 +50,19 @@ $(document).ready(function () {
     var htmlType4 = '<div class="rows col-lg-6"><div class="form-group"><input id="brick[media]" name="brick[media]" type="text" readonly=""class="form-control floating-label"placeholder="Upload 4 Files..."> <input type="file" id="inputFile" multiple=""></div></div>';
     var htmlType5 = '<div class="rows col-lg-6"><div class="form-group"><input id="brick[media]" name="brick[media]" type="text"placeholder="Text to record"class="form-control input-md"></div></div>';
 
-
     $('#brickTypeSelector').on('change', function () {
         var value = $(this).val();
         console.log(value);
         //si c'est un stimuli auditif
-        if(value == 1) {
+        if(value == 'WAV') {
             $('#dynamicForm').html(htmlType1);
-        } else if(value == 2) {
+        } else if(value == "TTS") {
             $('#dynamicForm').html(htmlType2);
-        } else if(value == 3) {
+        } else if(value == "TEXT") {
             $('#dynamicForm').html(htmlType3);
-        } else if(value == 4) {
+        } else if(value == "IMG") {
             $('#dynamicForm').html(htmlType4);
-        } else if(value == 5) {
+        } else if(value == "REC") {
             $('#dynamicForm').html(htmlType5);
         }
         $.material.init();

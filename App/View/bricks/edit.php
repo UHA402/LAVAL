@@ -37,11 +37,11 @@
 
                                         <div class="col-sm-10">
                                             <select class="form-control" id="brickTypeSelector">
-                                                <option value="1">Stimuli auditif enregistré</option>
-                                                <option value="2">Stimuli auditif généré</option>
-                                                <option value="3">Stimuli visuel textuel</option>
-                                                <option value="4">Stimuli visuel imagé</option>
-                                                <option value="5">Record user's voice</option>
+                                                <option value="WAV">Stimuli auditif enregistré</option>
+                                                <option value="TTS">Stimuli auditif généré</option>
+                                                <option value="TEXT">Stimuli visuel textuel</option>
+                                                <option value="IMG">Stimuli visuel imagé</option>
+                                                <option value="REC">Record user's voice</option>
                                             </select>
                                         </div>
                                     </div>
