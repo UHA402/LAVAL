@@ -1,23 +1,25 @@
-<?php namespace App\Core;
-
+<?php namespace App\Core\Validator;
 use App\Core\Session;
+use App\Core\Model\Model;
+
 class Validator extends Model {
 
 	public function __construct(){
-		parent::__construct();
+		parent::__ocnstruct();
 	}
 
 	public static function is_empty($input){
-		return ($input == '')?true:false;
+		return (isset($input))?true:false;
 	}
 
 	public static function array_has_empty($array){
 		foreach ($array as $key=>$value){
 			if(self::is_empty($value)){
 				return false;
+			} else {
+				return true;
 			}
 		}
-		return true;
 	}
 
 	public static function is_equal($input, $input1){
