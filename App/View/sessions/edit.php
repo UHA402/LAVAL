@@ -19,7 +19,7 @@
 
                         <h1>Add/Edit Session</h1>
 
-                        <form class="form-horizontal" method="post">
+                        <form class="form-horizontal" data-toggle="validator" method="post">
                             <fieldset>
 
                                 <!-- Text input-->
@@ -27,7 +27,7 @@
                                     <div class="col-md-6">
                                         <input id="session[name]" name="session[name]" type="text"
                                                placeholder="Session's name"
-                                               class="floating-label form-control input-md">
+                                               class="floating-label form-control input-md" required>
                                     </div>
                                     <div class="col-md-3 text-center">
                                         <div class="togglebutton togglebutton-material-green">
