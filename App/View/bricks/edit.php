@@ -108,5 +108,6 @@
 <?php
 	echo '<pre>';
 	 $this->getFlash(); 
+	 print_r ($this->msg);
 
 	 ?>

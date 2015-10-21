@@ -84,9 +84,9 @@ class Brick extends Model{
 		return $data[0];
 	}
 	
-    public function ReaAllBrick($iID){
-		$data = $this->db->query("SELECT  id, * FROM tbricks WHERE id='".$iID."'");
-		return $data[0];
+    public function ReadAllBrick(){
+		$data = $this->db->query("SELECT `id`, `title`, `type`, `data` FROM `tbricks` ");
+		return $data;
 	}
 
 

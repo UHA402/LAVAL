@@ -17,18 +17,15 @@ class BricksController extends Controller {
 	}
 
    public function edit(){
+	    $array = $this->Brick->ReadAllBrick();
+		$this->view->msg = $array;
 		$data = $this->Brick->ReadAllTitleBricks();
 	 	$this->view->data = $data;
 		
 	 	$this->view->render('bricks/edit');
-		
-		
+				
     }   
-	 public function ReadAllBricks (){
-		 
-		 
-		 
-	 }
+	 
 //-------------------------------------------------------------------------------------------------------------------------------
    public function CreateBrick (){
 	   $this->data = Request::all();
