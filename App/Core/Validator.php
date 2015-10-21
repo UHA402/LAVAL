@@ -1,6 +1,7 @@
-<?php namespace App\Core;
-
+<?php namespace App\Core\Validator;
 use App\Core\Session;
+use App\Core\Model\Model;
+
 class Validator extends Model {
 
 	public function __construct(){
@@ -8,20 +9,17 @@ class Validator extends Model {
 	}
 
 	public static function is_empty($input){
-		return ($input == '')?true:false;
+		return (isset($input))?true:false;
 	}
 
 	public static function array_has_empty($array){
-		if (isset($array)){
-				foreach ($array as $key=>$value){
-					if(self::is_empty($value)){
-						return false;
-					}
-				}
-			}else{
-
+		foreach ($array as $key=>$value){
+			if(self::is_empty($value)){
+				return false;
+			} else {
 				return true;
 			}
+		}
 	}
 
 	public static function is_equal($input, $input1){

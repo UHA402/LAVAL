@@ -7,7 +7,7 @@ class SessionsController extends Controller
 {
 
     public function index() {
-        $this->view->render("sessions/index");
+        echo 'sessions/index';
     }
 
     public function edit() {
