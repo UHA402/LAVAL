@@ -19,7 +19,7 @@
 
                 <p>Confirmer la suppresion de <strong>#num - $NOMBRICK$</strong></p>
                 <a href="<?php echo URL ?>brick/edit">
-                    <button class="btn btn-success">Annuler</button>
+                    <button type="button" class="btn btn-success">Annuler</button>
                 </a>
 
                 <button type="submit" class="btn btn-danger">Confirmer</button>

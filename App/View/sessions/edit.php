@@ -68,7 +68,7 @@
                                         <td>Sequence 1</td>
                                         <td>34</td>
                                         <td>
-                                            <button class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -76,7 +76,7 @@
                                         <td>Sequence 2</td>
                                         <td>56</td>
                                         <td>
-                                            <button class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -108,8 +108,8 @@
                         <td>Session 1</td>
                         <td>5</td>
                         <td>
-                            <button class="btn btn-flat btn-info btn-sm btn-td">edit</button>
-                            <button class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                            <button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button>
+                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -117,8 +117,8 @@
                         <td>Session 2</td>
                         <td>10</td>
                         <td>
-                            <button class="btn btn-flat btn-info btn-sm btn-td">edit</button>
-                            <button class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                            <button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button>
+                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
                         </td>
                     </tr>
                     </tbody>

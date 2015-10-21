@@ -65,7 +65,9 @@
                                         <td>WAV</td>
                                         <td>fichier.wav</td>
                                         <td>
-                                            <button class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                                            <a href="../delete">
+                                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -74,7 +76,7 @@
                                         <td>TTS</td>
                                         <td>BLA BLA BLA BLA</td>
                                         <td>
-                                            <button class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -105,8 +107,8 @@
                         <td>Sequence 1</td>
                         <td>34</td>
                         <td>
-                            <button class="btn btn-flat btn-info btn-sm btn-td">edit</button>
-                            <button class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                            <button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button>
+                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -114,8 +116,8 @@
                         <td>Sequence 2</td>
                         <td>55</td>
                         <td>
-                            <button class="btn btn-flat btn-info btn-sm btn-td">edit</button>
-                            <button class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                            <button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button>
+                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
                         </td>
                     </tr>
                     </tbody>
