@@ -5,7 +5,7 @@
         <div class="panel">
             <div class="panel-heading enteteFlou">
 
-                <h1>SEQUENCES</h1>
+                <h1>BRICKS</h1>
 
                 <div class="cercle">
                     <img
@@ -15,10 +15,10 @@
                 </div>
             </div>
             <div class="panel-body panelCategorie panelSession">
-                <h1>Suppresion de la sequence</h1>
+                <h1>Suppresion de la brick</h1>
 
-                <p>Confirmer la suppresion de <strong>#num - $NOMSEQUENCE$</strong></p>
-                <a href="<?php echo URL ?>lessons/edit">
+                <p>Confirmer la suppresion de <strong>#num - $NOMBRICK$</strong></p>
+                <a href="<?php echo URL ?>brick/edit">
                     <button type="button" class="btn btn-success">Annuler</button>
                 </a>
 
