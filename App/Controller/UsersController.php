@@ -142,6 +142,7 @@ class UsersController extends Controller
 	 */
 	public function recovery()
 	{
+		this->view->render('users/recovery')
 	}
 
 	public function admin_brick()
