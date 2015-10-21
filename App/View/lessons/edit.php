@@ -18,14 +18,14 @@
                     <div class="panel-body containerEditForm">
 
                         <h1>Add/Edit Sequence</h1>
-                        <form class="form-horizontal" method="post">
+                        <form class="form-horizontal" data-toggle="validator" method="post">
                             <fieldset>
 
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <div class="col-md-6">
                                         <input id="sequence[name]" name="sequence[name]" type="text" placeholder="Sequence's name"
-                                               class="floating-label form-control input-md">
+                                               class="floating-label form-control input-md" required>
                                     </div>
                                     <div class="col-md-3 text-center">
                                         <div class="togglebutton togglebutton-material-green">

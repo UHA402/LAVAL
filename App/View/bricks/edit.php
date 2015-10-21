@@ -19,7 +19,7 @@
 
                         <h1>Add/Edit Brick</h1>
 
-                        <form class="form-horizontal" method="post" action="brick/edit">
+                        <form class="form-horizontal" data-toggle="validator" method="post" action="brick/edit">
                             <fieldset>
                                 <!-- Text input-->
 
@@ -27,7 +27,7 @@
                                     <div class="form-group">
                                         <input id="brick[name]" name="brick[name]" type="text"
                                                placeholder="Brick's name"
-                                               class="floating-label form-control input-md">
+                                               class="floating-label form-control input-md" required>
                                     </div>
                                 </div>
 
@@ -37,11 +37,11 @@
 
                                         <div class="col-sm-10">
                                             <select class="form-control" id="brickTypeSelector">
-                                                <option value="WAV">Stimuli auditif enregistré</option>
+                                                <option value="WAVE">Stimuli auditif enregistré</option>
                                                 <option value="TTS">Stimuli auditif généré</option>
                                                 <option value="TEXT">Stimuli visuel textuel</option>
                                                 <option value="IMG">Stimuli visuel imagé</option>
-                                                <option value="REC">Record user's voice</option>
+                                                <option value="RESP">Record user's voice</option>
                                             </select>
                                         </div>
                                     </div>
@@ -51,7 +51,7 @@
                                         <div class="form-group"><input id="brick[media]" name="brick[media]" type="text"
                                                                        readonly="" class="form-control floating-label"
                                                                        placeholder="Upload File..."> <input type="file"
-                                                                                                            id="inputFile">
+                                                                                                            id="inputFile" required>
                                         </div>
                                     </div>
 
