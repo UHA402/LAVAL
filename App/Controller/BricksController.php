@@ -1,7 +1,7 @@
 <?php
 
-use App\core\Controller\Controller;
-use App\core\Request;
+use App\Core\Controller\Controller;
+use App\Core\Request\Request;
 use App\Core\View\View;
 
 class BricksController extends Controller {

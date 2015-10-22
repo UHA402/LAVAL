@@ -12,7 +12,7 @@ class Brick extends Model{
 
 
 
-	function CreateBrick($strTitle,$strType,$strData,$strType_response,$strDuree ){
+	function CreateBrick($strTitle,$strType,$strData){
 
 	    $data=$this->db->query("INSERT INTO tbricks(title, type, data) VALUES ('".$strTitle."','".$strType."','".$strData."' )");
       	return $data;
