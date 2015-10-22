@@ -6,10 +6,14 @@
 			parent::__construct();
 		}
 		
+		// Accueil de la partie Leçon
 		function index() {
 			$this->view->render('lessons/index');
 		}
 
+		/*
+		* Vue d'une leçon
+		*/
 		function view() {
 			$this->view->render('lessons/view');
 		}
