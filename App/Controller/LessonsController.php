@@ -8,6 +8,7 @@
 		
 		function index() {
 			$this->view->render('lessons/index');
+			$this->view->redirect_to('lessons/index');
 		}
 
 		function view() {
