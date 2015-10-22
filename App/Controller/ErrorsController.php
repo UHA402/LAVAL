@@ -11,7 +11,7 @@ class ErrorsController extends Controller {
     
     function index() {
         $this->view->msg = "Cette page n'existe pas";
-        $this->view->render('error/index');
+        $this->view->render('errors/index');
     }
 
     function user(){

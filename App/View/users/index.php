@@ -15,7 +15,7 @@
             </div>
             <div class="panel-body panelCategorie panelSession">
                 <div class="jumbotron">
-                    <h1>Hello : USER !</h1>
+                    <h1>Hello : Welcome <?= $this->username ?>  !</h1>
                     <p><a class="btn btn-primary">Start Session !</a></p>
                 </div>
                 <h1>Sessions list</h1>

@@ -1,7 +1,8 @@
 <?php namespace App\Core;
 
-use App\Core\Session;
-class Validator extends Model {
+
+
+class Validator  {
 
 	public function __construct(){
 		parent::__construct();

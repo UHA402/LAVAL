@@ -1,7 +1,12 @@
 <?php
+use App\Core\Session;
+
 use App\Core\Controller\Controller;
 use App\Core\Request;
 use App\Core\View\View;
+use App\Core\Validator;
+
+
 
 /*
  *  Gestion de la logique utilisateur
@@ -22,40 +27,43 @@ class UsersController extends Controller
       */
     public function index()
     {
+			  $user = Request::all();
+         
+				
         if (isset($_SESSION['user'])) {
             //$lessons = $this->Lesson->findToDo();
             //$this->view->lessons = $lessons;
-            $username = $_SESSION['user']['firstName'];
+            $username = Session::get('user');
             $this->view->username = $username;
             $this->view->render('users/index');
-        } elseif (isset($_POST['user'])) {
+		    
+        } elseif (!Validator::array_has_empty($user)) {
 
-            // Si les champs ont été remplis
-            if (isset($_POST['user']['mail']) && isset($_POST['user']['password'])) {
+            // Si les champs ont été remplis 
+         
+                if ($user = $this->User->fetchValidUser($user))
+				{
 
-                // Vérification dans la DB
-                if ($user = $this->User->fetchValidUser($_POST['user'])) {
-
-                    // Création de la session
-                    $_SESSION['user'] = $user;
+                    // Création de la session                 
+                    Session::set('user', $user['lastName']);
                     $this->setFlash("Vous êtes connecté !", 'success');
-
+                    
                     // Redirection en fonction des roles
                     if ($user['role'] == "admin") {
-                        header('Location: /user/admin_index');
-                        exit();
-
+											 $this->view->render('/user/admin_index');
                     } else {
-                        header('Location: /user/index');
-                        exit();
-                    }
-                } else {
-                    $this->setFlash("L'email et le mot de passe ne correspondent pas", 'danger');
-                    header('Location: /user/index');
-                    exit();
+						 $this->view->user = Session::get('lastName');
+						 $this->view->render('user/index');
+					}
+
                 }
-            }
-        } else {
+				else {
+                    $this->setFlash("L'email et le mot de passe ne correspondent pas", 'danger');
+                    $this->view->redirect_to('/');
+                }
+           
+        }
+		else {
             $this->setFlash("Vous devez vous connecter avant de pouvoir acceder à cette partie", 'danger');
             $this->view->render('users/connect');
         }
@@ -89,8 +97,7 @@ class UsersController extends Controller
                         $this->User->create($_POST['user']);
                         $this->setFlash("Votre inscription a bien été prise en compte", 'success');
                         //$this->login();
-                        header('Location: /');
-                        exit();
+                        $this->view->redirect_to('/');
                     }
 
                 } else {
@@ -131,11 +138,10 @@ class UsersController extends Controller
 
     public function logout()
     {
-        unset($_SESSION['user']);
+        Session::destroy('user');
         $this->setFlash("Vous êtes bien deconnecté", 'success');
         //$this->view->render('index/index');
-        header('Location: /');
-        exit();
+        $this->view->redirect_to('/');
     }
 
     /*
@@ -143,12 +149,13 @@ class UsersController extends Controller
      */
     public function recovery()
     {
+
         $this->view->render('users/recovery');
     }
 
     public function admin_brick()
     {
-        
+
     }
 
     public function admin_users()
