@@ -1,6 +1,6 @@
 <?php
 use App\Core\Session;
-
+use App\Core\Request\Request;
 use App\Core\Controller\Controller;
 use App\Core\View\View;
 use App\Core\Validator;
@@ -75,7 +75,6 @@ class UsersController extends Controller
 	public function register()
 	{
 		$data = Request::all();
-		var_dump($_REQUEST);
 		// Si tous les champs ont été remplis
 			if (!Validator::array_has_empty($data)) {
 				// Si le password et la confirmation sont identiques
