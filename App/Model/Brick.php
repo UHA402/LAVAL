@@ -54,7 +54,7 @@ class Brick extends Model{
 		}
 	}
 
-	public function DeleteBrick($iID){
+	public function delete($iID){
 		$data = $this->db->query("DELETE FROM `tbricks` WHERE id='".$iID."'");
 
 		return $data;
@@ -87,25 +87,18 @@ class Brick extends Model{
 	}
 
 	
-    public function ReadAllBrick(){
+  	public function ReadAllBrick(){
 		$data = $this->db->query("SELECT `id`, `title`, `type`, `data` FROM `tbricks` ");
 		return $data;
 
 	}
 
+	public function findById($id){
+		$data = $this->db->query("SELECT * FROM `tbricks` WHERE id=".$id);
+		return $data;
+	}
+
 
 }
 
-
-
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
->>>>>>> f3477362d8093742564928839f7f1034c7d15c1c
 ?>

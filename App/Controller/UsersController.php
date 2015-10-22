@@ -2,7 +2,6 @@
 use App\Core\Session;
 
 use App\Core\Controller\Controller;
-use App\Core\Request;
 use App\Core\View\View;
 use App\Core\Validator;
 

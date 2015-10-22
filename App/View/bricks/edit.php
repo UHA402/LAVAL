@@ -17,7 +17,12 @@
                 <div class="panel panel-default">
                     <div class="panel-body containerEditForm">
 
-                        <h1>Add/Edit Brick</h1>
+                        <h1><?php if(isset($this->currentBrick)){
+                            echo "Edit"; 
+                        }
+                            else echo "Add";?> Brick
+
+                        </h1>
                         <form class="form-horizontal" data-toggle="validator" method="post" action="/brick/CreateBrick">
                             <fieldset>
                                 <!-- Text input-->
@@ -25,7 +30,9 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <input id="brick[name]" name="brick[name]" type="text"
-                                               placeholder="Brick's name"
+                                               placeholder="Brick's name" value="<?php if (isset($this->currentBrick)) {
+                                                   echo $this->currentBrick[0]['title'];
+                                               } ?>"
                                                class="floating-label form-control input-md" required>
                                     </div>
                                 </div>
@@ -50,8 +57,11 @@
                                     <div class="rows col-lg-6">
                                         <div class="form-group"><input id="brick[media]" name="brick[media]" type="text"
                                                                        readonly="" class="form-control floating-label"
-                                                                       placeholder="Upload File..."> <input type="file"
-                                                                                                            id="inputFile" required>
+                                                                       placeholder="<?php if (isset($this->currentBrick)) {
+                                                   echo $this->currentBrick[0]['data'];
+                                               } else echo "Upload File..."?>" value="<?php if (isset($this->currentBrick)) {
+                                                   echo $this->currentBrick[0]['data'];
+                                               }?>"> <input type="file" id="inputFile"  required>
                                         </div>
                                     </div>
 
@@ -77,26 +87,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Session 1</td>
-                        <td>WAV</td>
-                        <td>fichier.wav</td>
-                        <td>
-                            <button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button>
-                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
-                        </td>
+                        <?php foreach ($this->bricks as $brick) :?>
+                             <tr>
+                                <td><?php echo $brick['id']; ?></td>
+                                <td><?php echo $brick['title']; ?></td>
+                                <td><?php echo $brick['type']; ?></td>
+                                <td><?php echo $brick['data']; ?></td>
+                                <td>
+                                    <a href="/brick/edit/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button></a>
+                                    <a href="delete/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button></a>
+                                </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Session 2</td>
-                        <td>TTS</td>
-                        <td>BLA BLA BLA BLA</td>
-                        <td>
-                            <button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button>
-                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
-                        </td>
-                    </tr>
+                    <?php endforeach;?>
                     </tbody>
 
                 </table>
@@ -105,9 +107,3 @@
         </div>
     </div>
 </div>
-<?php
-	echo '<pre>';
-	 $this->getFlash(); 
-	 print_r ($this->msg);
-
-	 ?>
