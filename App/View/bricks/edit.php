@@ -18,8 +18,7 @@
                     <div class="panel-body containerEditForm">
 
                         <h1>Add/Edit Brick</h1>
-
-                        <form class="form-horizontal" data-toggle="validator" method="post" action="brick/edit">
+                        <form class="form-horizontal" data-toggle="validator" method="post" action="/brick/CreateBrick">
                             <fieldset>
                                 <!-- Text input-->
 
@@ -36,7 +35,8 @@
                                         <label for="select" class="col-sm-2 control-label">Type</label>
 
                                         <div class="col-sm-10">
-                                            <select class="form-control" id="brickTypeSelector">
+
+                                            <select class="form-control" id="brickTypeSelector" name="brick[type]">
                                                 <option value="WAVE">Stimuli auditif enregistré</option>
                                                 <option value="TTS">Stimuli auditif généré</option>
                                                 <option value="TEXT">Stimuli visuel textuel</option>
@@ -83,8 +83,8 @@
                         <td>WAV</td>
                         <td>fichier.wav</td>
                         <td>
-                            <button class="btn btn-flat btn-info btn-sm btn-td">edit</button>
-                            <button class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                            <button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button>
+                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -93,8 +93,8 @@
                         <td>TTS</td>
                         <td>BLA BLA BLA BLA</td>
                         <td>
-                            <button class="btn btn-flat btn-info btn-sm btn-td">edit</button>
-                            <button class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                            <button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button>
+                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
                         </td>
                     </tr>
                     </tbody>
@@ -105,3 +105,9 @@
         </div>
     </div>
 </div>
+<?php
+	echo '<pre>';
+	 $this->getFlash(); 
+	 print_r ($this->msg);
+
+	 ?>

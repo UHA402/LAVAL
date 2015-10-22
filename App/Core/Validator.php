@@ -1,3 +1,4 @@
+
 <?php namespace App\Core;
 
 
@@ -9,20 +10,17 @@ class Validator  {
 	}
 
 	public static function is_empty($input){
-		return ($input == '')?true:false;
+		return (isset($input))?true:false;
 	}
 
 	public static function array_has_empty($array){
-		if (isset($array)){
-				foreach ($array as $key=>$value){
-					if(self::is_empty($value)){
-						return false;
-					}
-				}
-			}else{
-
+		foreach ($array as $key=>$value){
+			if(self::is_empty($value)){
+				return false;
+			} else {
 				return true;
 			}
+		}
 	}
 
 	public static function is_equal($input, $input1){

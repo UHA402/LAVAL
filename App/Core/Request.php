@@ -1,4 +1,4 @@
-<?php  namespace App\Core;
+<?php  namespace App\Core\Request;
 
 class Request {
 

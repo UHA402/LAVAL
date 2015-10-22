@@ -7,9 +7,8 @@ use App\Core\View\View;
 use App\Core\Validator;
 
 
-
 /*
- *  Gestion de la logique utilisateur
+ *  View de la logique utilisateur
  */
 
 class UsersController extends Controller
@@ -70,50 +69,47 @@ class UsersController extends Controller
     }
 
 
-    /*
-     * Fonction d'inscription
-     * $this->User->register($_POST['user']);
-     */
-    public function register()
-    {
-        $data = Request::all();
-        // Si tous les champs ont été remplis
-        if (isset($_POST['user'])) {
-            if (isset($_POST['user']['mail']) &&
-                isset($_POST['user']['password']) &&
-                isset($_POST['user']['password2']) &&
-                isset($_POST['user']['firstName']) &&
-                isset($_POST['user']['lastName'])
-            ) {
-                // Si le password et la confirmation sont identiques
-                if ($_POST['user']['password'] == $_POST['user']['password2']) {
+/*
+	 * Fonction d'inscription
+	 * $this->User->register($data);
+	 */
+	public function register()
+	{
+		$data = Request::all();
+		// Si tous les champs ont été remplis
+			if (!Validator::array_has_empty($data)) {
+				// Si le password et la confirmation sont identiques
+				if ($data['password'] == $data['password2']) {
 
-                    // Si l'email existe déjà dans la db -> erreur
-                    if ($this->User->findByMail($_POST['user']['mail'])) {
-                        $this->setFlash("Un utilisateur utilise déjà cet e-mail", 'warning');
-                        $this->view->render('users/register');
-                    } // Sinon on crée l'utilisateur et on le redirige vers l'index
-                    else {
-                        $this->User->create($_POST['user']);
-                        $this->setFlash("Votre inscription a bien été prise en compte", 'success');
-                        //$this->login();
-                        $this->view->redirect_to('/');
-                    }
+					// Si l'email existe déjà dans la db -> erreur
+					if ($this->User->findByMail($data['mail'])) {
+						$this->setFlash("Un utilisateur utilise déjà cet e-mail", 'warning');
+						$this->view->render('users/register');
+					}
+					// Sinon on crée l'utilisateur et on le redirige vers l'index
+					else {
+						$this->User->create($data);
+						$this->setFlash("Votre inscription a bien été prise en compte", 'success');
+						//$this->login();
+						$this->view->redirect_to('/');
+						
+					}
 
-                } else {
-                    $this->setFlash("Les mots de passes renseignés ne sont pas identiques", 'warning');
-                    $this->view->render('users/register');
-                }
+				} else {
+					$this->setFlash("Les mots de passes renseignés ne sont pas identiques", 'warning');
+					$this->view->render('users/register');
+				}
 
-            } else {
-                $this->setFlash("Veuillez renseigner tous les champs", 'warning');
-                $this->view->render('users/register');
-            }
-        } else {
-            $this->view->render('users/register');
-        }
-    }
+			} else {
+				
+				$this->setFlash("Veuillez renseigner tous les champs", 'warning');
+				$this->view->render('users/register');
+			}
+	}
 
+	
+
+   
     /**
      * Accueil de la partie administrateur
      */
@@ -131,12 +127,15 @@ class UsersController extends Controller
         }
     }
 
-    /*
-     * Fonction de déconnection
-     * envoi une variable $msg à la vue
-     */
+  
 
-    public function logout()
+	
+	/*
+	 * Fonction de déconnection
+	 * envoi une variable $msg à la vue
+	 */
+
+	 public function logout()
     {
         Session::destroy('user');
         $this->setFlash("Vous êtes bien deconnecté", 'success');
