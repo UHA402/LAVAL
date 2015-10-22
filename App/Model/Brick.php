@@ -12,7 +12,9 @@ class Brick extends Model{
 
 
 
+
 	function CreateBrick($strTitle,$strType,$strData){
+
 
 	    $data=$this->db->query("INSERT INTO tbricks(title, type, data) VALUES ('".$strTitle."','".$strType."','".$strData."' )");
       	return $data;
@@ -60,7 +62,7 @@ class Brick extends Model{
 	}
 
 	public function UpdateBrick($iID,$strTitle,$strType,$strData,$strType_response,$strDuree){
-   
+
 		$data = $this->db->query("UPDATE `tbricks` SET title='".$strTitle."',type ='".$strType."',data='".$strData."',type_response='".$strType_response."',duree='".$strDuree."' WHERE id= '".$iID."'");
 		return $data;
 
@@ -83,10 +85,12 @@ class Brick extends Model{
 		$data = $this->db->query("SELECT * FROM tbricks WHERE id='".$iID."'");
 		return $data[0];
 	}
+
 	
   	public function ReadAllBrick(){
 		$data = $this->db->query("SELECT `id`, `title`, `type`, `data` FROM `tbricks` ");
 		return $data;
+
 	}
 
 	public function findById($id){

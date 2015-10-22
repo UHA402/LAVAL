@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 define('URL', 'http://localhost/');
 define('LIBS', 'App/Core/');
 define('DB_TYPE', 'mysql');
