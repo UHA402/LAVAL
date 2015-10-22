@@ -18,8 +18,8 @@
                     <div class="panel-body containerEditForm">
 
                         <h1>Add/Edit Brick</h1>
-
                         <form class="form-horizontal" data-toggle="validator" method="post" action="brick/edit">
+                        <form class="form-horizontal" method="post" action="../brick/CreateBrick">
                             <fieldset>
                                 <!-- Text input-->
 
@@ -37,6 +37,8 @@
 
                                         <div class="col-sm-10">
                                             <select class="form-control" id="brickTypeSelector">
+
+                                            <select class="form-control" id="brickTypeSelector" name="brick[type]">
                                                 <option value="WAVE">Stimuli auditif enregistré</option>
                                                 <option value="TTS">Stimuli auditif généré</option>
                                                 <option value="TEXT">Stimuli visuel textuel</option>
@@ -105,3 +107,9 @@
         </div>
     </div>
 </div>
+<?php
+	echo '<pre>';
+	 $this->getFlash(); 
+	 print_r ($this->msg);
+
+	 ?>
