@@ -15,7 +15,7 @@ class User extends Model{
 	 */
 
 	public function create(array $user){
-		$this->db->query("INSERT INTO tusers (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
+		$this->db->query("INSERT INTO users (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
 	}
 
 	/*
@@ -24,7 +24,7 @@ class User extends Model{
 	 */
 
 	public function update(array $user){
-		$this->db->query("UPDATE tusers (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
+		$this->db->query("UPDATE users (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
 	}
 
 	/*
@@ -33,7 +33,7 @@ class User extends Model{
 	 */
 
 	public function fetchValidUser(array $user) {
-		$data = $this->db->query("SELECT * FROM tusers WHERE mail = '".$user["mail"]."' AND password = '".md5($user['password'])."'");
+		$data = $this->db->query("SELECT * FROM users WHERE mail = '".$user["mail"]."' AND password = '".md5($user['password'])."'");
 		return ($data)? $data[0] : false;
 	}
 
@@ -43,7 +43,7 @@ class User extends Model{
 	 */
 
 	public function findByMail($mail){
-		$data = $this->db->query("SELECT * FROM tusers WHERE mail='$mail'");
+		$data = $this->db->query("SELECT * FROM users WHERE mail='$mail'");
 		return $data;
 	}
 
@@ -53,7 +53,7 @@ class User extends Model{
 	 */
 
 	public function findCurrent(array $user){
-		$data = $this->db->query('SELECT * FROM tusers WHERE id='.$user['id']);
+		$data = $this->db->query('SELECT * FROM users WHERE id='.$user['id']);
 		return $data;
 	}
 
@@ -63,6 +63,6 @@ class User extends Model{
 	 */
 
 	private function delete($id){
-		$this->db->query("DELETE FROM tusers WHERE id=".$id);
+		$this->db->query("DELETE FROM users WHERE id=".$id);
 	}
 }
