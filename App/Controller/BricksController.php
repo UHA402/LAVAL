@@ -20,7 +20,7 @@ class BricksController extends Controller {
 	public function edit($id = null){
 		if ($id) {
 			if ($this->Brick->findById($id)) {
-				$currentBrick = $this->Brick->findById($id);
+				$currentBrick = Request::cleanInput($this->Brick->findById($id));
 				$this->view->currentBrick = $currentBrick;
 			} else {
 				$this->setFlash("This brick doesn't exist", "warning");
@@ -71,46 +71,20 @@ class BricksController extends Controller {
 		}
 	}
    
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  /* public function UpdateBrick (){
-	   $clean_inputs=[];
+
+  public function UpdateBrick ($id){
+	  
 	   $this->data = Request::all();
-	   foreach($this->data as $keys=>$value){
-		   $clean_inputs = $value;
-		   
+	   if($this->Brick->UpdateBrick($id, $this->data )){
+		   $this->setFlash('The brick has been updated', "success");
+	   	   $this->view->redirect_to('/brick/edit');
 	   }
-	    echo'<pre>';
-	        print_r($clean_inputs);
-	  
-	  
-	   
-	   $ee= $clean_inputs['name'];
-	   	   
-	   $this->setFlash($ee, 'success');*/
-	   
-	   //$id= $this->Brick->FindIDBrickByTitle($this->data['oldtitle']);
-	  
-	 /* $test= true;
-	   $array = $this->Brick->ReadAllTitleBricks();
-	   foreach ($array as $name) {
-				$id= $this->Brick->FindIDBrickByTitle($name);
-				if (($this->data['bricks[id]'] != $id)&&($this->data['bricks[name]']==$name)){
-					$test = false;
-				}
+	   else{
+		   $this->setFlash("Problem occur while updating Brick", "warning");
+			$this->view->redirect_to('/brick/edit');
 	   }
-	   
-		// New title doesn't exists : OK
-		if ($test == true){
-			$this->Brick->UpdateBrick($this->data['bricks[id]'],$this->data['bricks[name]'], $this->data['bricks[type]'],$this->data['bricks[data]'],$this->data['bricks[type_response]'], $this->data['bricks[duree]']); 
-			$this->setFlash("The Brick is updated", 'success');
-		}
-		else {
-				$this->setFlash("The title of the brick is already used", 'danger');
-		
-		// A voir la vue..*/
-		/*$this->view->redirect_to('/bricks/create');
-		}
-   }*/
+  }
+	 
 
    /*public function show(){
        $this->data = Request::all();

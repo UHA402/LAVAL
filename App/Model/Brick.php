@@ -61,9 +61,19 @@ class Brick extends Model{
 
 	}
 
-	public function UpdateBrick($iID,$strTitle,$strType,$strData,$strType_response,$strDuree){
+	public function UpdateBrickOld($iID,$strTitle,$strType,$strData,$strType_response,$strDuree){
 
 		$data = $this->db->query("UPDATE `tbricks` SET title='".$strTitle."',type ='".$strType."',data='".$strData."',type_response='".$strType_response."',duree='".$strDuree."' WHERE id= '".$iID."'");
+		return $data;
+
+	}
+	
+	public function UpdateBrick($iID,$data){
+		$strTitle = $data['name'];
+		$strTitle = $data['type'];
+		$strData = $data['media'];
+
+		$data = $this->db->query("UPDATE `tbricks` SET title='".$strTitle."',type ='".$strType."',data='".$strData."' WHERE id= '".$iID."'");
 		return $data;
 
 	}
@@ -102,3 +112,5 @@ class Brick extends Model{
 }
 
 ?>
+
+

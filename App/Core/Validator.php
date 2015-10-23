@@ -1,4 +1,3 @@
-
 <?php namespace App\Core;
 
 
@@ -17,10 +16,10 @@ class Validator  {
 		foreach ($array as $key=>$value){
 			if(self::is_empty($value)){
 				return false;
-			} else {
-				return true;
 			}
+				
 		}
+		return true;
 	}
 
 	public static function is_equal($input, $input1){

@@ -17,13 +17,20 @@
                 <div class="panel panel-default">
                     <div class="panel-body containerEditForm">
 
-                        <h1><?php if(isset($this->currentBrick)){
-                            echo "Edit"; 
-                        }
-                            else echo "Add";?> Brick
-
-                        </h1>
-                        <form class="form-horizontal" data-toggle="validator" method="post" action="/brick/CreateBrick">
+                        <?php 
+                            if(isset($this->currentBrick)){
+                                echo "<h1>Edit Brick</h1>"; 
+                               
+                                echo ' <form class="form-horizontal" data-toggle="validator" method="post" action="/brick/UpdateBrick/'.$this->currentBrick['id'].'">';
+                            }
+                            else {
+                                echo "<h1>Add Brick</h1>";
+                                 echo ' <form class="form-horizontal" data-toggle="validator" method="post" action="/brick/CreateBrick">';
+                            }
+                        ?> 
+                         
+                      
+                  
                             <fieldset>
                                 <!-- Text input-->
 
@@ -31,7 +38,7 @@
                                     <div class="form-group">
                                         <input id="brick[name]" name="brick[name]" type="text"
                                                placeholder="Brick's name" value="<?php if (isset($this->currentBrick)) {
-                                                   echo $this->currentBrick[0]['title'];
+                                                   echo $this->currentBrick['title'];
                                                } ?>"
                                                class="floating-label form-control input-md" required>
                                     </div>
@@ -58,9 +65,9 @@
                                         <div class="form-group"><input id="brick[media]" name="brick[media]" type="text"
                                                                        readonly="" class="form-control floating-label"
                                                                        placeholder="<?php if (isset($this->currentBrick)) {
-                                                   echo $this->currentBrick[0]['data'];
+                                                   echo $this->currentBrick['data'];
                                                } else echo "Upload File..."?>" value="<?php if (isset($this->currentBrick)) {
-                                                   echo $this->currentBrick[0]['data'];
+                                                   echo $this->currentBrick['data'];
                                                }?>"> <input type="file" id="inputFile"  required>
                                         </div>
                                     </div>
