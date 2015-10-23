@@ -17,7 +17,6 @@ class Validator  {
 			if(self::is_empty($value)){
 				return false;
 			}
-				
 		}
 		return true;
 	}

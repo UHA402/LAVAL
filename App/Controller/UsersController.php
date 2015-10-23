@@ -1,6 +1,6 @@
 <?php
 use App\Core\Session;
-
+use App\Core\Request\Request;
 use App\Core\Controller\Controller;
 use App\Core\View\View;
 use App\Core\Validator;

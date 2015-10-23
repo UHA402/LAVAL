@@ -37,6 +37,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <input id="brick[name]" name="brick[name]" type="text"
+
                                                placeholder="Brick's name" value="<?php if (isset($this->currentBrick)) {
                                                    echo $this->currentBrick['title'];
                                                } ?>"
@@ -102,7 +103,7 @@
                                 <td><?php echo $brick['data']; ?></td>
                                 <td>
                                     <a href="/brick/edit/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button></a>
-                                    <a href="delete/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button></a>
+                                    <a href="/brick/delete/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button></a>
                                 </td>
                     </tr>
                     <?php endforeach;?>
