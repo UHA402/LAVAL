@@ -6,9 +6,10 @@ class Media extends Model {
 	private $id;
 	private $title;
 	private $url;
+	private $type;
 	
 	public function __construct(){
-		parent::__construct();
+		parent::__construct('tmedias');
 	}
 	
 	public function getTitle(){
@@ -18,11 +19,11 @@ class Media extends Model {
 		 return $this->url;
     } 
 	
-	public function setTitle($tilte){
+	public function setTitle($title){
 		 $this->title = $title;
     } 
 	
-	public function setUrl($ulr){
+	public function setUrl($url){
 		 $this->url = $url;
     } 
 	public function getId(){
@@ -34,10 +35,29 @@ class Media extends Model {
     } 
 	
 	
-	public function create($media, $idBrick){
+	  /**
+     * @return mixed
+     */
+    public function getType(){
+		return $this->type;
+	}
+
+    /**
+     * @param $type
+     */
+    public function setType($type){
+		$this->type= $type;
+	}
+	
+	 public function setFields(){
+        $this->setTabFields(['title'=>$this->title,  'url'=>$this->url, 'type'=>$this->type]);
+    }
+	
+	
+	/*public function create($media, $idBrick){
 		$this->db->query("INSERT INTO MEDIA (title, url) VALUES ($media->getTitle(), $media->getUrl())");	
 		$this->db->query("INSERT INTO tbricks_media (id_Bricks, id_Medias) VALUES ($idBrick, $media->getiD())");
-	}
+	}*/
 	
 	/*public function update($media){
 		//$data = $this->db->query("UPDATE `tbricks` SET title='".$strTitle."',type ='".$strType."',data='".$strData."' WHERE id= '".$iID."'");

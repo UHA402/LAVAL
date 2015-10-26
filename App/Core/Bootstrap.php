@@ -71,7 +71,7 @@ class Bootstrap {
 		if (file_exists($file)) {
 			require $file;
 			$this->_controller = new $this->ctrl();
-			
+		
 			$this->_controller->loadModel($this->_url[0]);
 		} else {
 			$this->_error();

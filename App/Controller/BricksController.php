@@ -40,24 +40,23 @@ class BricksController extends Controller {
 	 * Create bricks 
 	 */
 	public function CreateBrick (){
-		   $this->data = Request::all();
 		   $name= Request::input('name');
-		  
 		   $type= Request::input('type');
-	
 		   $media= Request::input('media');
-		 
-		  
-		   	   
+		   
 		   $data= $this->Brick->FindIDBrickByTitle($name);
 			 // Title doesn't exists 
 			 if ($data == 0) {
+				$this->Media->setTitle($media);
+				$this->Media->setUrl(URL.'medias/'.$media);
+				$this->Media->setType($type);
+				$this->Media->setFields();
 				
 				$this->Brick->createBrick($name, $type,$media); 
 				$id =$this->Brick->FindIDBrickByTitle($name);
 				
 				// create media
-				$this->Media->create($media, $id);
+				$this->Media->create();
 			
 				$this->setFlash("You have created your new brick !", 'success');
 			 }
@@ -65,7 +64,7 @@ class BricksController extends Controller {
 				$this->setFlash(" This title already exists choose another one !", "danger");
 			 }
     
-		      $this->view->redirect_to('/brick/edit');
+		     $this->view->redirect_to('/brick/edit');
 
 	}
 

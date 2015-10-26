@@ -74,7 +74,7 @@
                                                } else echo "Upload File..."?>" value="<?php if (isset($this->currentBrick)) {
                                                    echo $this->currentBrick['data'];
                                                }?>"> 
-                                               <input type="file" id="inputFile" name="inputFile" required>
+                                               <input type="file" id="inputFile"  required>
 
                                                                       
 
