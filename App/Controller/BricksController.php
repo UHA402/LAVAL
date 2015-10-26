@@ -33,39 +33,38 @@ class BricksController extends Controller {
 		}
 		$bricks =$this->Brick->ReadAllBrick();
 	 	$this->view->bricks = $bricks;
-	 	$this->view->render('bricks/edit');				
+	 	$this->view->render('bricks/edit');	
 	}   
 
 	/* 
 	 * Create bricks 
 	 */
-	public function CreateBrick (){
-		   $name= Request::input('name');
+	public function CreateBrick(){
+		   $name= Request::input('title');
 		   $type= Request::input('type');
-		   $media= Request::input('media');
+		   $media= Request::input('data');
+		   $data = Request::all();
 		   
-		   $data= $this->Brick->FindIDBrickByTitle($name);
-			 // Title doesn't exists 
-			 if ($data == 0) {
+		   $bricks= $this->Brick->FindIDBrickByTitle($name);
+			 // Title doesn't exists
+			 if ($bricks == 0) {
 				$this->Media->setTitle($media);
 				$this->Media->setUrl(URL.'medias/'.$media);
 				$this->Media->setType($type);
 				$this->Media->setFields();
 				
-				$this->Brick->createBrick($name, $type,$media); 
-				$id =$this->Brick->FindIDBrickByTitle($name);
-				
-				// create media
-				$this->Media->create();
-			
-				$this->setFlash("You have created your new brick !", 'success');
-			 }
-			 else {
+				if($this->Brick->create($data)){
+					$this->setFlash("You have created your new brick !", 'success');
+					// create media
+					$this->Media->create();
+				} else {
+					$this->setFlash("Failure", 'danger');
+				}		
+			 } else {
 				$this->setFlash(" This title already exists choose another one !", "danger");
 			 }
-    
-		     $this->view->redirect_to('/brick/edit');
 
+		      $this->view->redirect_to('/brick/edit');
 	}
 
 	/* 

@@ -97,7 +97,7 @@
                                 </table>
                                 <div class="pagingBrick"></div>
                                 <div class="form-group text-right">
-                                    <button type="submit" id="sequence[save]" name="sequence[save]" class="btn btn-primary">Save
+                                    <button type="submit" id="sequence[save]" class="btn btn-primary">Save
                                     </button>
                                 </div>
 
@@ -116,15 +116,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Sequence 1</td>
-                        <td>34</td>
-                        <td>
-                            <button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button>
-                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
-                        </td>
+                   <?php foreach ($this->sequences as $key => $sequence): ?>
+                        <tr>
+                            <td><?php echo $sequence['id'] ?></td>
+                            <td><?php echo $sequence['title'] ?></td>
+                            <td><?php echo $sequence['type'] ?></td>
+                            <td><?php echo $sequence['data'] ?></td>
+                            <td>
+                                <a href="/sequence/delete/<?php echo $brick['id']; ?>">
+                                <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                                </a>
+                            </td>
                     </tr>
+                    <?php endforeach; ?>
                     <tr>
                         <td>2</td>
                         <td>Sequence 2</td>

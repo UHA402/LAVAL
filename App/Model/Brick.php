@@ -7,16 +7,16 @@
 class Brick extends Model{
 
 	public function __contruct(){
-	   parent::__construct();
+	   parent::__construct("tbricks");
 	}
 
 	/*
 	 * Save a new brick in the database
 	 */
-	function CreateBrick($strTitle,$strType,$strData){
-	    $data=$this->db->query("INSERT INTO tbricks(title, type, data) VALUES ('".$strTitle."','".$strType."','".$strData."' )");
-      	return $data;
-	}
+	// function CreateBrick($strTitle,$strType,$strData){
+	//     $data=$this->db->query("INSERT INTO tbricks(title, type, data) VALUES ('".$strTitle."','".$strType."','".$strData."' )");
+ //      	return $data;
+	// }
 
 	/*
 	 * Find all title brick in the database
@@ -79,14 +79,14 @@ class Brick extends Model{
 	/*
 	 * Update a brick
 	 */
-	public function UpdateBrick($iID,$data){
-		var_dump($data);
-		$strTitle = $data['name'];
-		$strType = $data['type'];
-		$strData = $data['media'];
-		$data = $this->db->query("UPDATE `tbricks` SET title='".$strTitle."',type ='".$strType."',data='".$strData."' WHERE id= '".$iID."'");
-		return $data;
-	}
+	// public function UpdateBrick($iID,$data){
+	// 	var_dump($data);
+	// 	$strTitle = $data['name'];
+	// 	$strType = $data['type'];
+	// 	$strData = $data['media'];
+	// 	$data = $this->db->query("UPDATE `tbricks` SET title='".$strTitle."',type ='".$strType."',data='".$strData."' WHERE id= '".$iID."'");
+	// 	return $data;
+	// }
 
 	/*
 	 * Erase a brick from database

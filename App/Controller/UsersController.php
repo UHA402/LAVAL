@@ -29,7 +29,7 @@ class UsersController extends Controller
             $this->view->username = $username;
             $this->view->render('users/index');
 		    
-        } elseif (!Validator::array_has_empty($user)) {
+            } elseif (!Validator::array_has_empty($user)) {
 
             // Si les champs ont été remplis 
          

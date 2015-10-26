@@ -4,11 +4,7 @@ use App\Core\Model\Model;
 class Sequence extends Model{
 
 	public function __construct(){
-		parent::__construct();
-	}
-
-	public function create(array $sequence){
-		$this->db->query("INSERT INTO sequences (title, duration) VALUES ('".$sequence['title']."', '".$sequence['duration']."')");
+		parent::__construct("sequences");
 	}
 
 	public function findById($id){
@@ -31,9 +27,9 @@ class Sequence extends Model{
 		return $data;
 	}
 
-	public function update(array $sequence){
-		$this->db->query("UPDATE sequences (title, duration) VALUES ('".$sequence['title']."', '".$sequence['duration'].")");
-	}
+	// public function update(array $sequence){
+	// 	$this->db->query("UPDATE sequences (title, duration) VALUES ('".$sequence['title']."', '".$sequence['duration'].")");
+	// }
 
 	public function delete($id){
 		$this->db->query("DELETE FROM sequences WHERE id='".$id."'");

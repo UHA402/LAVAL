@@ -14,9 +14,9 @@ class User extends Model{
 	 * Enregistre un utilisateur en base de donnée
 	 */
 
-	public function create(array $user){
-		$this->db->query("INSERT INTO tusers (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
-	}
+	// public function create(array $user){
+	// 	$this->db->query("INSERT INTO tusers (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
+	// }
 
 	/*
 	 * Fonction de modification d'un utilisateur*

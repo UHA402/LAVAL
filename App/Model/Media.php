@@ -1,7 +1,7 @@
 <?php 
-
 use App\Core\Session;
 use App\Core\Model\Model;
+
 class Media extends Model {
 	private $id;
 	private $title;
