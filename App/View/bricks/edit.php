@@ -21,11 +21,11 @@
                             if(isset($this->currentBrick)){
                                 echo "<h1>Edit Brick</h1>"; 
                                
-                                echo ' <form class="form-horizontal" data-toggle="validator" method="post" action="/brick/UpdateBrick/'.$this->currentBrick['id'].'">';
+                                echo ' <form class="form-horizontal" enctype="multipart/form-data" data-toggle="validator" method="post" action="/brick/UpdateBrick/'.$this->currentBrick['id'].'">';
                             }
                             else {
                                 echo "<h1>Add Brick</h1>";
-                                 echo ' <form class="form-horizontal" data-toggle="validator" method="post" action="/brick/CreateBrick">';
+                                 echo ' <form class="form-horizontal" enctype="multipart/form-data"  data-toggle="validator" method="post" action="/brick/CreateBrick">';
                             }
                         ?> 
                          
@@ -69,7 +69,8 @@
                                                    echo $this->currentBrick['data'];
                                                } else echo "Upload File..."?>" value="<?php if (isset($this->currentBrick)) {
                                                    echo $this->currentBrick['data'];
-                                               }?>"> <input type="file" id="inputFile"  required>
+                                               }?>"> 
+                                               <input type="file" id="inputFile" name="inputFile" required>
                                         </div>
                                     </div>
 

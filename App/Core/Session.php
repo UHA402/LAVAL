@@ -20,5 +20,15 @@ class Session {
 	public static function destroy(){
 		session_destroy();
 	}
+	
+	public static function setFlash($message, $type = 'info', $title = null) {
+         if ($message) {
+             $_SESSION['flash'] = array(
+                 'message' => $message,
+                 'type' => $type,
+                 'title' => $title
+             );
+         }
+     }
 
 }
