@@ -68,18 +68,16 @@
                                         <div class="form-group">
                                             <input id="brick[media]" name="brick[media]" type="text"
                                                                        readonly="" class="form-control floating-label"
-<<<<<<< HEAD
+
                                                                        placeholder="<?php if (isset($this->currentBrick)) {
                                                    echo $this->currentBrick['data'];
                                                } else echo "Upload File..."?>" value="<?php if (isset($this->currentBrick)) {
                                                    echo $this->currentBrick['data'];
                                                }?>"> 
                                                <input type="file" id="inputFile" name="inputFile" required>
-=======
-                                                                       placeholder="<?php if (isset($this->currentBrick)){ echo $this->currentBrick['data'];} else echo "Upload File..."?>" 
-                                                                       value="<?php if (isset($this->currentBrick)) {echo $this->currentBrick['data']; }?>">
-                                            <input type="file" id="inputFile" value="<?php if (isset($this->currentBrick)) { echo $this->currentBrick['data']; }?>" required>
->>>>>>> 2b6314f1446772d676ed6154bc8b02e24cac8dc8
+
+                                                                      
+
                                         </div>
                                     </div>
                                 </div>
