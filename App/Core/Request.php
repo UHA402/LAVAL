@@ -24,6 +24,7 @@ class Request {
 			$data = strip_tags($data);
 			$clean_input = trim($data);
 		}
+	
 		return $clean_input;
 	}
 
@@ -35,7 +36,7 @@ class Request {
   	*@return array
   	*/
 	public static function all(){
-		$data = $_REQUEST ;//file_get_contents('php://input');
+		$data = $_REQUEST ;//file_get_contents('php://input');	
 		unset($data['url']);
 		$data = self::cleanInput($data);
 		return $data;
@@ -52,6 +53,7 @@ class Request {
 	public static function input($name){
 		$clean_input= self::cleanInput($_REQUEST);
 		return $clean_input[$name];
+		
 	}
 	/**
      * to determine if value is present on the request

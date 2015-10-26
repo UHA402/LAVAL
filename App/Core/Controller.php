@@ -21,15 +21,16 @@ Session::init();
 
    public function loadModel($name){
      /* recupere le chemin du model */
-        $name = ucfirst($name);
+        $n = ucfirst($name);
+       $name .="S";
 
-        $path = 'App/Model/'.$name.'.php';
+        $path = 'App/Model/'.$n.'.php';
 
         /* vérifie si le model exixte et l' initialise */
 
         if(file_exists($path)){
-          require 'App/Model/'.$name.'.php';
-          $this->$name = new $name(); // modification, pour pourvoir faire par exemple $this->User->method
+          require 'App/Model/'.$n.'.php';
+          $this->$n = new $n($name); // modification, pour pourvoir faire par exemple $this->User->method
           // $this->model = new $name();
         }
    }
