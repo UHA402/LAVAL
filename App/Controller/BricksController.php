@@ -42,7 +42,9 @@ class BricksController extends Controller {
 	public function CreateBrick (){
 		   $this->data = Request::all();
 		   $name= Request::input('name');
+		  
 		   $type= Request::input('type');
+	
 		   $media= Request::input('media');
 		 
 		  
