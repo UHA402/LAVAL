@@ -41,7 +41,7 @@ class Request {
 		return $data;
 	}
 
-	/*
+	/**
 	* return specified input name
 	*
 	*@var $name
@@ -53,6 +53,35 @@ class Request {
 		$clean_input= self::cleanInput($_REQUEST);
 		return $clean_input[$name];
 	}
+	/**
+     * to determine if value is present on the request
+     *
+     * @param $name
+     * @return bool
+     */
+    public static function has($name){
+		if(!isset($_REQUEST[$name]) && $_REQUEST[$name] != ""){
+			return false;
+		}
+		return true;
+    }
+
+    /**
+     * retrieving subset of provided inputs data
+     *
+     * @param array $input
+     * @return array
+     */
+    public static function only($input = []){
+		$only_inputs =[];
+	    $clean_input= self::cleanInput($_REQUEST);
+		foreach($input as $keys => $value){
+			$only_inputs[$value] = $clean_input[$value];
+			
+		}
+		return $only_inputs;
+	}
+	
 
 
 

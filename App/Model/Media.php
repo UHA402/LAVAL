@@ -34,12 +34,12 @@ class Media extends Model {
     } 
 	
 	
-	/*public function create($media, $idBrick){
+	public function create($media, $idBrick){
 		$this->db->query("INSERT INTO MEDIA (title, url) VALUES ($media->getTitle(), $media->getUrl())");	
 		$this->db->query("INSERT INTO tbricks_media (id_Bricks, id_Medias) VALUES ($idBrick, $media->getiD())");
 	}
 	
-	public function update($media){
+	/*public function update($media){
 		//$data = $this->db->query("UPDATE `tbricks` SET title='".$strTitle."',type ='".$strType."',data='".$strData."' WHERE id= '".$iID."'");
 		$this->db->query("UPDATE  MEDIA  SET title= $media->getTitle(), url=$media->getUrl())");
 	}

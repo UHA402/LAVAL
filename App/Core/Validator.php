@@ -32,6 +32,7 @@ class Validator  {
 	public function is_registered($input, $tab='users'){
 		return $this->db->query("SELECT * FROM $tab WHERE $input = '$input'");
 	}
+	
 
 
 

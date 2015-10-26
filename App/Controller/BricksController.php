@@ -7,7 +7,7 @@ class BricksController extends Controller {
 	
 	function __construct(){
 		parent::__construct();
-		//$this->loadModel('media');
+		$this->loadModel('media');
 
 	}
 
@@ -41,8 +41,7 @@ class BricksController extends Controller {
 		   $type= Request::input('type');
 		   $media= Request::input('media');
 		 
-		   //var_dump($name);
-		   //return;
+		  
 		   	   
 		   $data= $this->Brick->FindIDBrickByTitle($name);
 			 // Title doesn't exists 
@@ -51,7 +50,7 @@ class BricksController extends Controller {
 				$this->Brick->createBrick($name, $type,$media); 
 				$id =$this->Brick->FindIDBrickByTitle($name);
 				
-				//$this->Media->create($media, $id);
+				$this->Media->create($media, $id);
 				
 				$this->setFlash("You have created your new brick !", 'success');
 			 }
@@ -61,7 +60,7 @@ class BricksController extends Controller {
 			 //setFlash($message, $type = 'info', $title = null)
 			 
 		    
-		     //$this->view->redirect_to('/brick/edit');
+		      $this->view->redirect_to('/brick/edit');
 		   
 
 	}
