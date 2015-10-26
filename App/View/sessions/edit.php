@@ -21,21 +21,20 @@
 
                         <form class="form-horizontal" data-toggle="validator" method="post">
                             <fieldset>
-
+ <span class="text-right">
+                                        <div class="togglebutton togglebutton-material-green">
+                                            <label class="text-left">
+                                                <input id="sequence[publish]" name="sequence[publish]"
+                                                       type="checkbox" checked="">Publish
+                                            </label>
+                                        </div>
+                                </span>
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <div class="col-md-6">
                                         <input id="session[name]" name="session[name]" type="text"
                                                placeholder="Session's name"
                                                class="floating-label form-control input-md" required>
-                                    </div>
-                                    <div class="col-md-3 text-center">
-                                        <div class="togglebutton togglebutton-material-green">
-                                            <label class="text-left">
-                                                <input id="session[publish]" name="session[publish]" type="checkbox"
-                                                       checked="">Publish
-                                            </label>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">

@@ -20,30 +20,39 @@
                         <h1>Add/Edit Sequence</h1>
                         <form class="form-horizontal" data-toggle="validator" method="post" action="/sequence/edit">
                             <fieldset>
+                                <span class="text-right">
+                                        <div class="togglebutton togglebutton-material-green">
+                                            <label class="text-left">
+                                                <input id="sequence[publish]" name="sequence[publish]"
+                                                       type="checkbox" checked="">Publish
+                                            </label>
+                                        </div>
+                                </span>
 
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <div class="col-md-6">
-                                        <input id="sequence[name]" name="sequence[title]" type="text" placeholder="Sequence's name"
-                                               class="floating-label form-control input-md"  
-                                               value="<?php if (isset($this->sequence)) {echo $this->sequence['title'];} ?>"
+                                        <input id="sequence[name]" name="sequence[title]" type="text"
+                                               placeholder="Sequence's name"
+                                               class="floating-label form-control input-md"
+                                               value="<?php if (isset($this->sequence)) {
+                                                   echo $this->sequence['title'];
+                                               } ?>"
                                                required>
                                     </div>
-                                    <div class="col-md-3 text-center">
-                                        <div class="togglebutton togglebutton-material-green">
-                                            <label class="text-left">
-                                                <input id="sequence[publish]" name="sequence[publish]" type="checkbox" checked="">Publish
-                                            </label>
+                                    <div class="form-group">
+                                        <label class="col-md-2 text-right">Duration :</label>
+                                        <div class="col-md-2">
+                                            <input id="sequence[duration]" name="sequence[duration]" type="time"
+                                                   placeholder="Duration"
+                                                   class="form-control input-md"
+                                                   value="<?php if (isset($this->sequence)) {
+                                                       echo $this->sequence['duration'];
+                                                   } ?>"
+                                                   required>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-6">
-                                        <input id="sequence[duration]" name="sequence[duration]" type="time" placeholder="Duration"
-                                               class="floating-label form-control input-md"
-                                                value="<?php if (isset($this->sequence)) {echo $this->sequence['duration'];} ?>" 
-                                               required>
-                                    </div>
+
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-4">
