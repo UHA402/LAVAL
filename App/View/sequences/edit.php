@@ -18,27 +18,39 @@
                     <div class="panel-body containerEditForm">
 
                         <h1>Add/Edit Sequence</h1>
-                        <form class="form-horizontal" data-toggle="validator" method="post">
+                        <form class="form-horizontal" data-toggle="validator" method="post" action="/sequence/edit">
                             <fieldset>
 
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <div class="col-md-6">
-                                        <input id="sequence[name]" name="sequence[name]" type="text" placeholder="Sequence's name"
-                                               class="floating-label form-control input-md" required>
+                                        <input id="sequence[name]" name="sequence[title]" type="text" placeholder="Sequence's name"
+                                               class="floating-label form-control input-md"  
+                                               value="<?php if (isset($this->sequence)) {echo $this->sequence['title'];} ?>"
+                                               required>
                                     </div>
                                     <div class="col-md-3 text-center">
                                         <div class="togglebutton togglebutton-material-green">
                                             <label class="text-left">
-                                                <input id="sequence[publish] name="sequence[publish]" type="checkbox" checked="">Publish
+                                                <input id="sequence[publish]" name="sequence[publish]" type="checkbox" checked="">Publish
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="col-md-6">
+                                        <input id="sequence[duration]" name="sequence[duration]" type="time" placeholder="Duration"
+                                               class="floating-label form-control input-md"
+                                                value="<?php if (isset($this->sequence)) {echo $this->sequence['duration'];} ?>" 
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="col-md-4">
                                         <select id="sequence[bricklist]" name="sequence[bricklist]" class="form-control" multiple>
-                                            <option value="1">Liste des briques disponibles</option>
+                                            <?php foreach ($this->bricks as $key => $brick): ?>
+                                                <option value="<?php echo $brick['id'];?>"><?php echo $brick['title']; ?></option>
+                                            <?php endforeach; ?>
                                         </select>
 
                                     </div>
@@ -59,26 +71,19 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Brick 1</td>
-                                        <td>WAV</td>
-                                        <td>fichier.wav</td>
-                                        <td>
-                                            <a href="../delete">
-                                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
-                                            </a>
-                                        </td>
+                                    <?php foreach ($this->bricks as $key => $brick): ?>
+                                        <tr>
+                                            <td><?php echo $brick['id'] ?></td>
+                                            <td><?php echo $brick['title'] ?></td>
+                                            <td><?php echo $brick['type'] ?></td>
+                                            <td><?php echo $brick['data'] ?></td>
+                                            <td>
+                                                <a href="/sequence/delete/<?php echo $brick['id']; ?>">
+                                                <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                                                </a>
+                                            </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Brick 2</td>
-                                        <td>TTS</td>
-                                        <td>BLA BLA BLA BLA</td>
-                                        <td>
-                                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
-                                        </td>
-                                    </tr>
+                                    <?php endforeach; ?>
                                     </tbody>
                                 </table>
                                 <div class="pagingBrick"></div>

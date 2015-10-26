@@ -19,18 +19,12 @@ class UsersController extends Controller
         parent::__construct();
     }
 
-
     /*
      * Accueil de la partie user et gestion de la connexion
       */
-    public function index()
-    {
-			  $user = Request::all();
-         
-				
-        if (isset($_SESSION['user'])) {
-            //$lessons = $this->Lesson->findToDo();
-            //$this->view->lessons = $lessons;
+    public function index(){
+	$user = Request::all();
+	if (isset($_SESSION['user'])) {
             $username = Session::get('user');
             $this->view->username = $username;
             $this->view->render('users/index');
@@ -39,29 +33,23 @@ class UsersController extends Controller
 
             // Si les champs ont été remplis 
          
-                if ($user = $this->User->fetchValidUser($user))
-				{
-
+                if ($user = $this->User->fetchValidUser($user)){
                     // Création de la session                 
                     Session::set('user', $user['lastName']);
                     $this->setFlash("Vous êtes connecté !", 'success');
                     
                     // Redirection en fonction des roles
                     if ($user['role'] == "admin") {
-											 $this->view->render('/user/admin_index');
+                    		$this->view->render('/user/admin_index');
                     } else {
-						 $this->view->user = Session::get('lastName');
-						 $this->view->render('user/index');
-					}
-
-                }
-				else {
+			 $this->view->user = Session::get('lastName');
+			 $this->view->render('user/index');
+		}
+                } else {
                     $this->setFlash("L'email et le mot de passe ne correspondent pas", 'danger');
                     $this->view->redirect_to('/');
                 }
-           
-        }
-		else {
+        } else {
             $this->setFlash("Vous devez vous connecter avant de pouvoir acceder à cette partie", 'danger');
             $this->view->render('users/connect');
         }
@@ -133,14 +121,13 @@ class UsersController extends Controller
 	 * Fonction de déconnection
 	 * envoi une variable $msg à la vue
 	 */
-
-	 public function logout()
-    {
-        Session::destroy('user');
-        $this->setFlash("Vous êtes bien deconnecté", 'success');
-        //$this->view->render('index/index');
-        $this->view->redirect_to('/');
-    }
+	public function logout()
+	{
+	Session::destroy('user');
+	$this->setFlash("Vous êtes bien deconnecté", 'success');
+	//$this->view->render('index/index');
+	$this->view->redirect_to('/');
+	}
 
     /*
      * Fonction de récuperation de mot de passe
