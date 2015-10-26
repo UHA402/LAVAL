@@ -52,11 +52,12 @@ class BricksController extends Controller {
 				$this->Media->setUrl(URL.'medias/'.$media);
 				$this->Media->setType($type);
 				$this->Media->setFields();
-				
-				if($this->Brick->create($data)){
+
+				if($data){
+					$this->Brick->create($data);
+					$this->Media->create();
 					$this->setFlash("You have created your new brick !", 'success');
 					// create media
-					$this->Media->create();
 				} else {
 					$this->setFlash("Failure", 'danger');
 				}		

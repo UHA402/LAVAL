@@ -14,6 +14,9 @@ use App\Core\Validator;
 		*/
 		function edit($id = null) {
 			$data = Request::all();
+			var_dump($data);
+			$post = $_POST;
+			var_dump($post);
 			if ($id) {
 				if ($sequence = Request::cleanInput($this->Sequence->findById($id))) {
 			var_dump($sequence);
@@ -30,7 +33,9 @@ use App\Core\Validator;
 				$this->setFlash("You've created a new sequence !", "success");
 			}
 			$bricks = $this->Sequence->findAllBricks();
+			$sequences = $this->Sequence->findAll();
 			$this->view->bricks = $bricks;
+			$this->view->sequences = $sequences;
 			$this->view->render('sequences/edit');
 		}
 		

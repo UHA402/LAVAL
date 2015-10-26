@@ -23,15 +23,14 @@ namespace App\Core\Model;
     
     public function create(array $data = null){
         $sql = "INSERT INTO $this->tab";
-        var_dump($data);
         if ($data) {
           $sql .= " (`".implode("`, `", array_keys($data))."`)";
           $sql .= " VALUES ('".implode("', '", $data)."') ";
-        var_dump($sql);     
        } else {
           $sql .= " (`".implode("`, `", array_keys($this->fields))."`)";
           $sql .= " VALUES ('".implode("', '", $this->fields)."') ";
        }
+        var_dump($sql); 
         $this->db->query($sql);
     }
 

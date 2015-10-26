@@ -56,11 +56,12 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-4">
-                                        <select id="sequence[bricklist]" name="sequence[bricklist]" class="form-control" multiple>
+                                        <!-- <select id="sequence[bricklist]" name="sequence[bricklist]" class="form-control" multiple> -->
                                             <?php foreach ($this->bricks as $key => $brick): ?>
-                                                <option value="<?php echo $brick['id'];?>"><?php echo $brick['title']; ?></option>
+                                                <input type="checkbox" value="<?php echo $brick['id'];?>" name="sequence_brick[brick<?php echo $brick['id'];?>]"><?php echo $brick['title']; ?>
+                                                <br>
                                             <?php endforeach; ?>
-                                        </select>
+
 
                                     </div>
                                     <div class="col-md-1">
@@ -110,8 +111,7 @@
                     <thead>
                     <tr>
                         <th class="text-center">#</th>
-                        <th class="text-center">Name</th>
-                        <th class="text-center">Bricks</th>
+                        <th class="text-center">Title</th>
                         <th class="text-center">Action</th>
                     </tr>
                     </thead>
@@ -120,24 +120,17 @@
                         <tr>
                             <td><?php echo $sequence['id'] ?></td>
                             <td><?php echo $sequence['title'] ?></td>
-                            <td><?php echo $sequence['type'] ?></td>
-                            <td><?php echo $sequence['data'] ?></td>
                             <td>
-                                <a href="/sequence/delete/<?php echo $brick['id']; ?>">
-                                <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                                <a href="/sequence/edit/<?php echo $sequence['id']; ?>">
+                                <button type="button" class="btn btn-flat btn-info btn-sm btn-td">Edit</button>
+                                </a>
+                                <a href="/sequence/delete/<?php echo $sequence['id']; ?>">
+                                <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">Delete</button>
                                 </a>
                             </td>
                     </tr>
                     <?php endforeach; ?>
-                    <tr>
-                        <td>2</td>
-                        <td>Sequence 2</td>
-                        <td>55</td>
-                        <td>
-                            <button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button>
-                            <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
-                        </td>
-                    </tr>
+
                     </tbody>
                 </table>
                 <div class="pagingLesson"></div>

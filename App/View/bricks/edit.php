@@ -28,10 +28,6 @@
                             }
                         ?> 
 
-                      
-                         
-                      
-                  
                             <fieldset>
                                 <!-- Text input-->
 
