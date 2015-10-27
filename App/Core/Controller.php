@@ -44,5 +44,9 @@ Session::init();
              );
          }
      }
+     
+     public function formatToJson($tab){
+        return json_encode($tab);
+     }
 
  }

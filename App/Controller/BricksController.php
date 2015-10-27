@@ -8,6 +8,7 @@ class BricksController extends Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->loadModel('media');
+		$this->loadModel('media_Brick');
 	}
 
 	/* 
@@ -51,20 +52,23 @@ class BricksController extends Controller {
 				$this->Media->setUrl(URL.'medias/'.$media);
 				$this->Media->setType($type);
 				$this->Media->setFields();
-				
+				//create brick
 				$this->Brick->createBrick($name, $type,$media); 
-				$id =$this->Brick->FindIDBrickByTitle($name);
-				
 				// create media
 				$this->Media->create();
-			
+				
+				 $this->Media_Brick->set_id_Bricks($this->Brick->FindIDBrickByTitle($name));
+				 $this->Media_Brick->set_id_Medias($this->Media->retrieveId('title', $media));
+				 $this->Media_Brick->setFields();
+				 //create pivot table link elements
+				 $this->Media_Brick->create();	
 				$this->setFlash("You have created your new brick !", 'success');
 			 }
 			 else {
 				$this->setFlash(" This title already exists choose another one !", "danger");
 			 }
     
-		     $this->view->redirect_to('/brick/edit');
+		    // $this->view->redirect_to('/brick/edit');
 
 	}
 

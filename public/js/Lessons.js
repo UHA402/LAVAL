@@ -1,10 +1,11 @@
-var sequenceId = 1; //Fonction qui recup l'id de la sequence lancé
-var nbBricks = 10; //"<?php echo GetNbBricks(sequenceId) ?>"; //Fonction PHP qui recup le nbr de briques total d'une leçon.
+var sequenceId = 1; //variable PHP de l'id de la sequence lancé
+var nbBricks = 10; //"<?php echo NbBricks ?>"; //Variable PHP qui contient le nbr de briques total d'une leçon.
 var positionSequence = 0; //Position dans la sequence
 var listOfBrique = []; //List des objets brique
 
 $(document).ready( function() {	
-	
+	console.log('chargement de lessons.js');
+	LoadModelTTS('un deux trois');
 	//Chargement des briques
 	LoadBrique();
 	
@@ -62,19 +63,15 @@ function GetDataBrick(id) {
 function LoadTemplate(brique) {
 	
 	switch(brique.type) {
-	case "MIDI":
-		//chargement du model MIDI
-		LoadModelSound(brique.data);
-		break;
 	case "WAVE":
 		//chargement du model WAVE
 		LoadModelTTS(brique.data);
 		break;
-	case "RESP":
+	case "TTS":
 		//chargement du model TTS
 		LoadModelSound(brique.data);
 		break;
-	case "TEXT":
+	case "TXT":
 		//chargement du model Stimuli textuel
 		LoadModelStimuliText(brique.data);
 		break;
@@ -92,7 +89,7 @@ function LoadTemplate(brique) {
 
 //Change la source du player audio
 function LoadModelSound(url) {
-	$("#briqueContent").load("http://192.168.33.10/LAVAL/App/View/lessons/sound.php", function() {
+	$("#briqueContent").load("http://localhost/player/sound", function() {
 		$("#audio").attr("src",url).trigger("play");
 	});	
 }
@@ -162,11 +159,12 @@ function LoadModelStimuliImg(stimuli) {
 
 //charge le TTS
 function LoadModelTTS(msg) {
-	$("#briqueContent").load("http://192.168.33.10/LAVAL/App/View/lessons/tts.php", function() {
+	$("#briqueContent").load("http://local.dev/LAVAL/player/tts/", function() {
 		$("h1").append(msg)
 		
 		$("#playTTS").click(function() {
 			var u = new SpeechSynthesisUtterance(msg);
+			u.lang = 'en-US';
 		    speechSynthesis.speak(u);
 		});
 	});
@@ -190,7 +188,6 @@ function ProgressBar() {
 	var prog = ((positionSequence + 1)) * nbBricks;
 	
 	$(".progress-bar").attr("style", "width: " + prog + "%");
-	$(".progress-bar").text((positionSequence + 1) + " / " + nbBricks + " briques")
 }
 
 //Verifie si la sequence est fini
@@ -199,8 +196,8 @@ function VerifDone() {
 	//Verifi si la sequence est fini
 	if(positionSequence + 1 === nbBricks) {
 		$('#next-brique').removeClass("btn-success");
-		$('#next-brique').addClass("btn-primary");
-		$('#next-brique').text("Terminé");
+		$('#next-brique').addClass("btn-info");
+		$('#next-brique').text("Finish");
 		$("#next-brique").off("click");
 		$("#next-brique").click(function () {
 			alert("FINI !");
