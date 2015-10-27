@@ -11,8 +11,10 @@
         </ul>
     </div>
 </div>
-<div class="vertical-center">
-<div id="briqueContent">
+<div class="container">
+    <div class="vertical-center">
+    <div id="briqueContent" class="text-center">
+    </div>
 </div>
 </div>
 
