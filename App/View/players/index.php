@@ -1,4 +1,6 @@
-<script src="<?php echo URL ?>public/js/Lessons.js" defer="defer"></script>
+<script>var url = '<?php echo URL ?>';</script>
+<script src="<?php echo URL ?>public/js/Player.js" defer="defer"></script>
+
 <div class="navbar-fixed-bottom navbar-player">
     <div class="progress progress-player">
         <div class="progress-bar progress-bar-success"></div>
@@ -9,9 +11,8 @@
         </ul>
     </div>
 </div>
-
 <div class="vertical-center">
 <div id="briqueContent">
+</div>
+</div>
 
-</div>
-</div>
