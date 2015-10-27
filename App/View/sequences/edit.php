@@ -58,7 +58,7 @@
                                     <div class="col-md-4">
                                         <!-- <select id="sequence[bricklist]" name="sequence[bricklist]" class="form-control" multiple> -->
                                             <?php foreach ($this->bricks as $key => $brick): ?>
-                                                <input type="checkbox" value="<?php echo $brick['id'];?>" name="sequence_brick[brick<?php echo $brick['id'];?>]"><?php echo $brick['title']; ?>
+                                                <input type="checkbox" value="<?php echo $brick['id'];?>" name="sequence_bricks_id[<?php echo $key;?>]"><?php echo $brick['title']; ?>
                                                 <br>
                                             <?php endforeach; ?>
 
