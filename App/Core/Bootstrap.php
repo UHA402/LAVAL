@@ -4,7 +4,7 @@ class Bootstrap {
 
 	private $_url = null;
 	private $_controller = null;
-    private $ctrl = null;
+   	private $ctrl = null;
 	private $_controllerPath = 'App/Controller/';
 	private $_modelPath = 'App/Model/'; 
 	private $_errorFile = 'ErrorsController.php';
