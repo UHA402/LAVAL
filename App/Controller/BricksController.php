@@ -34,42 +34,44 @@ class BricksController extends Controller {
 		}
 		$bricks =$this->Brick->ReadAllBrick();
 	 	$this->view->bricks = $bricks;
-	 	$this->view->render('bricks/edit');				
+	 	$this->view->render('bricks/edit');	
 	}   
 
 	/* 
 	 * Create bricks 
 	 */
-	public function CreateBrick (){
-		   $name= Request::input('name');
+	public function CreateBrick(){
+		   $name= Request::input('title');
 		   $type= Request::input('type');
-		   $media= Request::input('media');
+		   $media= Request::input('data');
+		   $data = Request::all();
 		   
-		   $data= $this->Brick->FindIDBrickByTitle($name);
-			 // Title doesn't exists 
-			 if ($data == 0) {
+		   $bricks= $this->Brick->FindIDBrickByTitle($name);
+			 // Title doesn't exists
+			 if ($bricks == 0) {
 				$this->Media->setTitle($media);
 				$this->Media->setUrl(URL.'medias/'.$media);
 				$this->Media->setType($type);
 				$this->Media->setFields();
-				//create brick
-				$this->Brick->createBrick($name, $type,$media); 
-				// create media
-				$this->Media->create();
-				
-				 $this->Media_Brick->set_id_Bricks($this->Brick->FindIDBrickByTitle($name));
-				 $this->Media_Brick->set_id_Medias($this->Media->retrieveId('title', $media));
-				 $this->Media_Brick->setFields();
-				 //create pivot table link elements
-				 $this->Media_Brick->create();	
-				$this->setFlash("You have created your new brick !", 'success');
-			 }
-			 else {
+
+				if($data){
+					$this->Brick->create($data);	
+					$this->Media->create();
+					$this->Media_Brick->set_id_Bricks($this->Brick->FindIDBrickByTitle($name));
+					$this->Media_Brick->set_id_Medias($this->Media->retrieveId('title', $media));
+					$this->Media_Brick->setFields();
+					//create pivot table link elements
+					$this->Media_Brick->create();	
+					$this->setFlash("You have created your new brick !", 'success');
+					// create media
+				} else {
+					$this->setFlash("Failure", 'danger');
+				}		
+			 } else {
 				$this->setFlash(" This title already exists choose another one !", "danger");
 			 }
-    
-		    // $this->view->redirect_to('/brick/edit');
 
+		      $this->view->redirect_to('/brick/edit');
 	}
 
 	/* 
@@ -92,7 +94,7 @@ class BricksController extends Controller {
 	 */
 	public function UpdateBrick ($id){
 		$this->data = Request::all();
-		if($this->Brick->UpdateBrick($id, $this->data )){
+		if($this->Brick->update($id, $this->data )){
 			$this->setFlash('The brick has been updated', "success");
 			$this->view->redirect_to('/brick/edit');
 		} else {

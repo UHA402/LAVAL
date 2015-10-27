@@ -22,7 +22,8 @@ Session::init();
    public function loadModel($name){
      /* recupere le chemin du model */
         $n = ucfirst($name);
-       $name .="S";
+       $name .="s";
+       $table = 't'.$name;
 
         $path = 'App/Model/'.$n.'.php';
 
@@ -30,7 +31,7 @@ Session::init();
 
         if(file_exists($path)){
           require 'App/Model/'.$n.'.php';
-          $this->$n = new $n($name); // modification, pour pourvoir faire par exemple $this->User->method
+          $this->$n = new $n($table); // modification, pour pourvoir faire par exemple $this->User->method
           // $this->model = new $name();
         }
    }

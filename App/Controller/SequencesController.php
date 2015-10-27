@@ -17,6 +17,10 @@ use App\Core\Validator;
 			var_dump($post);
 			$this->Sequence->create();
 			// $this->Sequence_Brick->create();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1f7c17a8ce5c69429e1aad32fd18bb1563377fcb
 			if ($id) {
 				if ($sequence = Request::cleanInput($this->Sequence->findById($id))) {
 					$this->view->sequence = $sequence;
@@ -32,6 +36,7 @@ use App\Core\Validator;
 				$this->Sequence_Brick->create($post['sequence_bricks']);
 				$this->setFlash("You've created a new sequence !", "success");
 			}
+
 			$bricks = $this->Sequence->findAllBricks();
 			$sequences = $this->Sequence->findAll();
 			$this->view->bricks = $bricks;

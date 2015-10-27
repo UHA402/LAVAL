@@ -28,18 +28,14 @@
                             }
                         ?> 
 
-                      
-                         
-                      
-                  
                             <fieldset>
                                 <!-- Text input-->
 
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input id="brick[name]" name="brick[name]" type="text"
+                                        <input id="brick[title]" name="brick[title]" type="text"
 
-                                               placeholder="Brick's name" value="<?php if (isset($this->currentBrick)) {
+                                               placeholder="Brick's title" value="<?php if (isset($this->currentBrick)) {
                                                    echo $this->currentBrick['title'];
                                                } ?>"
                                                class="floating-label form-control input-md" required>
@@ -66,7 +62,7 @@
                                 <div id="dynamicForm">
                                     <div class="rows col-lg-6">
                                         <div class="form-group">
-                                            <input id="brick[media]" name="brick[media]" type="text"
+                                            <input id="brick[data]" name="brick[data]" type="text"
                                                                        readonly="" class="form-control floating-label"
 
                                                                        placeholder="<?php if (isset($this->currentBrick)) {
@@ -82,7 +78,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group text-right">
-                                    <button type="submit" id="brick[save]" name="brick[save]"
+                                    <button type="submit" id="brick[save]" 
                                             class="btn btn-primary">Save
                                     </button>
                                 </div>
