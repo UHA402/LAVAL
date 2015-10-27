@@ -24,7 +24,7 @@ namespace App\Core\Model;
 		public function create(array $data = null){
 				$sql = "INSERT INTO $this->tab";
 				if ($data) {
-					$sql .= " (`".implode("`, `", array_keys($data))."`)";
+					$sql .= " (`".implode("`, `", array_keys($data))."` )";
 					$sql .= " VALUES ('".implode("', '", $data)."') ";
 			 } else {
 					$sql .= " (`".implode("`, `", array_keys($this->fields))."`)";
