@@ -7,8 +7,26 @@ class Sequence extends Model{
 		parent::__construct("sequences");
 	}
 
+	public function countBricks($sequence_id){
+		$data = $this->db->query("SELECT COUNT(*) FROM sequence_brick WHERE id = ".$sequence_id);
+		return intval($data);
+	}
+
 	public function findById($id){
-		$data = $this->db->query("SELECT * FROM sequences WHERE id='".$id."'");
+		$request = "SELECT * FROM sequences WHERE";
+		if (is_array($id)) {
+			$lenght = count($id);
+			foreach ($id as $key => $i) {
+				if ($key == $lenght-1 ) {
+					$request .= "id = ".$i;
+				} else {
+					$request .= "id = ".$i." OR ";
+				}
+			}
+		} else {
+			$request .= "id = ".$id;
+		}
+		$data = $this->db->query($request);
 		return $data;
 	}
 

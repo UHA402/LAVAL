@@ -54,7 +54,7 @@ class BricksController extends Controller {
 				$this->Media->setFields();
 
 				if($data){
-					$this->Brick->create($data);
+					$this->Brick->create($data);	
 					$this->Media->create();
 					$this->setFlash("You have created your new brick !", 'success');
 					// create media
@@ -88,7 +88,7 @@ class BricksController extends Controller {
 	 */
 	public function UpdateBrick ($id){
 		$this->data = Request::all();
-		if($this->Brick->UpdateBrick($id, $this->data )){
+		if($this->Brick->update($id, $this->data )){
 			$this->setFlash('The brick has been updated', "success");
 			$this->view->redirect_to('/brick/edit');
 		} else {

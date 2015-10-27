@@ -17,21 +17,25 @@ use App\Core\Validator;
 			var_dump($data);
 			$post = $_POST;
 			var_dump($post);
+			$this->Sequence->create();
+			// $this->Sequence_Brick->create();
+
 			if ($id) {
 				if ($sequence = Request::cleanInput($this->Sequence->findById($id))) {
-			var_dump($sequence);
 					$this->view->sequence = $sequence;
 					if ($data && !Validator::array_has_empty($data)) {
-						$this->Sequence->update($data);
+						$this->Sequence->update($id, $data);
 						$this->setFlash("The sequence has been succesfully updated", "success");
 					}
 				} else {
 					$this->setFlash("This sequence doesn't exist", "warning");
 				}
-			} elseif($data) {
-				$this->Sequence->create($data);
+			} elseif(isset($post['sequence']) && isset($post['sequence_bricks'])) {
+				$this->Sequence->create($post['sequence']);
+				$this->Sequence_Brick->create($post['sequence_bricks']);
 				$this->setFlash("You've created a new sequence !", "success");
 			}
+
 			$bricks = $this->Sequence->findAllBricks();
 			$sequences = $this->Sequence->findAll();
 			$this->view->bricks = $bricks;
