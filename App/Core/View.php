@@ -34,6 +34,10 @@
        exit();
     }
 
+    public function load_layout($name){
+      require 'App/View/'.$name.'.php';
+    }
+
     public function getFlash() {
       if(isset($_SESSION['flash'])){ ?>
           <div class="alert alert-<?php echo $_SESSION['flash']['type'] ?> fade out">
