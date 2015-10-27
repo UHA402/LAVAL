@@ -15,12 +15,8 @@ use App\Core\Validator;
 			var_dump($data);
 			$post = $_POST;
 			var_dump($post);
-			$this->Sequence->create();
+			// $this->Sequence->create();
 			// $this->Sequence_Brick->create();
-<<<<<<< HEAD
-=======
-
->>>>>>> 1f7c17a8ce5c69429e1aad32fd18bb1563377fcb
 			if ($id) {
 				if ($sequence = Request::cleanInput($this->Sequence->findById($id))) {
 					$this->view->sequence = $sequence;
@@ -31,9 +27,18 @@ use App\Core\Validator;
 				} else {
 					$this->setFlash("This sequence doesn't exist", "warning");
 				}
-			} elseif(isset($post['sequence']) && isset($post['sequence_bricks'])) {
+			} elseif(isset($post['sequence']) && isset($post['sequence_bricks_id'])) {
 				$this->Sequence->create($post['sequence']);
-				$this->Sequence_Brick->create($post['sequence_bricks']);
+
+				$length = count($post['sequence_bricks_id']);
+				foreach ($post['sequence_bricks_id'] as $key => $id) {
+					if ($key == $length) {
+						$bricks_id .= $id;
+					} else {
+						$bricks_id .= $id.", ";		
+					}
+				}
+				$this->Sequence_Brick->create($post['sequence_bricks_id']);
 				$this->setFlash("You've created a new sequence !", "success");
 			}
 
