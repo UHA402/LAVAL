@@ -6,17 +6,14 @@ use App\Core\Validator;
 	class SequencesController extends Controller {
 		function __construct(){
 			parent::__construct();
+			$this->loadModel('Sequence_Brick');
 		}
 		/*
 		* Sequence update
 		*/
 		function edit($id = null) {
 			$data = Request::all();
-			var_dump($data);
 			$post = $_POST;
-			var_dump($post);
-			// $this->Sequence->create();
-			// $this->Sequence_Brick->create();
 			if ($id) {
 				if ($sequence = Request::cleanInput($this->Sequence->findById($id))) {
 					$this->view->sequence = $sequence;
@@ -31,15 +28,17 @@ use App\Core\Validator;
 				$this->Sequence->create($post['sequence']);
 
 				$length = count($post['sequence_bricks_id']);
+				$bricks_id = '';
 				foreach ($post['sequence_bricks_id'] as $key => $id) {
-					if ($key == $length) {
+					if ($key == $length+1) {
 						$bricks_id .= $id;
 					} else {
 						$bricks_id .= $id.", ";		
 					}
 				}
-				$this->Sequence_Brick->create($post['sequence_bricks_id']);
-				$this->setFlash("You've created a new sequence !", "success");
+				$sequence_id = $this->Sequence->findLastId();
+				$this->Sequence_Brick->save($sequence_id, $bricks_id);
+				$this->setFlash("You've created a new sequence ! Congrats !", "success");
 			}
 
 			$bricks = $this->Sequence->findAllBricks();
