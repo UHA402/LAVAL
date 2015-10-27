@@ -14,12 +14,6 @@ use App\Core\Validator;
 		function edit($id = null) {
 			$data = Request::all();
 			$post = $_POST;
-<<<<<<< HEAD
-			var_dump($post);
-			// $this->Sequence->create();
-			// $this->Sequence_Brick->create();
-=======
->>>>>>> sequences
 			if ($id) {
 				if ($sequence = Request::cleanInput($this->Sequence->findById($id))) {
 					$this->view->sequence = $sequence;
