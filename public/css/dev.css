@@ -236,6 +236,10 @@ legend {
     justify-content: center;
 }
 
+.stimuli-img {
+    height: 300px;
+}
+
 #briqueContent {
     width: 100%;
 }

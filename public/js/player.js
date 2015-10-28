@@ -4,9 +4,9 @@ $(function () {
     //var brick = {id: 1, name: "Record", type: "REC", data: "Text to record"};
     var brick1 = {id: 1, name: "Brick 1", type: "TTS", data: "text to speech"};
     var brick2 = {id: 2, name: "Brick 2", type: "TXT", data: "un,deux,trois,quatre"};
-    //var brick3 = {id: 3, name: "Brick 3", type: "IMG", data: "http://img.fr"};
+    var brick3 = {id: 3, name: "Brick 3", type: "IMG", data: "http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158,http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158,http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158,http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158" };
     var brick4 = {id: 4, name: "Brick 4", type: "WAVE", data: "http://sound.fr"};
-    var brickList = [brick1, brick2, brick4];
+    var brickList = [brick3, brick1, brick2, brick4];
 
     //Initialisation du player
     var player = new Player(brickList);
@@ -138,29 +138,29 @@ var Model = function (brick) {
             //cache le bouton next;
             $("#next-brique").hide();
             //split la chaine de caractere
-            var stimu = data.split(",");
+            var stimutxt = data.split(",");
             //insert les stimuli dans le model
             $("#briqueContent").load(url + "player/txtLayout/", function () {
                 for (var i = 1; i < 5; i++) {
-                    $("#stimu" + i).append('<a id="repStimu' + i + '" href="javascript:void(0)"><h1>' + stimu[i - 1] + '</h1></a>');
+                    $("#stimu" + i).append('<a id="repStimu' + i + '" href="javascript:void(0)"><h1>' + stimutxt[i - 1] + '</h1></a>');
                 }
                 $("#repStimu1").click(function () {
-                    brick.setResult(stimu[0]);
+                    brick.setResult(stimutxt[0]);
                     console.log('Result : ' + brick.result + ' saved');
                     $("#next-brique").show();
                 });
                 $("#repStimu2").click(function () {
-                    brick.setResult(stimu[1]);
+                    brick.setResult(stimutxt[1]);
                     console.log('Result : ' + brick.result + ' saved');
                     $("#next-brique").show();
                 });
                 $("#repStimu3").click(function () {
-                    brick.setResult(stimu[2]);
+                    brick.setResult(stimutxt[2]);
                     console.log('Result : ' + brick.result + ' saved');
                     $("#next-brique").show();
                 });
                 $("#repStimu4").click(function () {
-                    brick.setResult(stimu[3]);
+                    brick.setResult(stimutxt[3]);
                     console.log('Result : ' + brick.result + ' saved');
                     $("#next-brique").show();
                 });
@@ -168,6 +168,38 @@ var Model = function (brick) {
         } else if (type === 'REC') {
             console.log('Model Record loaded');
             $("#briqueContent").load(url + "player/recordLayout/", function () {
+            });
+        } else if (type === 'IMG') {
+            console.log('Model IMG Loaded');
+            //cache le bouton next;
+            $("#next-brique").hide();
+            //split la chaine de caractere
+            var stimuimg = data.split(",");
+            //insert les stimuli dans le model
+            $("#briqueContent").load(url + "player/imgLayout/", function () {
+                for (var i = 1; i < 5; i++) {
+                    $("#stimu" + i).find("img").attr("src", stimuimg[i - 1]);
+                }
+                $("#repStimu1").click(function () {
+                    brick.setResult(stimuimg[0]);
+                    console.log('Result : ' + brick.result + ' saved');
+                    $("#next-brique").show();
+                });
+                $("#repStimu2").click(function () {
+                    brick.setResult(stimuimg[1]);
+                    console.log('Result : ' + brick.result + ' saved');
+                    $("#next-brique").show();
+                });
+                $("#repStimu3").click(function () {
+                    brick.setResult(stimuimg[2]);
+                    console.log('Result : ' + brick.result + ' saved');
+                    $("#next-brique").show();
+                });
+                $("#repStimu4").click(function () {
+                    brick.setResult(stimuimg[3]);
+                    console.log('Result : ' + brick.result + ' saved');
+                    $("#next-brique").show();
+                });
             });
         }
     }
