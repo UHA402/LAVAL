@@ -1,13 +1,12 @@
 $(function () {
 
     //DEBUG
+    //var brick = {id: 1, name: "Record", type: "REC", data: "Text to record"};
     var brick1 = {id: 1, name: "Brick 1", type: "TTS", data: "text to speech"};
     var brick2 = {id: 2, name: "Brick 2", type: "TXT", data: "un,deux,trois,quatre"};
     //var brick3 = {id: 3, name: "Brick 3", type: "IMG", data: "http://img.fr"};
     var brick4 = {id: 4, name: "Brick 4", type: "WAVE", data: "http://sound.fr"};
-    var brick5 = {id: 1, name: "Brick 1", type: "TTS", data: "text to speech 1"};
-    var brick6 = {id: 1, name: "Brick 1", type: "TTS", data: "text to speech 2"};
-    var brickList = [brick1, brick2, brick4, brick5, brick6];
+    var brickList = [brick1, brick2, brick4];
 
     //Initialisation du player
     var player = new Player(brickList);
@@ -44,6 +43,7 @@ var Player = function (brickList) {
 
     //position dans la list
     var posList = 0;
+
     function incPosList() {
         posList += 1;
         console.log('_Position inc : (' + posList + ')');
@@ -56,7 +56,7 @@ var Player = function (brickList) {
         majProgressBar();
 
         //fin de la sequence
-        if(posList === getNbrBrick()) {
+        if (posList === getNbrBrick()) {
             $('#next-brique').removeClass("btn-success");
             $('#next-brique').addClass("btn-info");
             $('#next-brique').text("Finish");
@@ -76,13 +76,21 @@ var Player = function (brickList) {
 
     //Met à jour la bar de progression
     function majProgressBar() {
-            var prog = (posList / getNbrBrick()) * 100;
-            $(".progress-bar").attr("style", "width: " + prog + "%");
+        var prog = (posList / getNbrBrick()) * 100;
+        $(".progress-bar").attr("style", "width: " + prog + "%");
     }
 
     //Fin de la séquence envoi des données au controller PHP
     function sequenceDone() {
-
+        var methodcall = url + 'player/save/';
+        $.ajax({
+            type: POST,
+            url: methodcall,
+            data: brick,
+            success: function(msg) {
+                console.log('save done');
+            }
+        });
     }
 }
 
@@ -156,6 +164,10 @@ var Model = function (brick) {
                     console.log('Result : ' + brick.result + ' saved');
                     $("#next-brique").show();
                 });
+            });
+        } else if (type === 'REC') {
+            console.log('Model Record loaded');
+            $("#briqueContent").load(url + "player/recordLayout/", function () {
             });
         }
     }

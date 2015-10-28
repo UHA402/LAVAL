@@ -1,5 +1,5 @@
 <script>var url = '<?php echo URL ?>';</script>
-<script src="<?php echo URL ?>public/js/Player.js" defer="defer"></script>
+<script src="<?php echo URL ?>public/js/player.js" defer="defer"></script>
 
 <div class="navbar-fixed-bottom navbar-player">
     <div class="progress progress-player">

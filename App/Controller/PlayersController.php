@@ -8,6 +8,11 @@ class PlayersController extends Controller
     {
         $this->view->render('players/index');
     }
+
+    public function save() {
+
+    }
+
     public function soundLayout()
     {
         $this->view->load_layout('players/sound');
@@ -19,6 +24,10 @@ class PlayersController extends Controller
 
     public function txtLayout(){
         $this->view->load_layout('players/txt');
+    }
+
+    public function recordLayout(){
+        $this->view->load_layout('players/record');
     }
 
 
