@@ -4,8 +4,8 @@ class Bootstrap {
 
 	private $_url = null;
 	private $_controller = null;
-    private $ctrl = null;
-	private $_controllerPath = 'APP/Controller/'; 
+   	private $ctrl = null;
+	private $_controllerPath = 'App/Controller/';
 	private $_modelPath = 'App/Model/'; 
 	private $_errorFile = 'ErrorsController.php';
 	private $_defaultFile = 'IndexController.php';
@@ -71,7 +71,7 @@ class Bootstrap {
 		if (file_exists($file)) {
 			require $file;
 			$this->_controller = new $this->ctrl();
-			
+		
 			$this->_controller->loadModel($this->_url[0]);
 		} else {
 			$this->_error();
@@ -96,6 +96,20 @@ class Bootstrap {
 
 		// charge la methode correspondante
 		switch ($length) {
+			case 7:
+				//Controller->Method(Param1, Param2)
+				$this->_controller->{$this->_url[1]}($this->_url[2], $this->_url[3], $this->_url[4],$this->_url[5], $this->_url[6]);
+				break;
+			case 6:
+				//Controller->Method(Param1, Param2)
+				$this->_controller->{$this->_url[1]}($this->_url[2], $this->_url[3], $this->_url[4],$this->_url[5]);
+				break;
+
+			case 5:
+				//Controller->Method(Param1, Param2)
+				$this->_controller->{$this->_url[1]}($this->_url[2], $this->_url[3], $this->_url[4]);
+				break;
+
 
 			case 4:
 				//Controller->Method(Param1, Param2)

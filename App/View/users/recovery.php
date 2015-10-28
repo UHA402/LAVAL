@@ -4,7 +4,7 @@
         <div class="entete"></div>
         <div class="panel">
             <div class="panel-heading enteteFlou">
-                <h1>CONNEXION</h1>
+                <h1>RECOVERY</h1>
                 <div class="cercle">
                     <img
                         src="<?php echo URL ?>public/img/connexion.png"
@@ -13,25 +13,14 @@
                 </div>
             </div>
             <div class="panel-body panelCategorie">
-                <h1>Se connecter</h1>
-                <form method = "post" class="form-horizontal formConnexion" data-toggle="validator" role="form" action="/user/index">
+                <h1>Forget password</h1>
+                <form method = "post" class="form-horizontal formConnexion" data-toggle="validator" role="form" action="user/recovery">
                     <fieldset>
                         <div class="form-group">
                             <input type="email" class="form-control" id="inputEmail"
                                    placeholder="Email" name="user[mail]" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" required maxlength="40">
                         </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" id="inputPassword"
-                                   placeholder="Password" name="user[password]" required maxlength="30"> <a href="/user/recovery"><span
-                                    class="help-block text-right"><small>Mot de passe oublié.</small></span></a>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-6 creaCompteDiv">
-                                <button class="btn btn-raised btn-default btn-sm">
-                                    <a class="creaCompte" href="<?php echo URL ?>user/register">Créer un compte</a>
-                                </button>
-                            </div>
-                            <div class="col-lg-6 text-right creaCompteDiv">
+                            <div class="text-right creaCompteDiv">
                                 <button type="submit" class="btn btn-sm btn-material-teal-200">Valider</button>
                             </div>
                         </div>

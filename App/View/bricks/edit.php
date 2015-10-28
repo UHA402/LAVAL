@@ -4,7 +4,7 @@
         <div class="entete"></div>
         <div class="panel">
             <div class="panel-heading enteteFlou">
-                <h1>BRIQUES</h1>
+                <h1>BRICKS</h1>
 
                 <div class="cercle">
                     <img
@@ -14,82 +14,106 @@
                 </div>
             </div>
             <div class="panel-body panelCategorie panelSession">
+                <div class="panel panel-default">
+                    <div class="panel-body containerEditForm">
+                        
+                         <?php 
+                            if(isset($this->currentBrick)){
+                                echo "<h1>Edit Brick</h1>";      
+                                echo ' <form class="form-horizontal" data-toggle="validator" method="post" action="/brick/UpdateBrick/'.$this->currentBrick['id'].'">';
+                            }
+                            else {
+                                echo "<h1>Add Brick</h1>";
+                                echo ' <form class="form-horizontal" data-toggle="validator" method="post" action="/brick/CreateBrick">';
+                            }
+                        ?> 
 
-                <div class="formulaire">
-                    <form class="form-horizontal" method="post">
-                        <fieldset>
-
-                            <div class="col-md-6">
+                            <fieldset>
                                 <!-- Text input-->
-                                <div class="form-group editBricks">
-                                    <select id="bricks[type]" name="bricks[type]" class="form-control">
-                                        <option value="1">Brique 1</option>
-                                        <option value="2">Brique 2</option>
-                                        <option value="2">Brique 3</option>
-                                        <option value="2">Brique 4</option>
-                                        <option value="2">Brique 5</option>
-                                    </select>
-                                </div>
-                                <div class="form-group editBricks"">
-                                    <input id="nameInput" name="bricks[name]" type="text" placeholder="Nom de la brique"
-                                           class="floating-label form-control input-md">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group editBricks"">
-                                    <input id="nameInput" name="bricks[data]" type="text"
-                                           placeholder="Text de la brique" class="floating-label form-control input-md">
-                                </div>
-                                <div class="form-group editBricks"">
-                                    <input id="filebutton" name="filebutton" class="btn btn-primary btn-sm" type="file">
-                                </div>
-                            </div>
-                            <!-- Button (Double) -->
-                            <div class="form-group text-center">
-                                <button type="submit" id="button1id" name="button1id" class="btn btn-info">
-                                    Sauvegarder
-                                </button>
-                            </div>
 
-                        </fieldset>
-                    </form>
-                    <table class="table table-striped table-hover ">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nom</th>
-                            <th>Type</th>
-                            <th>Média</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Brique 1</td>
-                            <td>MIDI</td>
-                            <td>fichier.midi</td>
-                            <td>
-                                <button class="btn btn-info btn-sm">Editer</button>
-                                <button class="btn btn-danger btn-sm">Supprimer</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Brique 2</td>
-                            <td>TTS</td>
-                            <td>TEXT TEXT TEXT TEXT</td>
-                            <td>
-                                <button class="btn btn-info btn-sm">Editer</button>
-                                <button class="btn btn-danger btn-sm">Supprimer</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="text-right">
-                        <button id="button2id" name="button2id" class="btn btn-success">Valider</button>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input id="brick[title]" name="brick[title]" type="text"
+
+                                               placeholder="Brick's title" value="<?php if (isset($this->currentBrick)) {
+                                                   echo $this->currentBrick['title'];
+                                               } ?>"
+                                               class="floating-label form-control input-md" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="select" class="col-sm-2 control-label">Type</label>
+
+                                        <div class="col-sm-10">
+
+                                            <select class="form-control" id="brickTypeSelector" name="brick[type]">
+                                                <option value="WAVE" <?php if(isset($this->currentBrick['type']) && $this->currentBrick['type']=="WAVE" ) echo "selected='selected'";?>>Stimuli auditif enregistré</option>
+                                                <option value="TTS" <?php if(isset($this->currentBrick['type']) && $this->currentBrick['type']=="TTS" ) echo "selected='selected'";?>>Stimuli auditif généré</option>
+                                                <option value="TEXT" <?php if(isset($this->currentBrick['type']) && $this->currentBrick['type']=="TEXT" ) echo "selected='selected'";?>>Stimuli visuel textuel</option>
+                                                <option value="IMG" <?php if(isset($this->currentBrick['type']) && $this->currentBrick['type']=="IMG" ) echo "selected='selected'";?>>Stimuli visuel imagé</option>
+                                                <option value="RESP" <?php if(isset($this->currentBrick['type']) && $this->currentBrick['type']=="RESP" ) echo "selected='selected'";?>>Record user's voice</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Faire en sorte que le dynamicform n'affiche pas l'uploader de fichier en cas de type text, dès le chargement de la page  -->
+                                <div id="dynamicForm">
+                                    <div class="rows col-lg-6">
+                                        <div class="form-group">
+                                            <input id="brick[data]" name="brick[data]" type="text"
+                                                                       readonly="" class="form-control floating-label"
+
+                                                                       placeholder="<?php if (isset($this->currentBrick)) {
+                                                   echo $this->currentBrick['data'];
+                                               } else echo "Upload File..."?>" value="<?php if (isset($this->currentBrick)) {
+                                                   echo $this->currentBrick['data'];
+                                               }?>"> 
+                                               <input type="file" id="inputFile"  required>
+
+                                                                      
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group text-right">
+                                    <button type="submit" id="brick[save]" 
+                                            class="btn btn-primary">Save
+                                    </button>
+                                </div>
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
+                <h1>Bricks list</h1>
+                <table id="brickTable" class="table table-striped table-hover text-center">
+                    <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Type</th>
+                        <th class="text-center">Media</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($this->bricks as $brick) :?>
+                             <tr>
+                                <td><?php echo $brick['id']; ?></td>
+                                <td><?php echo $brick['title']; ?></td>
+                                <td><?php echo $brick['type']; ?></td>
+                                <td><?php echo $brick['data']; ?></td>
+                                <td>
+                                    <a href="/brick/edit/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button></a>
+                                    <a href="/brick/delete/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button></a>
+                                </td>
+                    </tr>
+                    <?php endforeach;?>
+                    </tbody>
+
+                </table>
+                <div class="pagingBrick"></div>
             </div>
         </div>
     </div>

@@ -1,7 +1,8 @@
 <?php namespace App\Core\Controller;
 use App\Core\View\View;
+use App\Core\Session;
 // Initialisation de la session dans tous les controleurs
-session_start();
+Session::init();
 
 
  /**
@@ -10,26 +11,28 @@ session_start();
  class Controller
  {
    protected $model =null;
-   
+
    function __construct()
    {
    	/* main controller */
-   	
+
    	$this->view = new View();
    }
 
    public function loadModel($name){
      /* recupere le chemin du model */
-        $name = ucfirst($name);
+        $n = ucfirst($name);
+       $name .="s";
+       $table = 't'.$name;
 
-        $path = 'App/Model/'.$name.'.php';
+        $path = 'App/Model/'.$n.'.php';
 
         /* vérifie si le model exixte et l' initialise */
-      
+
         if(file_exists($path)){
-          require 'App/Model/'.$name.'.php';
-          $this->$name = new $name(); // modification, pour pourvoir faire par exemple $this->User->method
-          // $this->model = new $name();     
+          require 'App/Model/'.$n.'.php';
+          $this->$n = new $n($table); // modification, pour pourvoir faire par exemple $this->User->method
+          // $this->model = new $name();
         }
    }
 
@@ -42,5 +45,9 @@ session_start();
              );
          }
      }
-   
+     
+     public function formatToJson($tab){
+        return json_encode($tab);
+     }
+
  }
