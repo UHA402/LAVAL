@@ -17,13 +17,11 @@ use App\Core\Validator;
 			if ($id) {
 				if ($sequence = Request::cleanInput($this->Sequence->findById($id))) {
 					$this->view->sequence = $sequence;
-						var_dump($post);
 					if ($post && !Validator::array_has_empty($post)) {
 						// $this->Sequence_Brick->edit($sequence_id, $bricks_id);
 						// $this->Sequence->update($id, $data);
 						$this->setFlash("The sequence has been succesfully updated", "success");
 					} else {
-						var_dump($post);
 						$this->setFlash("No data", "danger");
 					}
 				} else {

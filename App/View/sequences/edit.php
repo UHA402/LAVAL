@@ -65,14 +65,34 @@
                                                 <thead>
                                                 <tr>
                                                     <th class="text-center" style="width: 20%">check</th>
+                                                    <th class="text-center">Title</th>                                                    
+                                                    <th class="text-center" style="width: 20%">check</th>
                                                     <th class="text-center">Title</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <!-- <select id="sequence[bricklist]" name="sequence[bricklist]" class="form-control" multiple> -->
                                                 <?php foreach ($this->bricks as $key => $brick): ?>
-                                                    <tr>
+                                                    <?php $key+=1; ?>
+                                                    <?php if (($key%2) == 1): ?> 
+                                                        <tr>
+                                                            <td>
+                                                        <?php echo $key; ?>
+                                                                <div class="checkbox list-add-cbx">
+                                                                    <label>
+                                                                        <input type="checkbox"
+                                                                               value="<?php echo $brick['id']; ?>"
+                                                                               name="sequence_bricks_id[<?php echo $key; ?>]">
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $brick['title']; ?>
+                                                            </td>
+                                                    <?php endif; ?>
+                                                    <?php if (($key%2) == 0): ?> 
                                                         <td>
+                                                    <?php echo $key; ?>
                                                             <div class="checkbox list-add-cbx">
                                                                 <label>
                                                                     <input type="checkbox"
@@ -87,6 +107,7 @@
 
                                                         </td>
                                                     </tr>
+                                                    <?php endif ?>
                                                 <?php endforeach; ?>
                                                 </tbody>
                                             </table>
@@ -110,7 +131,9 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach ($this->bricks as $key => $brick): ?>
+                                    <?php foreach ($bricks as $key => $brick): ?>
+                                    <?php if (in_array($brick['id'], $_SESSION['sequence_bricks_id']): ?>
+                                        
                                         <tr>
                                             <td><?php echo $brick['id'] ?></td>
                                             <td><?php echo $brick['title'] ?></td>
@@ -124,6 +147,7 @@
                                                 </a>
                                             </td>
                                         </tr>
+                                    <?php endif ?>
                                     <?php endforeach; ?>
                                     </tbody>
                                 </table>
