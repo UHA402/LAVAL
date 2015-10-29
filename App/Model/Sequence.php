@@ -15,7 +15,7 @@ class Sequence extends Model{
 	}
 
 	public function findById($id){
-		$request = "SELECT * FROM sequences WHERE";
+		$request = "SELECT * FROM sequences WHERE ";
 		if (is_array($id)) {
 			$lenght = count($id);
 			foreach ($id as $key => $i) {

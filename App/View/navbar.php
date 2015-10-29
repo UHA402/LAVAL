@@ -21,9 +21,8 @@
 							<li><a href="<?php echo URL ?>sequence/edit">Sequences</a></li>
 							<li><a href="<?php echo URL ?>brick/edit">Bricks</a></li>
 							<li><a href="<?php echo URL ?>user/admin_index">Admin</a></li>
-						<?php else: ?>
-							<li><a href="<?php echo URL ?>user/index"><i class="glyphicon glyphicon-user"></i> My account</a></li>
 						<?php endif; ?>
+							<li><a href="<?php echo URL ?>user/index"><i class="glyphicon glyphicon-user" ></i> <?php echo $_SESSION['user']['firstName']; ?></a></li>
 							<li><a href="<?php echo URL ?>user/logout"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
 					<?php endif; ?>
 				</ul>
