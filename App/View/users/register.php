@@ -24,7 +24,7 @@
 						</div>
 
 						<div class="form-group has-error">
-							<input type="email" name="user[mail]" maxlength="40" class="form-control floating-label" id="inputEmail" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" placeholder="Email" required>
+							<input type="email" name="user[mail]" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$" maxlength="40" class="form-control floating-label" id="inputEmail" placeholder="Email" required>
 						</div>
 
 						<div class="form-group">
