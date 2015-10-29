@@ -54,17 +54,28 @@ $(document).ready(function () {
         var value = $(this).val();
         console.log(value);
         //si c'est un stimuli auditif
-        if(value == 'WAVE') {
+        if (value == 'WAVE') {
             $('#dynamicForm').html(htmlType1);
-        } else if(value == "TTS") {
+        } else if (value == "TTS") {
             $('#dynamicForm').html(htmlType2);
-        } else if(value == "TEXT") {
+        } else if (value == "TEXT") {
             $('#dynamicForm').html(htmlType3);
-        } else if(value == "IMG") {
+        } else if (value == "IMG") {
             $('#dynamicForm').html(htmlType4);
-        } else if(value == "RESP") {
+        } else if (value == "RESP") {
             $('#dynamicForm').html(htmlType5);
         }
         $.material.init();
     });
+
+    $("#sort tbody").sortable({
+        placeholder: "ui-state-highlight",
+        change: function() {
+            var order = $('#sort tbody').sortable( "serialize" );
+            $('#sequence\\[BrickPos\\]').val(order);
+            console.log(order);
+        }});
+    $("#sort tbody").disableSelection();
+
+
 });

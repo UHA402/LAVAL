@@ -65,7 +65,7 @@
                                                 <thead>
                                                 <tr>
                                                     <th class="text-center" style="width: 20%">check</th>
-                                                    <th class="text-center">Title</th>                                                    
+                                                    <th class="text-center">Title</th>
                                                     <th class="text-center" style="width: 20%">check</th>
                                                     <th class="text-center">Title</th>
                                                 </tr>
@@ -120,7 +120,7 @@
 
                                 </div>
                                 <h1>Brick in the sequence</h1>
-                                <table id="brickTable" class="table table-striped table-hover text-center">
+                                <table id="sort" class="table table-striped table-hover text-center">
                                     <thead>
                                     <tr>
                                         <th class="text-center">#</th>
@@ -131,10 +131,8 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach ($bricks as $key => $brick): ?>
-                                    <?php if (in_array($brick['id'], $_SESSION['sequence_bricks_id']): ?>
-                                        
-                                        <tr>
+                                    <?php foreach ($this->bricks as $key => $brick): ?>
+                                        <tr id="id_<?= $brick['id'] ?>">
                                             <td><?php echo $brick['id'] ?></td>
                                             <td><?php echo $brick['title'] ?></td>
                                             <td><?php echo $brick['type'] ?></td>
@@ -147,11 +145,11 @@
                                                 </a>
                                             </td>
                                         </tr>
-                                    <?php endif ?>
                                     <?php endforeach; ?>
                                     </tbody>
                                 </table>
                                 <div class="pagingBrick"></div>
+<input id="sequence[BrickPos]" value="" />
                                 <div class="form-group text-right">
                                     <button type="submit" id="sequence[save]" class="btn btn-primary">Save
                                     </button>
