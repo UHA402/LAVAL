@@ -5,9 +5,8 @@ use App\Core\Controller\Controller;
 use App\Core\View\View;
 use App\Core\Validator;
 
-
 /*
- *  View de la logique utilisateur
+ *  Logique utilisateur
  */
 
 class UsersController extends Controller
@@ -77,10 +76,12 @@ class UsersController extends Controller
 					else {
 
 						$this->User->save($data);
+                               $_SESSION['user'] = $data;
+                               $_SESSION['user']['role'] = "member";
+                               unset($_SESSION['user']['password'], $_SESSION['user']['password2']);
 						$this->setFlash("Votre inscription a bien été prise en compte", 'success');
 						//$this->login();
-						$this->view->redirect_to('/');
-						
+						$this->view->redirect_to('/user/index');
 					}
 
 				} else {
