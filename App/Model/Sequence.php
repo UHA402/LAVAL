@@ -8,8 +8,10 @@ class Sequence extends Model{
 	}
 
 	public function countBricks($sequence_id){
-		$data = $this->db->query("SELECT COUNT(*) FROM sequence_brick WHERE id = ".$sequence_id);
-		return intval($data[0]["COUNT(*)"]);
+		$data = $this->db->query("SELECT bricks_id FROM sequences_bricks WHERE id = ".$sequence_id);
+		$bricks_id = explode(',', $data);
+		$nb_bricks = count($bricks_id);
+		 return $nb_bricks;
 	}
 
 	public function findById($id){
@@ -51,9 +53,6 @@ class Sequence extends Model{
 		return intval($data["MAX(id)"]);
 	}
 
-	// public function update(array $sequence){
-	// 	$this->db->query("UPDATE sequences (title, duration) VALUES ('".$sequence['title']."', '".$sequence['duration'].")");
-	// }
 	public function delete($id){
 		$this->db->query("DELETE FROM sequences WHERE id='".$id."'");
 	}

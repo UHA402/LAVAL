@@ -25,7 +25,7 @@ class UsersController extends Controller
     public function index(){
 	$user = Request::all();
 	if (isset($_SESSION['user'])) {
-            $username = Session::get('user');
+            $username = $_SESSION['user']['firstName'];
             $this->view->username = $username;
             $this->view->render('users/index');
 		    
@@ -35,15 +35,15 @@ class UsersController extends Controller
          
                 if ($user = $this->User->fetchValidUser($user)){
                     // Création de la session                 
-                    Session::set('user', $user['lastName']);
+                    Session::set('user', $user);
                     $this->setFlash("Vous êtes connecté !", 'success');
                     
                     // Redirection en fonction des roles
                     if ($user['role'] == "admin") {
-                    		$this->view->render('/user/admin_index');
+                    		$this->view->redirect_to('/user/admin_index');
                     } else {
-			 $this->view->user = Session::get('lastName');
-			 $this->view->render('user/index');
+			 $this->view->username = $_SESSION['user']['firstName'];
+			 $this->view->redirect_to('/user/index');
 		}
                 } else {
                     $this->setFlash("L'email et le mot de passe ne correspondent pas", 'danger');
@@ -75,7 +75,8 @@ class UsersController extends Controller
 					}
 					// Sinon on crée l'utilisateur et on le redirige vers l'index
 					else {
-						$this->User->create($data);
+
+						$this->User->save($data);
 						$this->setFlash("Votre inscription a bien été prise en compte", 'success');
 						//$this->login();
 						$this->view->redirect_to('/');

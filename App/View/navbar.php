@@ -14,8 +14,18 @@
 			</div>
 			<div class="navbar-collapse collapse navbar-responsive-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<?php echo URL ?>">Accueil</a></li>
-					<li><a href="<?php echo URL ?>user/register">Inscription</a></li>
+					<li><a href="<?php echo URL ?>">Home</a></li>
+					<li><a href="<?php echo URL ?>user/register">Sign up</a></li>
+					<?php if(isset($_SESSION['user'])): ?>
+						<?php if($_SESSION['user']['role'] == 'admin'): ?>
+							<li><a href="<?php echo URL ?>sequence/edit">Sequences</a></li>
+							<li><a href="<?php echo URL ?>brick/edit">Bricks</a></li>
+							<li><a href="<?php echo URL ?>user/admin_index">Admin</a></li>
+						<?php else: ?>
+							<li><a href="<?php echo URL ?>user/index"><i class="glyphicon glyphicon-user"></i> My account</a></li>
+						<?php endif; ?>
+							<li><a href="<?php echo URL ?>user/logout"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
+					<?php endif; ?>
 				</ul>
 			</div>
 		</div>

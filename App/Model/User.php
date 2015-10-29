@@ -6,7 +6,7 @@ use App\Core\Model\Model;
 class User extends Model{
 
 	public function __contruct(){
-		parent::__construct();
+		parent::__construct("tusers");
 
 	}
 
@@ -14,18 +14,18 @@ class User extends Model{
 	 * Enregistre un utilisateur en base de donnée
 	 */
 
-	// public function create(array $user){
-	// 	$this->db->query("INSERT INTO tusers (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
-	// }
+	public function save(array $user){
+		$this->db->query("INSERT INTO tusers (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
+	}
 
 	/*
 	 * Fonction de modification d'un utilisateur*
 	 * $this->update($_POST['user']);
 	 */
 
-	public function update(array $user){
-		$this->db->query("UPDATE tusers (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
-	}
+	// public function update(array $user){
+	// 	$this->db->query("UPDATE tusers (firstName, lastName, mail, password) VALUES ('".$user['firstName']."', '".$user['lastName']."', '".$user['mail']."', '".md5($user['password'])."')");
+	// }
 
 	/*
 	 * Valide l'email et le mot de passe d'un utilisateur pour la connexion
@@ -62,7 +62,7 @@ class User extends Model{
 	 * Utilisation : User->delete(25)
 	 */
 
-	private function delete($id){
-		$this->db->query("DELETE FROM tusers WHERE id=".$id);
-	}
+	// private function delete($id){
+	// 	$this->db->query("DELETE FROM tusers WHERE id=".$id);
+	// }
 }
