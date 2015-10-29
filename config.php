@@ -1,5 +1,5 @@
 <?php
-define('URL', 'http://locahost/');
+define('URL', 'http://localhost/');
 define('LIBS', 'App/Core/');
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');

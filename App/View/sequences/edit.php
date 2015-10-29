@@ -131,8 +131,8 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach ($bricks as $key => $brick): ?>
-                                    <?php if (in_array($brick['id'], $_SESSION['sequence_bricks_id']): ?>
+                                    <?php foreach ($this->bricks as $key => $brick): ?>
+                                     <?php// if (in_array($brick['id'], $_SESSION['sequence_bricks_id'])): ?>
                                         
                                         <tr>
                                             <td><?php echo $brick['id'] ?></td>
@@ -147,7 +147,7 @@
                                                 </a>
                                             </td>
                                         </tr>
-                                    <?php endif ?>
+                                    <?php //endif ?>
                                     <?php endforeach; ?>
                                     </tbody>
                                 </table>
