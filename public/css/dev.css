@@ -245,3 +245,14 @@ legend {
 .progress-player {
 	margin: 0;
 }
+
+#add-list {
+	max-height: 200px;
+	overflow: auto;
+}
+
+.list-add-cbx {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}

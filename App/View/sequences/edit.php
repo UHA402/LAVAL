@@ -18,6 +18,7 @@
                     <div class="panel-body containerEditForm">
 
                         <h1>Add/Edit Sequence</h1>
+
                         <form class="form-horizontal" data-toggle="validator" method="post" action="/sequence/edit">
                             <fieldset>
                                 <span class="text-right">
@@ -42,6 +43,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 text-right">Duration :</label>
+
                                         <div class="col-md-2">
                                             <input id="sequence[duration]" name="sequence[duration]" type="time"
                                                    placeholder="Duration"
@@ -55,21 +57,48 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-md-4">
-                                        <!-- <select id="sequence[bricklist]" name="sequence[bricklist]" class="form-control" multiple> -->
-                                            <?php foreach ($this->bricks as $key => $brick): ?>
-                                                <input type="checkbox" value="<?php echo $brick['id'];?>" name="sequence_bricks_id[<?php echo $key;?>]"><?php echo $brick['title']; ?>
-                                                <br>
-                                            <?php endforeach; ?>
+                                    <div class="col-md-12">
+                                        <h1>Select one brick or more, to add in the sequence</h1>
 
+                                        <div id="add-list">
+                                            <table id="bricktable" class="table table-striped table-hover text-center">
+                                                <thead>
+                                                <tr>
+                                                    <th class="text-center" style="width: 20%">check</th>
+                                                    <th class="text-center">Title</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <!-- <select id="sequence[bricklist]" name="sequence[bricklist]" class="form-control" multiple> -->
+                                                <?php foreach ($this->bricks as $key => $brick): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="checkbox list-add-cbx">
+                                                                <label>
+                                                                    <input type="checkbox"
+                                                                           value="<?php echo $brick['id']; ?>"
+                                                                           name="sequence_bricks_id[<?php echo $key; ?>]">
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $brick['title']; ?>
+                                                        </td>
 
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button type="button" id="sequence[save]" class="btn btn-sm btn-info">Add
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="col-md-1">
-                                        <button type="submit" id="sequence[addbrick]" name="sequence[addbrick]" class="btn btn-flat btn-info btn-sm">add
-                                        </button>
-                                    </div>
+
                                 </div>
-
+                                <h1>Brick in the sequence</h1>
                                 <table id="brickTable" class="table table-striped table-hover text-center">
                                     <thead>
                                     <tr>
@@ -89,10 +118,12 @@
                                             <td><?php echo $brick['data'] ?></td>
                                             <td>
                                                 <a href="/sequence/delete/<?php echo $brick['id']; ?>">
-                                                <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                                                    <button type="button"
+                                                            class="btn btn-flat btn-warning btn-sm btn-td">delete
+                                                    </button>
                                                 </a>
                                             </td>
-                                    </tr>
+                                        </tr>
                                     <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -116,19 +147,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                   <?php foreach ($this->sequences as $key => $sequence): ?>
+                    <?php foreach ($this->sequences as $key => $sequence): ?>
                         <tr>
                             <td><?php echo $sequence['id'] ?></td>
                             <td><?php echo $sequence['title'] ?></td>
                             <td>
                                 <a href="/sequence/edit/<?php echo $sequence['id']; ?>">
-                                <button type="button" class="btn btn-flat btn-info btn-sm btn-td">Edit</button>
+                                    <button type="button" class="btn btn-flat btn-info btn-sm btn-td">Edit</button>
                                 </a>
                                 <a href="/sequence/delete/<?php echo $sequence['id']; ?>">
-                                <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">Delete</button>
+                                    <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">Delete</button>
                                 </a>
                             </td>
-                    </tr>
+                        </tr>
                     <?php endforeach; ?>
 
                     </tbody>
