@@ -35,7 +35,10 @@
                             <td>Pierre</td>
                             <td><a href="mailto:dupontpierre@gmail.com">dupontpierre@gmail.com</a></td>
                             <td>20/10/2014</td>
-                            <td>Administrator</td>
+                            <td><select class="form-control" id="select">
+                                    <option>Administrateur</option>
+                                    <option>Membre</option>
+                                </select></td>
                             <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
                         </tr>
                         <tr>
