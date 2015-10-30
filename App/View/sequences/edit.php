@@ -19,7 +19,7 @@
 
                         <h1>Add/Edit Sequence</h1>
 
-                        <form class="form-horizontal" data-toggle="validator" method="post" action="/sequence/edit">
+                        <form class="form-horizontal" data-toggle="validator" method="post" action="<?php echo URL ?>sequence/edit">
                             <fieldset>
                                 <span class="text-right">
                                         <div class="togglebutton togglebutton-material-green">

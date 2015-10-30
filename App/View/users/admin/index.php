@@ -18,7 +18,7 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-body text-center">
-                                <a href="users/admin/userslist">
+                                <a href="<?= URL ?>user/admin_users">
                                     <h1><span class="mdi-social-people dashIcon"></span></h1>
 
                                     <h1>Users</h1>
@@ -52,7 +52,7 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-body text-center">
-                                <a href="users/admin/userslist">
+                                <a href="<?php echo URL ?>session/edit">
                                     <h1><span class="mdi-action-assignment dashIcon"></span></h1>
 
                                     <h1>Sessions</h1>
@@ -64,21 +64,25 @@
                     <div class="col-lg-4 col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-body text-center">
-                                <h1><span class="mdi-action-view-carousel dashIcon"></span></h1>
+                                <a href="<?php echo URL ?>sequence/edit">
+                                    <h1><span class="mdi-action-view-carousel dashIcon"></span></h1>
 
-                                <h1>Sequences</h1>
+                                    <h1>Sequences</h1>
                             </div>
                             <div class="panel-footer text-center"><h4>220</h4></div>
+                            </a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-body text-center">
-                                <h1><span class="mdi-action-view-module dashIcon"></span></h1>
+                                <a href="<?php echo URL ?>brick/edit">
+                                    <h1><span class="mdi-action-view-module dashIcon"></span></h1>
 
-                                <h1>Bricks</h1>
+                                    <h1>Bricks</h1>
                             </div>
                             <div class="panel-footer text-center"><h4>220</h4></div>
+                            </a>
                         </div>
                     </div>
                 </div>
