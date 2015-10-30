@@ -35,12 +35,12 @@
                         <div class="form-group">
                             <input type="password" name="user[password]" data-minlength="6" maxlength="40"
                                    class="form-control floating-label" id="inputPassword"
-                                   placeholder="Password change" required>
+                                   placeholder="Password change">
                         </div>
                         <div class="form-group">
                             <input type="password" name="user[password2]" data-match="#inputPassword"
                                    data-minlength="6" maxlength="40" class="form-control floating-label"
-                                   id="inputPasswordConfirm" placeholder="Password confirm" required>
+                                   id="inputPasswordConfirm" placeholder="Password confirm">
                         </div>
                         <div class="form-group text-right ">
 
