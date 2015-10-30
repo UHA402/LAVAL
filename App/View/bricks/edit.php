@@ -105,8 +105,8 @@
                                 <td><?php echo $brick['type']; ?></td>
                                 <td><?php echo $brick['data']; ?></td>
                                 <td>
-                                    <a href="/brick/edit/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button></a>
-                                    <a href="/brick/delete/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button></a>
+                                    <a href="<? echo URL ?>brick/edit/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button></a>
+                                    <a href="<? echo URL ?>brick/delete/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button></a>
                                 </td>
                     </tr>
                     <?php endforeach;?>
