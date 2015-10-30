@@ -39,14 +39,14 @@ class UsersController extends Controller
                     
                     // Redirection en fonction des roles
                     if ($user['role'] == "admin") {
-                    		$this->view->redirect_to('/user/admin_index');
+                    		$this->view->redirect_to('user/admin_index');
                     } else {
 			 $this->view->username = $_SESSION['user']['firstName'];
-			 $this->view->redirect_to('/user/index');
+			 $this->view->redirect_to('user/index');
 		}
                 } else {
                     $this->setFlash("L'email et le mot de passe ne correspondent pas", 'danger');
-                    $this->view->redirect_to('/');
+                    $this->view->redirect_to('');
                 }
         } else {
             $this->setFlash("Vous devez vous connecter avant de pouvoir acceder à cette partie", 'danger');
@@ -81,7 +81,7 @@ class UsersController extends Controller
                                unset($_SESSION['user']['password'], $_SESSION['user']['password2']);
 						$this->setFlash("Votre inscription a bien été prise en compte", 'success');
 						//$this->login();
-						$this->view->redirect_to('/user/index');
+						$this->view->redirect_to('user/index');
 					}
 
 				} else {
@@ -128,7 +128,7 @@ class UsersController extends Controller
 	Session::destroy('user');
 	$this->setFlash("Vous êtes bien deconnecté", 'success');
 	//$this->view->render('index/index');
-	$this->view->redirect_to('/');
+	$this->view->redirect_to('');
 	}
 
     /*

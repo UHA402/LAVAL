@@ -30,7 +30,7 @@
     *
     */
     public function redirect_to($route){
-       header('location: '.$route);
+       header('location: ' . URL .$route);
        exit();
     }
 
