@@ -1,5 +1,5 @@
 <?php
-define('URL', 'http://localhost/');
+define('URL', 'http://local.dev/LAVAL/');
 define('LIBS', 'App/Core/');
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
