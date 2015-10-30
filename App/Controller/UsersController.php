@@ -140,6 +140,10 @@ class UsersController extends Controller
         $this->view->render('users/recovery');
     }
 
+    public function profil() {
+        $this->view->render('users/profil');
+    }
+
     public function admin_brick()
     {
 
