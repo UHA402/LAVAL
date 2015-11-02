@@ -139,7 +139,7 @@
                                             <td><?php echo $brick['type'] ?></td>
                                             <td><?php echo $brick['data'] ?></td>
                                             <td>
-                                                <a href="<? echo URL ?>sequence/delete/<?php echo $brick['id']; ?>">
+                                                <a href="<?php echo URL ?>sequence/delete/<?php echo $brick['id']; ?>">
                                                     <button type="button"
                                                             class="btn btn-flat btn-warning btn-sm btn-td">delete
                                                     </button>
@@ -177,10 +177,10 @@
                             <td><?php echo $sequence['id'] ?></td>
                             <td><?php echo $sequence['title'] ?></td>
                             <td>
-                                <a href="<? echo URL ?>sequence/edit/<?php echo $sequence['id']; ?>">
+                                <a href="<?php echo URL ?>sequence/edit/<?php echo $sequence['id']; ?>">
                                     <button type="button" class="btn btn-flat btn-info btn-sm btn-td">Edit</button>
                                 </a>
-                                <a href="<? echo URL ?>sequence/delete/<?php echo $sequence['id']; ?>">
+                                <a href="<?php echo URL ?>sequence/delete/<?php echo $sequence['id']; ?>">
                                     <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">Delete</button>
                                 </a>
                             </td>
