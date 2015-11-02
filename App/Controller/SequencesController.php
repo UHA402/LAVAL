@@ -3,6 +3,7 @@ use App\Core\Controller\Controller;
 use App\Core\View\View;
 use App\Core\Request\Request;
 use App\Core\Validator;
+
 	class SequencesController extends Controller {
 		function __construct(){
 			parent::__construct();
@@ -16,10 +17,18 @@ use App\Core\Validator;
 			$post = $_POST;
 			if ($id) {
 				if ($sequence = Request::cleanInput($this->Sequence->findById($id))) {
+					$sequence_brick = Request::cleanInput($this->Sequence_Brick->findBySeqId($id));
 					$this->view->sequence = $sequence;
+					$_POST = $sequence;
+					$_POST .= $sequence_brick;
+					var_dump($sequence);
+					var_dump($sequence_brick);
+					var_dump($post);
+					var_dump($data);
+					var_dump(!Validator::array_has_empty($post));
 					if ($post && !Validator::array_has_empty($post)) {
-						// $this->Sequence_Brick->edit($sequence_id, $bricks_id);
-						// $this->Sequence->update($id, $data);
+						$this->Sequence_Brick->edit($sequence_brick['id'], $sequence_brick['sequence_id'], $post['bricks_id']);
+						$this->Sequence->update($id, $data);
 						$this->setFlash("The sequence has been succesfully updated", "success");
 					} else {
 						$this->setFlash("No data", "danger");
@@ -27,7 +36,7 @@ use App\Core\Validator;
 				} else {
 					$this->setFlash("This sequence doesn't exist", "warning");
 				}
-			} elseif(isset($post['sequence']) && isset($post['sequence_bricks_id'])) {
+			} elseif(!$id && isset($post['sequence']) && isset($post['sequence_bricks_id'])) {
 				$this->Sequence->create($post['sequence']);
 				$length = count($post['sequence_bricks_id']);
 				$bricks_id = '';

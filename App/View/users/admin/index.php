@@ -62,6 +62,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
+                        <a href="/sequence/edit">
                         <div class="panel panel-default">
                             <div class="panel-body text-center">
                                 <h1><span class="mdi-action-view-carousel dashIcon"></span></h1>
@@ -70,8 +71,10 @@
                             </div>
                             <div class="panel-footer text-center"><h4>220</h4></div>
                         </div>
+                        </a>
                     </div>
                     <div class="col-lg-4 col-md-4">
+                        <a href="/brick/edit">
                         <div class="panel panel-default">
                             <div class="panel-body text-center">
                                 <h1><span class="mdi-action-view-module dashIcon"></span></h1>
@@ -80,6 +83,7 @@
                             </div>
                             <div class="panel-footer text-center"><h4>220</h4></div>
                         </div>
+                        </a>
                     </div>
                 </div>
             </div>

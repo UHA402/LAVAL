@@ -1,5 +1,4 @@
 <body>
-<?= $this->getFlash(); ?>
 	<div class="navbar navbar-default">
 		<div id="deco_blanc"></div>
 		<div id="deco_blanc2"></div>
@@ -28,6 +27,7 @@
 				</ul>
 			</div>
 		</div>
+	<?= $this->getFlash(); ?>
 	</div>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog">
