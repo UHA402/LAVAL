@@ -54,51 +54,49 @@ class UsersController extends Controller
         }
     }
 
-
-/*
+            /*
 	 * Fonction d'inscription
 	 * $this->User->register($data);
 	 */
-	public function register()
-	{
-		$data = Request::all();
-		// Si tous les champs ont été remplis
-			if (!Validator::array_has_empty($data)) {
-				// Si le password et la confirmation sont identiques
-				if ($data['password'] == $data['password2']) {
+public function register()
+{
+   $data = Request::all();
+   // Si tous les champs ont été remplis
+   	if (!Validator::array_has_empty($data)) {
+   		// Si le password et la confirmation sont identiques
+   		if ($data['password'] == $data['password2']) {
 
-					// Si l'email existe déjà dans la db -> erreur
-					if ($this->User->findByMail($data['mail'])) {
-						$this->setFlash("Un utilisateur utilise déjà cet e-mail", 'warning');
-						$this->view->render('users/register');
-					}
-					// Sinon on crée l'utilisateur et on le redirige vers l'index
-					else {
+   			// Si l'email existe déjà dans la db -> erreur
+   			if ($this->User->findByMail($data['mail'])) {
+   				$this->setFlash("Un utilisateur utilise déjà cet e-mail", 'warning');
+   				$this->view->render('users/register');
+   			}
+   			// Sinon on crée l'utilisateur et on le redirige vers l'index
+   			else {
 
-						$this->User->save($data);
-                               $_SESSION['user'] = $data;
-                               $_SESSION['user']['role'] = "member";
-                               unset($_SESSION['user']['password'], $_SESSION['user']['password2']);
-						$this->setFlash("Votre inscription a bien été prise en compte", 'success');
-						//$this->login();
-						$this->view->redirect_to('/user/index');
-					}
+   				$this->User->save($data);
+                            $_SESSION['user'] = $data;
+                            $_SESSION['user']['role'] = "member";
+                            unset($_SESSION['user']['password'], $_SESSION['user']['password2']);
+   				$this->setFlash("Votre inscription a bien été prise en compte", 'success');
+   				//$this->login();
+   				$this->view->redirect_to('/user/index');
+   			}
 
-				} else {
-					$this->setFlash("Les mots de passes renseignés ne sont pas identiques", 'warning');
-					$this->view->render('users/register');
-				}
+   		} else {
+   			$this->setFlash("Les mots de passes renseignés ne sont pas identiques", 'warning');
+   			$this->view->render('users/register');
+   		}
 
-			} else {
-				
-				$this->setFlash("Veuillez renseigner tous les champs", 'warning');
-				$this->view->render('users/register');
-			}
-	}
+   	} elseif($data && Validator::array_has_empty($data)) {
+                  $this->setFlash("Veuillez renseigner tous les champs", 'warning');
+                  $this->view->render('users/register');
 
-	
+         } else {
+	  $this->view->render('users/register');
+         }
+}
 
-   
     /**
      * Accueil de la partie administrateur
      */
@@ -115,9 +113,6 @@ class UsersController extends Controller
             $this->view->render('users/login');
         }
     }
-
-  
-
 	
 	/*
 	 * Fonction de déconnection
@@ -154,5 +149,4 @@ class UsersController extends Controller
     {
 
     }
-
 }

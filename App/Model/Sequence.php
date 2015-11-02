@@ -55,5 +55,6 @@ class Sequence extends Model{
 
 	public function delete($id){
 		$this->db->query("DELETE FROM sequences WHERE id='".$id."'");
+		$this->db->query("DELETE FROM sequences_bricks WHERE sequence_id='".$id."'");
 	}
 }

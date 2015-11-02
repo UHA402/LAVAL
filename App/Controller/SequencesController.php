@@ -68,8 +68,27 @@ use App\Core\Validator;
 		/*
 		* Sequance delete
 		*/
-		function delete() {
-			$this->view->render('sequences/delete');
-			$this->view->redirect_to('sequences/index');
+		function delete($id, $confirm = null) {
+			if ($id) {
+				if ($sequence = $this->Sequence->findById($id)) {
+					if ($confirm && isset($_SESSION['token']) && $confirm == $_SESSION['token']) {
+						$this->Sequence->delete($id);
+						$this->Sequence_Brick->delete($id);
+						unset($_SESSION['token']);
+						$this->setFlash('The sequence has been deleted', "success");
+						$this->view->redirect_to('/sequence/edit');
+					}
+					else {
+						$token = md5(rand());
+						$_SESSION['token'] = $token;
+						$this->view->sequence = $sequence;
+						$this->view->token = $token;
+						$this->view->brick_id = $id;
+						$this->view->render('sequences/delete');	
+					}
+				}
+			} else {
+				$this->setFlash("You cannot delete a sequence without its id");
+			}
 		}
 	}

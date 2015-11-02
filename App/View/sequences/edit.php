@@ -77,7 +77,6 @@
                                                     <?php if (($key%2) == 1): ?> 
                                                         <tr>
                                                             <td>
-                                                        <?php echo $key; ?>
                                                                 <div class="checkbox list-add-cbx">
                                                                     <label>
                                                                         <input type="checkbox"
@@ -92,7 +91,6 @@
                                                     <?php endif; ?>
                                                     <?php if (($key%2) == 0): ?> 
                                                         <td>
-                                                    <?php echo $key; ?>
                                                             <div class="checkbox list-add-cbx">
                                                                 <label>
                                                                     <input type="checkbox"
