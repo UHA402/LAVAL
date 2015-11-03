@@ -1,10 +1,10 @@
-<?php 
+<?php
 namespace App\Core\Model;
  use App\Core\Database\Database;
  use App\Core\Request\Request;
 
 	class Model {
-		
+
 		protected $tab;
 		protected $fields =[];
 		protected $tab_fields =[];
@@ -13,13 +13,13 @@ namespace App\Core\Model;
 	public function __construct($tab)
 	{
 			$this->db = new Database(DB_NAME, DB_USER, DB_PASS, DB_HOST, $db_type = 'mysql');
-			$this->tab = $tab;  
+			$this->tab = $tab;
 	}
 
 	public function setTabFields($field =[]){
 	    foreach ($field as $key => $value) {
 	        $this->fields[$key] = $value;
-	    } 
+	    }
 	}
 
 	 /**
@@ -42,7 +42,7 @@ namespace App\Core\Model;
 	    $sql .= " VALUES ('".implode("', '", $tab)."') ";
 	    return $sql;
 	  }
-	  
+
 	    /**
 	   * @param $tab
 	   * @return string
@@ -50,7 +50,7 @@ namespace App\Core\Model;
 	  protected function query_update($tab) {
 	    $temp =[];
 	    foreach ($tab as $key => $value) {
-	          $temp[] =  $keys.'='.$value;
+	          $temp[] = $key."='".$value."'";
 	      }
 	    return  implode (',', $temp);
 	  }
@@ -69,13 +69,14 @@ namespace App\Core\Model;
 	   */
 	  public function update($id, array $data = null){
 	      $sql = "UPDATE $this->tab SET ";
-	      if(is_null($tab)){
+	      if(is_null($data)){
 	        $sql .= $this->query_update($this->fields);
-	        $sql .= "WHERE id=".$id;
+	        $sql .= " WHERE id=".$id;
 	      }else{
-	         $sql .= $this->query_update($tab);
-	        $sql .= "WHERE id=".$id;
+	         $sql .= $this->query_update($data);
+	        $sql .= " WHERE id=".$id;
 	      }
+
 	      return $this->db->query($sql);
 	  }
 

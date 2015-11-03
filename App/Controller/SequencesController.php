@@ -1,4 +1,4 @@
-<?php 
+<?php
 use App\Core\Controller\Controller;
 use App\Core\View\View;
 use App\Core\Request\Request;
@@ -13,38 +13,45 @@ use App\Core\Validator;
 		* Sequence update
 		*/
 		function edit($id = null) {
-			$data = Request::all();
-			$post = $_POST;
 			if ($id) {
-				if ($sequence = Request::cleanInput($this->Sequence->findById($id))) {
-					$sequence_brick = Request::cleanInput($this->Sequence_Brick->findBySeqId($id));
-					$this->view->sequence = $sequence;
-					$_POST = $sequence;
-					$_POST .= $sequence_brick;
-					var_dump($sequence);
-					var_dump($sequence_brick);
-					var_dump($post);
-					var_dump($data);
-					var_dump(!Validator::array_has_empty($post));
-					if ($post && !Validator::array_has_empty($post)) {
-						$this->Sequence_Brick->edit($sequence_brick['id'], $sequence_brick['sequence_id'], $post['bricks_id']);
-						$this->Sequence->update($id, $data);
+				if (Request::cleanInput($this->Sequence->findById($id))) {
+					if ($_POST && !Validator::array_has_empty($_POST)) {
+						$sequence_bricks = Request::cleanInput($this->Sequence_Brick->findBySeqId($id));
+						$length = count($_POST['sequence_bricks_id']);
+						$bricks_id = '';
+						foreach ($_POST['sequence_bricks_id'] as $key => $brick_id) {
+							if ($key == $length+1) {
+								$bricks_id .= $brick_id;
+							} else {
+								$bricks_id .= $brick_id.",";
+							}
+						}
+						$this->Sequence_Brick->edit($sequence_bricks['id'], $sequence_bricks['sequence_id'], $bricks_id);
+						$this->Sequence->update($id, $_POST['sequence']);
+						// $sequence = Request::cleanInput($this->Sequence->findById($id));
+						// $sequence_bricks = Request::cleanInput($this->Sequence_Brick->findBySeqId($id));
+						// $bricksId = explode(',', $sequence_bricks['bricks_id']);
+						// $this->view->sequence = $sequence;
+						// $this->view->sequence_bricks = $bricksId;
 						$this->setFlash("The sequence has been succesfully updated", "success");
-					} else {
-						$this->setFlash("No data", "danger");
 					}
+						$sequence = Request::cleanInput($this->Sequence->findById($id));
+						$sequence_bricks = Request::cleanInput($this->Sequence_Brick->findBySeqId($id));
+						$bricksId = explode(',', $sequence_bricks['bricks_id']);
+						$this->view->sequence = $sequence;
+						$this->view->sequence_bricks = $bricksId;
 				} else {
 					$this->setFlash("This sequence doesn't exist", "warning");
 				}
-			} elseif(!$id && isset($post['sequence']) && isset($post['sequence_bricks_id'])) {
-				$this->Sequence->create($post['sequence']);
-				$length = count($post['sequence_bricks_id']);
+			} elseif(isset($_POST['sequence']) && isset($_POST['sequence_bricks_id'])) {
+				$this->Sequence->create($_POST['sequence']);
+				$length = count($_POST['sequence_bricks_id']);
 				$bricks_id = '';
-				foreach ($post['sequence_bricks_id'] as $key => $id) {
+				foreach ($_POST['sequence_bricks_id'] as $key => $id) {
 					if ($key == $length+1) {
 						$bricks_id .= $id;
 					} else {
-						$bricks_id .= $id.", ";		
+						$bricks_id .= $id.",";
 					}
 				}
 				$sequence_id = $this->Sequence->findLastId();
@@ -58,7 +65,7 @@ use App\Core\Validator;
 			$this->view->sequences = $sequences;
 			$this->view->render('sequences/edit');
 		}
-		
+
 		/*
 		 * Sequences display
 		 */
@@ -93,7 +100,7 @@ use App\Core\Validator;
 						$this->view->sequence = $sequence;
 						$this->view->token = $token;
 						$this->view->brick_id = $id;
-						$this->view->render('sequences/delete');	
+						$this->view->render('sequences/delete');
 					}
 				}
 			} else {

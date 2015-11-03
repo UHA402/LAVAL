@@ -19,7 +19,12 @@
 
                         <h1>Add/Edit Sequence</h1>
 
-                        <form class="form-horizontal" data-toggle="validator" method="post" action="/sequence/edit">
+                        <form class="form-horizontal"
+                              data-toggle="validator"
+                              method="post"
+                              action="/sequence/edit<?php if (isset($this->sequence)): echo "/".$this->sequence['id'];?>
+
+                        <?php endif; ?>">
                             <fieldset>
                                 <span class="text-right">
                                         <div class="togglebutton togglebutton-material-green">
@@ -65,7 +70,7 @@
                                                 <thead>
                                                 <tr>
                                                     <th class="text-center" style="width: 20%">check</th>
-                                                    <th class="text-center">Title</th>                                                    
+                                                    <th class="text-center">Title</th>
                                                     <th class="text-center" style="width: 20%">check</th>
                                                     <th class="text-center">Title</th>
                                                 </tr>
@@ -74,14 +79,14 @@
                                                 <!-- <select id="sequence[bricklist]" name="sequence[bricklist]" class="form-control" multiple> -->
                                                 <?php foreach ($this->bricks as $key => $brick): ?>
                                                     <?php $key+=1; ?>
-                                                    <?php if (($key%2) == 1): ?> 
+                                                    <?php if (($key%2) == 1): ?>
                                                         <tr>
                                                             <td>
                                                                 <div class="checkbox list-add-cbx">
                                                                     <label>
-                                                                        <input type="checkbox"
+                                                                         <input type="checkbox"
                                                                                value="<?php echo $brick['id']; ?>"
-                                                                               name="sequence_bricks_id[<?php echo $key; ?>]">
+                                                                               name="sequence_bricks_id[<?php echo $key; ?>]"<?php if (isset($this->sequence_bricks)): ?><?php if (in_array($brick['id'], $this->sequence_bricks)): ?> checked<?php endif ?><?php endif ?>>
                                                                     </label>
                                                                 </div>
                                                             </td>
@@ -89,13 +94,14 @@
                                                                 <?php echo $brick['title']; ?>
                                                             </td>
                                                     <?php endif; ?>
-                                                    <?php if (($key%2) == 0): ?> 
+                                                    <?php if (($key%2) == 0): ?>
                                                         <td>
                                                             <div class="checkbox list-add-cbx">
                                                                 <label>
                                                                     <input type="checkbox"
-                                                                           value="<?php echo $brick['id']; ?>"
-                                                                           name="sequence_bricks_id[<?php echo $key; ?>]">
+                                                                               value="<?php echo $brick['id']; ?>"
+                                                                               name="sequence_bricks_id[<?php echo $key; ?>]"<?php if (isset($this->sequence_bricks)): ?><?php if (in_array($brick['id'], $this->sequence_bricks)): ?> checked<?php endif ?><?php endif ?>>
+
                                                                 </label>
                                                             </div>
                                                         </td>
@@ -131,7 +137,7 @@
                                     <tbody>
                                     <?php foreach ($this->bricks as $key => $brick): ?>
                                      <?php// if (in_array($brick['id'], $_SESSION['sequence_bricks_id'])): ?>
-                                        
+
                                         <tr>
                                             <td><?php echo $brick['id'] ?></td>
                                             <td><?php echo $brick['title'] ?></td>

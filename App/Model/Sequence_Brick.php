@@ -16,6 +16,7 @@ class Sequence_Brick extends Model{
 	}
 
 	public function edit($id, $sequence_id, $bricks_id){
-		$this->db->query("UPDATE sequences_bricks SET (sequence_id = '".$sequence_id."', bricks_id = '".$bricks_id."') WHERE (id = '".$id."')");
+		$sql = "UPDATE sequences_bricks SET sequence_id = '".$sequence_id."', bricks_id = '".$bricks_id."' WHERE id = ".$id;
+		$this->db->query($sql);
 	}
 }

@@ -4,15 +4,15 @@ use App\Core\Request\Request;
 use App\Core\View\View;
 
 class BricksController extends Controller {
-	
+
 	public function __construct(){
 		parent::__construct();
 		$this->loadModel('media');
 		$this->loadModel('media_Brick');
 	}
 
-	/* 
-	 * Fetch and display bricks 
+	/*
+	 * Fetch and display bricks
 	 */
 	public function index(){
 		$data = $this->Brick->ReadAllTitleBricks();
@@ -20,8 +20,8 @@ class BricksController extends Controller {
 		$this->view->render('bricks/index');
 	}
 
-	/* 
-	 * Create and update bricks 
+	/*
+	 * Create and update bricks
 	 */
 	public function edit($id = null){
 		if ($id) {
@@ -34,18 +34,18 @@ class BricksController extends Controller {
 		}
 		$bricks =$this->Brick->ReadAllBrick();
 	 	$this->view->bricks = $bricks;
-	 	$this->view->render('bricks/edit');	
-	}   
+	 	$this->view->render('bricks/edit');
+	}
 
-	/* 
-	 * Create bricks 
+	/*
+	 * Create bricks
 	 */
 	public function CreateBrick(){
 		   $name= Request::input('title');
 		   $type= Request::input('type');
 		   $media= Request::input('data');
 		   $data = Request::all();
-		   
+
 		   $bricks= $this->Brick->FindIDBrickByTitle($name);
 			 // Title doesn't exists
 			 if ($bricks == 0) {
@@ -55,18 +55,18 @@ class BricksController extends Controller {
 				$this->Media->setFields();
 
 				if($data){
-					$this->Brick->create($data);	
+					$this->Brick->create($data);
 					$this->Media->create();
 					$this->Media_Brick->set_id_Bricks($this->Brick->FindIDBrickByTitle($name));
 					$this->Media_Brick->set_id_Medias($this->Media->retrieveId('title', $media));
 					$this->Media_Brick->setFields();
 					//create pivot table link elements
-					$this->Media_Brick->create();	
+					$this->Media_Brick->create();
 					$this->setFlash("You have created your new brick !", 'success');
 					// create media
 				} else {
 					$this->setFlash("Failure", 'danger');
-				}		
+				}
 			 } else {
 				$this->setFlash(" This title already exists choose another one !", "danger");
 			 }
@@ -74,8 +74,8 @@ class BricksController extends Controller {
 		      $this->view->redirect_to('/brick/edit');
 	}
 
-	/* 
-	 * Delete bricks 
+	/*
+	 * Delete bricks
 	 */
 	public function delete($id){
 		if ($this->Brick->ReadBrick($id)) {
@@ -89,8 +89,8 @@ class BricksController extends Controller {
 		}
 	}
 
-	/* 
-	 * Update bricks 
+	/*
+	 * Update bricks
 	 */
 	public function UpdateBrick ($id){
 		$this->data = Request::all();
