@@ -35,48 +35,13 @@
                             <td>Pierre</td>
                             <td><a href="mailto:dupontpierre@gmail.com">dupontpierre@gmail.com</a></td>
                             <td>20/10/2014</td>
-                            <td>Administrator</td>
-                            <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
-                        </tr>
-                        <tr>
-                            <td>Smith</td>
-                            <td>John</td>
-                            <td><a href="mailto:john.smith@gmail.com">john.smith@gmail.com</a></td>
-                            <td>20/08/2015</td>
-                            <td>user</td>
-                            <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
-                        </tr>
-                        <tr>
-                            <td>Dupont</td>
-                            <td>Pierrette</td>
-                            <td><a href="mailto:dupontpierrette@gmail.com">dupontpierrette@gmail.com</a></td>
-                            <td>20/10/2014</td>
-                            <td>Administrator</td>
-                            <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
-                        </tr>
-                        <tr>
-                            <td>Martin</td>
-                            <td>Charlie</td>
-                            <td><a href="mailto:charlie@gmail.com">charlie@gmail.com</a></td>
-                            <td>20/10/2014</td>
-                            <td>user</td>
-                            <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
-                        </tr>
-                        <tr>
-                            <td>Froute</td>
-                            <td>Pierre</td>
-                            <td><a href="mailto:froupierre@gmail.com">froupierre@gmail.com</a></td>
-                            <td>20/10/2014</td>
-                            <td>user</td>
-                            <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
-                        </tr>
-                        <tr>
-                            <td>Matt</td>
-                            <td>Marc</td>
-                            <td><a href="mailto:matt@gmail.com">matt@gmail.com</a></td>
-                            <td>20/10/2014</td>
-                            <td>user</td>
-                            <td><button class="btn btn-flat btn-warning btn-sm btn-td">delete</button></td>
+                            <td><select class="form-control" id="select">
+                                    <option>Administrateur</option>
+                                    <option>Membre</option>
+                                </select></td>
+                            <td><a href="#">
+                                    <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button>
+                                </a></td>
                         </tr>
                         </tbody>
                     </table>

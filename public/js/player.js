@@ -1,12 +1,12 @@
 $(function () {
 
     //DEBUG
-    //var brick = {id: 1, name: "Record", type: "REC", data: "Text to record"};
+    var brick = {id: 1, name: "Record", type: "REC", data: "Text to record"};
     var brick1 = {id: 1, name: "Brick 1", type: "TTS", data: "text to speech"};
     var brick2 = {id: 2, name: "Brick 2", type: "TXT", data: "un,deux,trois,quatre"};
     var brick3 = {id: 3, name: "Brick 3", type: "IMG", data: "http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158,http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158,http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158,http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158" };
     var brick4 = {id: 4, name: "Brick 4", type: "WAVE", data: "http://sound.fr"};
-    var brickList = [brick3, brick1, brick2, brick4];
+    var brickList = [brick, brick3, brick1, brick2, brick4];
 
     //Initialisation du player
     var player = new Player(brickList);
@@ -167,6 +167,7 @@ var Model = function (brick) {
             });
         } else if (type === 'REC') {
             console.log('Model Record loaded');
+            var linksound;
             $("#briqueContent").load(url + "player/recordLayout/", function () {
             });
         } else if (type === 'IMG') {
@@ -204,4 +205,3 @@ var Model = function (brick) {
         }
     }
 }
-

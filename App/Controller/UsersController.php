@@ -27,26 +27,26 @@ class UsersController extends Controller
             $username = $_SESSION['user']['firstName'];
             $this->view->username = $username;
             $this->view->render('users/index');
-		    
+
             } elseif (!Validator::array_has_empty($user)) {
 
-            // Si les champs ont été remplis 
-         
+            // Si les champs ont été remplis
+
                 if ($user = $this->User->fetchValidUser($user)){
-                    // Création de la session                 
+                    // Création de la session
                     Session::set('user', $user);
                     $this->setFlash("Vous êtes connecté !", 'success');
-                    
+
                     // Redirection en fonction des roles
                     if ($user['role'] == "admin") {
-                    		$this->view->redirect_to('/user/admin_index');
+                    		$this->view->redirect_to('user/admin_index');
                     } else {
 			 $this->view->username = $_SESSION['user']['firstName'];
-			 $this->view->redirect_to('/user/index');
+			 $this->view->redirect_to('user/index');
 		}
                 } else {
                     $this->setFlash("L'email et le mot de passe ne correspondent pas", 'danger');
-                    $this->view->redirect_to('/');
+                    $this->view->redirect_to('');
                 }
         } else {
             $this->setFlash("Vous devez vous connecter avant de pouvoir acceder à cette partie", 'danger');
@@ -54,7 +54,7 @@ class UsersController extends Controller
         }
     }
 
-            /*
+  /*
 	 * Fonction d'inscription
 	 * $this->User->register($data);
 	 */
@@ -113,7 +113,7 @@ class UsersController extends Controller
             $this->view->render('users/login');
         }
     }
-	
+
 	/*
 	 * Fonction de déconnection
 	 * envoi une variable $msg à la vue
@@ -123,7 +123,7 @@ class UsersController extends Controller
 	Session::destroy('user');
 	$this->setFlash("Vous êtes bien deconnecté", 'success');
 	//$this->view->render('index/index');
-	$this->view->redirect_to('/');
+	$this->view->redirect_to('');
 	}
 
     /*
@@ -133,6 +133,10 @@ class UsersController extends Controller
     {
 
         $this->view->render('users/recovery');
+    }
+
+    public function profil() {
+        $this->view->render('users/profil');
     }
 
     public function admin_brick()

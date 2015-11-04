@@ -124,7 +124,7 @@
 
                                 </div>
                                 <h1>Brick in the sequence</h1>
-                                <table id="brickTable" class="table table-striped table-hover text-center">
+                                <table id="sort" class="table table-striped table-hover text-center">
                                     <thead>
                                     <tr>
                                         <th class="text-center">#</th>
@@ -136,26 +136,27 @@
                                     </thead>
                                     <tbody>
                                     <?php foreach ($this->bricks as $key => $brick): ?>
-                                     <?php// if (in_array($brick['id'], $_SESSION['sequence_bricks_id'])): ?>
-
-                                        <tr>
+                                        <tr id="id_<?= $brick['id'] ?>">
+                                            <?php //if (in_array($brick['id'], $_SESSION['sequence_bricks_id'])): ?>
                                             <td><?php echo $brick['id'] ?></td>
                                             <td><?php echo $brick['title'] ?></td>
                                             <td><?php echo $brick['type'] ?></td>
                                             <td><?php echo $brick['data'] ?></td>
                                             <td>
-                                                <a href="/sequence/delete/<?php echo $brick['id']; ?>">
+                                                <a href="<?php echo URL ?>sequence/delete/<?php echo $brick['id']; ?>">
                                                     <button type="button"
                                                             class="btn btn-flat btn-warning btn-sm btn-td">delete
                                                     </button>
                                                 </a>
                                             </td>
                                         </tr>
-                                    <?php //endif ?>
+                                        <?php //endif ?>
                                     <?php endforeach; ?>
                                     </tbody>
                                 </table>
                                 <div class="pagingBrick"></div>
+                                <input id="sequence[BrickPos]" value=""/>
+
                                 <div class="form-group text-right">
                                     <button type="submit" id="sequence[save]" class="btn btn-primary">Save
                                     </button>
@@ -180,10 +181,10 @@
                             <td><?php echo $sequence['id'] ?></td>
                             <td><?php echo $sequence['title'] ?></td>
                             <td>
-                                <a href="/sequence/edit/<?php echo $sequence['id']; ?>">
+                                <a href="<?php echo URL ?>sequence/edit/<?php echo $sequence['id']; ?>">
                                     <button type="button" class="btn btn-flat btn-info btn-sm btn-td">Edit</button>
                                 </a>
-                                <a href="/sequence/delete/<?php echo $sequence['id']; ?>">
+                                <a href="<?php echo URL ?>sequence/delete/<?php echo $sequence['id']; ?>">
                                     <button type="button" class="btn btn-flat btn-warning btn-sm btn-td">Delete</button>
                                 </a>
                             </td>

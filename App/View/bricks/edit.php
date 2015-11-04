@@ -20,11 +20,11 @@
                          <?php 
                             if(isset($this->currentBrick)){
                                 echo "<h1>Edit Brick</h1>";      
-                                echo ' <form class="form-horizontal" data-toggle="validator" method="post" action="/brick/UpdateBrick/'.$this->currentBrick['id'].'">';
+                                echo ' <form class="form-horizontal" data-toggle="validator" method="post" action="'.URL.'brick/UpdateBrick/'.$this->currentBrick['id'].'">';
                             }
                             else {
                                 echo "<h1>Add Brick</h1>";
-                                echo ' <form class="form-horizontal" data-toggle="validator" method="post" action="/brick/CreateBrick">';
+                                echo ' <form class="form-horizontal" data-toggle="validator" method="post" action="'.URL.'brick/CreateBrick">';
                             }
                         ?> 
 
@@ -105,8 +105,8 @@
                                 <td><?php echo $brick['type']; ?></td>
                                 <td><?php echo $brick['data']; ?></td>
                                 <td>
-                                    <a href="/brick/edit/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button></a>
-                                    <a href="/brick/delete/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button></a>
+                                    <a href="<? echo URL ?>brick/edit/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button></a>
+                                    <a href="<? echo URL ?>brick/delete/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button></a>
                                 </td>
                     </tr>
                     <?php endforeach;?>

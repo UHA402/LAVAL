@@ -1,5 +1,7 @@
 <script>var url = '<?php echo URL ?>';</script>
-<script src="<?php echo URL ?>public/js/Player.js" defer="defer"></script>
+<script src="<?php echo URL ?>public/js/player.js" defer="defer"></script>
+<script src="<?php echo URL ?>public/js/jquery.voice.js" defer="defer" ></script>
+<script src="<?php echo URL ?>public/js/recorder.js" defer="defer" ></script>
 
 <div class="navbar-fixed-bottom navbar-player">
     <div class="progress progress-player">
@@ -11,8 +13,10 @@
         </ul>
     </div>
 </div>
-<div class="vertical-center">
-<div id="briqueContent">
+<div class="container">
+    <div class="vertical-center">
+    <div id="briqueContent" class="text-center">
+    </div>
 </div>
 </div>
 

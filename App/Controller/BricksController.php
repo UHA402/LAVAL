@@ -71,7 +71,7 @@ class BricksController extends Controller {
 				$this->setFlash(" This title already exists choose another one !", "danger");
 			 }
 
-		      $this->view->redirect_to('/brick/edit');
+		      $this->view->redirect_to('brick/edit');
 	}
 
 	/*
@@ -81,10 +81,10 @@ class BricksController extends Controller {
 		if ($this->Brick->ReadBrick($id)) {
 	   		$this->Brick->delete($id);
 	   		$this->setFlash('The brick has been deleted', "success");
-	   		$this->view->redirect_to('/brick/edit');
+	   		$this->view->redirect_to('brick/edit');
 		} else {
 			$this->setFlash("This brick doesn't exist", "warning");
-			$this->view->redirect_to('/brick/edit');
+			$this->view->redirect_to('brick/edit');
 
 		}
 	}
@@ -96,10 +96,10 @@ class BricksController extends Controller {
 		$this->data = Request::all();
 		if($this->Brick->update($id, $this->data )){
 			$this->setFlash('The brick has been updated', "success");
-			$this->view->redirect_to('/brick/edit');
+			$this->view->redirect_to('brick/edit');
 		} else {
 			$this->setFlash("Problem occur while updating Brick", "warning");
-			$this->view->redirect_to('/brick/edit');
+			$this->view->redirect_to('brick/edit');
 		}
 	}
 }

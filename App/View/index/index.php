@@ -35,7 +35,7 @@
 					</div>
 				</div>
 				<div class="panel-body panelCategorie">
-					<h1>Contactez-nous</h1>
+					<h1>Contact us</h1>
 					<p>Sed ornare urna sit amet leo sollissssscitudin mattis. Donec sit
 						amet odio a urna blandit volutpat eget a risus. Fusce non dui
 						varius, rutrum nisi ultrices, sodales ex. Donec vel lectus enim.
@@ -48,7 +48,7 @@
 			<div class="entete"></div>
 			<div class="panel">
 				<div class="panel-heading enteteFlou">
-					<h1>CONNEXION</h1>
+					<h1>SIGN IN</h1>
 					<div class="cercle">
 						<img
 							src="<?php echo URL ?>public/img/connexion.png"
@@ -57,8 +57,8 @@
 					</div>
 				</div>
 				<div class="panel-body panelCategorie">
-					<h1>Se connecter</h1>
-					<form method = "post" class="form-horizontal formConnexion" data-toggle="validator" role="form" action="user/index">
+					<h1>Login</h1>
+					<form method = "post" class="form-horizontal formConnexion" data-toggle="validator" role="form" action="<?php echo URL ?>user/index">
 						<fieldset>
 							<div class="form-group">
 								<input type="email" class="form-control" id="inputEmail"
@@ -67,16 +67,16 @@
 							<div class="form-group">
 								<input type="password" class="form-control" id="inputPassword"
 									placeholder="Password" name="user[password]" required maxlength="30"><span
-									class="help-block text-right"><a href="user/recovery"><small>Mot de passe oublié ?</small></a></span>
+									class="help-block text-right"><a href="user/recovery"><small>forget password ?</small></a></span>
 							</div>
 							<div class="form-group">
 								<div class="col-sm-6 creaCompteDiv">
 									<button class="btn btn-raised btn-default btn-sm">
-										<a class="creaCompte" href="user/register">Créer un compte</a>
+										<a class="creaCompte" href="user/register">Sign Up</a>
 									</button>
 								</div>
 								<div class="col-sm-6 text-right creaCompteDiv">
-									<button type="submit" class="btn btn-sm btn-material-teal-200">Valider</button>
+									<button type="submit" class="btn btn-sm btn-material-teal-200">connect</button>
 								</div>
 							</div>
 						</fieldset>
