@@ -1,24 +1,15 @@
 <?php use App\Core\Model\Model;
 
-/*
+/**
  * Brick manager
  */
-
 class Brick extends Model{
 
 	public function __contruct(){
 	   parent::__construct("tbricks");
 	}
 
-	/*
-	 * Save a new brick in the database
-	 */
-	// function CreateBrick($strTitle,$strType,$strData){
-	//     $data=$this->db->query("INSERT INTO tbricks(title, type, data) VALUES ('".$strTitle."','".$strType."','".$strData."' )");
- //      	return $data;
-	// }
-
-	/*
+	/**
 	 * Find all title brick in the database
 	 */
 	public function ReadAllTitleBricks(){
@@ -30,7 +21,7 @@ class Brick extends Model{
 		return $array;
 	}
 
-	/*
+	/**
 	 * Return the number of bricks in the database
 	 */
 	public function ReadNumberBricks(){
@@ -38,10 +29,10 @@ class Brick extends Model{
 		foreach($data as $row){
 	 		$nbBricks=intval($row['COUNT(*)']);
 	 		return $nbBricks;
-	    }
+	  }
 	}
 
-	/*
+	/**
 	 * Find just only one brick by id
 	 */
 	public function ReadBrick($iID){
@@ -49,7 +40,7 @@ class Brick extends Model{
 		return $data;
 	}
 
-	/*
+	/**
 	 * Find all bricks
 	 */
   	public function ReadAllBrick(){
@@ -57,7 +48,7 @@ class Brick extends Model{
 		return $data;
 	}
 
-	/*
+	/**
 	 * Find a brick's id by his title
 	 */
 	public function FindIDBrickByTitle($strTitle){
@@ -76,23 +67,12 @@ class Brick extends Model{
 		}
 	}
 
-	/*
-	 * Update a brick
-	 */
-	// public function UpdateBrick($iID,$data){
-	// 	var_dump($data);
-	// 	$strTitle = $data['name'];
-	// 	$strType = $data['type'];
-	// 	$strData = $data['media'];
-	// 	$data = $this->db->query("UPDATE `tbricks` SET title='".$strTitle."',type ='".$strType."',data='".$strData."' WHERE id= '".$iID."'");
-	// 	return $data;
-	// }
-
-	/*
+	/**
 	 * Erase a brick from database
 	 */
 	public function delete($iID){
 		$data = $this->db->query("DELETE FROM `tbricks` WHERE id='".$iID."'");
 		return $data;
 	}
+
 }

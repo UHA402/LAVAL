@@ -1,4 +1,4 @@
-<?php 
+<?php
 use App\Core\Model\Model;
 use App\Core\Request\Request;
 class Sequence extends Model{
@@ -8,7 +8,7 @@ class Sequence extends Model{
 	}
 
 	public function countBricks($sequence_id){
-		$data = $this->db->query("SELECT bricks_id FROM sequences_bricks WHERE id = ".$sequence_id);
+		$data = $this->db->query("SELECT bricks_id FROM sequences_bricks WHERE sequence_id = ".$sequence_id);
 		$bricks_id = explode(',', $data);
 		$nb_bricks = count($bricks_id);
 		 return $nb_bricks;
