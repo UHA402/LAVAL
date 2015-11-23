@@ -34,6 +34,24 @@ class Media_Brick extends Model
     }
 
     public function setFields(){
-        $this->setTabFields(['id_Bricks'=>$this->id_Bricks,  'id_Medias'=>$this->id_Medias]);
+        $this->setTabFields(['id_Bricks'=>$this->id_Bricks, 'id_Medias'=>$this->id_Medias]);
+    }
+    
+    public function createMediaBricks()
+    {
+        $i = 0;
+        $this->deleteByBrickId($this->id_Bricks);
+        $sql = "INSERT INTO tbricks_medias (id_Bricks, id_Medias) VALUES ";
+        for ($i = 0; $i < count($this->id_Medias) - 1; $i++) {
+            $sql .= "('".$this->id_Bricks."','".$this->id_Medias[$i]."'),";
+        }
+        $sql .= "('".$this->id_Bricks."','".$this->id_Medias[$i]."');";
+        
+        return $this->db->query($sql);
+    }
+    
+    public function deleteByBrickId($id)
+    {
+        return $this->db->query("DELETE FROM tbricks_medias WHERE id_Bricks='$id';");
     }
 }

@@ -53,7 +53,7 @@ class Brick extends Model{
 	 * Find all bricks
 	 */
   	public function ReadAllBrick(){
-		$data = $this->db->query("SELECT `id`, `title`, `type`, `data` FROM `tbricks` ");
+		$data = $this->db->query("SELECT id, title, type, data FROM tbricks ");
 		return $data;
 	}
 
@@ -92,7 +92,8 @@ class Brick extends Model{
 	 * Erase a brick from database
 	 */
 	public function delete($iID){
-		$data = $this->db->query("DELETE FROM `tbricks` WHERE id='".$iID."'");
+		$data = $this->db->query("DELETE FROM tbricks WHERE id='".$iID."'");
+                $this->db->query("DELETE FROM sequences_bricks WHERE bricks_id='".$iID."'");
 		return $data;
 	}
 }

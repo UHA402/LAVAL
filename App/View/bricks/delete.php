@@ -16,13 +16,13 @@
             </div>
             <div class="panel-body panelCategorie panelSession">
                 <h1>Suppresion de la brick</h1>
-
-                <p>Confirmer la suppresion de <strong>#num - $NOMBRICK$</strong></p>
+                <p>Confirmer la suppresion de <strong><?php echo $_SESSION["brickToDelete"][0]["title"]; ?></strong></p>
                 <a href="<?php echo URL ?>brick/edit">
                     <button type="button" class="btn btn-success">Annuler</button>
                 </a>
-
-                <button type="submit" class="btn btn-danger">Confirmer</button>
+                <a href="<?php echo URL ?>brick/delete/<?php echo $_SESSION["brickToDelete"][0]["id"]; ?>/yes">
+                    <button type="button" class="btn btn-danger">Confirmer</button>
+                </a>
             </div>
         </div>
     </div>

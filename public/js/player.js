@@ -1,12 +1,23 @@
 $(function () {
 
     //DEBUG
-    var brick = {id: 1, name: "Record", type: "REC", data: "Text to record"};
+    /*var brick = {id: 1, name: "Record", type: "REC", data: "Text to record"};
     var brick1 = {id: 1, name: "Brick 1", type: "TTS", data: "text to speech"};
     var brick2 = {id: 2, name: "Brick 2", type: "TXT", data: "un,deux,trois,quatre"};
     var brick3 = {id: 3, name: "Brick 3", type: "IMG", data: "http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158,http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158,http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158,http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158" };
-    var brick4 = {id: 4, name: "Brick 4", type: "WAVE", data: "http://sound.fr"};
-    var brickList = [brick, brick3, brick1, brick2, brick4];
+    var brick4 = {id: 4, name: "Brick 4", type: "WAVE", data: url+"public/media/test.wav"};*/
+    var brickList = [];
+    
+    var tabBrick = JSON.parse(brickJson);
+    console.log(tabBrick);
+    
+    for (brick of tabBrick)
+    {
+        temp = {id: parseInt(brick.bricks_id), name: brick.title, type: brick.type, data: brick.data};
+        brickList.push(temp);
+    }
+    
+    console.log(brickList);
 
     //Initialisation du player
     var player = new Player(brickList);
@@ -83,12 +94,21 @@ var Player = function (brickList) {
     //Fin de la séquence envoi des données au controller PHP
     function sequenceDone() {
         var methodcall = url + 'player/save/';
+        var result = "";
+        var i = 0;
+        for (i; i < brick.length - 1; i++)
+        {
+            result += brick[i].name + "=" + brick[i].result + ";";
+        }
+        result += brick[i].name + "=" + brick[i].result;
+        console.log(result);
         $.ajax({
-            type: POST,
+            type: 'POST',
             url: methodcall,
-            data: brick,
+            data: result,
             success: function(msg) {
                 console.log('save done');
+                console.log(msg);
             }
         });
     }
@@ -165,10 +185,10 @@ var Model = function (brick) {
                     $("#next-brique").show();
                 });
             });
-        } else if (type === 'REC') {
+        } else if (type === 'RESP') {
             console.log('Model Record loaded');
-            var linksound;
             $("#briqueContent").load(url + "player/recordLayout/", function () {
+                
             });
         } else if (type === 'IMG') {
             console.log('Model IMG Loaded');
@@ -205,3 +225,4 @@ var Model = function (brick) {
         }
     }
 }
+

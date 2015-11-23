@@ -8,10 +8,7 @@ class Sequence extends Model{
 	}
 
 	public function countBricks($sequence_id){
-		$data = $this->db->query("SELECT bricks_id FROM sequences_bricks WHERE id = ".$sequence_id);
-		$bricks_id = explode(',', $data);
-		$nb_bricks = count($bricks_id);
-		 return $nb_bricks;
+		return intval($this->db->query("SELECT COUNT(bricks_id) as nbBrick FROM sequences_bricks WHERE sequence_id = ".$sequence_id)[0]["nbBrick"]);
 	}
 
 	public function findById($id){
@@ -34,6 +31,12 @@ class Sequence extends Model{
 
 	public function findAll(){
 		$data = $this->db->query("SELECT * FROM sequences");
+                
+                foreach ($data as $id=>$value)
+                {
+                    $data[$id]["nbBrick"] = $this->countBricks($value["id"]);
+                }
+                
 		return $data;
 	}
 
@@ -43,7 +46,7 @@ class Sequence extends Model{
 	}
 
 	public function findSequenceBricks($sequence_id){
-		$data = $this->db->query("SELECT * FROM tbricks INNER JOIN sequences_bricks ON tbricks.id = sequences_bricks.bricks_id WHERE id='".$id."'");
+		$data = $this->db->query("SELECT * FROM tbricks INNER JOIN sequences_bricks ON tbricks.id = sequences_bricks.bricks_id WHERE sequences_bricks.sequence_id='".$sequence_id."'");
 		return $data;
 	}
 
@@ -56,5 +59,6 @@ class Sequence extends Model{
 	public function delete($id){
 		$this->db->query("DELETE FROM sequences WHERE id='".$id."'");
 		$this->db->query("DELETE FROM sequences_bricks WHERE sequence_id='".$id."'");
+                $this->db->query("DELETE FROM tsessions_sequences WHERE id_Sequences='".$id."'");
 	}
 }

@@ -1,7 +1,11 @@
-<script>var url = '<?php echo URL ?>';</script>
+<script>
+    var url = '<?php echo URL ?>';
+    var brickJson = '<?php echo $this->msg ?>';
+</script>
 <script src="<?php echo URL ?>public/js/player.js" defer="defer"></script>
-<script src="<?php echo URL ?>public/js/jquery.voice.js" defer="defer" ></script>
-<script src="<?php echo URL ?>public/js/recorder.js" defer="defer" ></script>
+<script src="https://cdn.webrtc-experiment.com/RecordRTC.js" defer="defer" ></script>
+
+
 
 <div class="navbar-fixed-bottom navbar-player">
     <div class="progress progress-player">

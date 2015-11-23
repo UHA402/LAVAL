@@ -24,27 +24,29 @@
                     <tr>
                         <th class="text-center">#</th>
                         <th class="text-center">Name</th>
-                        <th class="text-center">Time</th>
+                        <th class="text-center">Sequence's number</th>
                         <th class="text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Session 1</td>
-                        <td>20min</td>
-                        <td>
-                            <button class="btn btn-flat btn-primary btn-sm btn-td">Start</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Session 2</td>
-                        <td>25min</td>
-                        <td>
-                            <button class="btn btn-flat btn-primary btn-sm btn-td">Start</button>
-                        </td>
-                    </tr>
+                    <?php
+                        if (isset($_SESSION["AllSessions"]) && $_SESSION["AllSessions"] != "")
+                        {
+                            foreach ($_SESSION["AllSessions"] as $i=>$v)
+                            {
+                                echo "<tr>";
+                                    echo "<td>".$i."</td>";
+                                    echo "<td>".$v["title"]."</td>";
+                                    echo "<td>".$v["nbLessons"]."</td>";
+                                    echo "<td>";
+                                        echo "<a href='".URL."player/start/".$i."'>";
+                                            echo "<button class='btn btn-flat btn-info btn-sm btn-td'>Start</button>";
+                                        echo "</a>";
+                                    echo "</td>";
+                                echo "</tr>";
+                            }
+                        }
+                    ?>
                     </tbody>
 
                 </table>

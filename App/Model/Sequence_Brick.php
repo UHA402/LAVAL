@@ -12,11 +12,14 @@ class Sequence_Brick extends Model{
 	}
 
 	public function save($sequence_id, $bricks_id){
-		$this->db->query("INSERT INTO sequences_bricks (sequence_id, bricks_id) VALUES ('".$sequence_id."', '".$bricks_id."')");
+            foreach ($bricks_id as $id=>$value)
+		$this->db->query("INSERT INTO sequences_bricks (sequence_id, bricks_id) VALUES ('".$sequence_id."', '".$value."')");
 	}
 
-	public function edit($id, $sequence_id, $bricks_id){
-		$sql = "UPDATE sequences_bricks SET sequence_id = '".$sequence_id."', bricks_id = '".$bricks_id."' WHERE id = ".$id;
-		$this->db->query($sql);
+	public function edit($sequence_id, $bricks_id){
+                $this->db->query("DELETE FROM sequences_bricks WHERE sequence_id=".$sequence_id);
+		/*$sql = "UPDATE sequences_bricks SET sequence_id = '".$sequence_id."', bricks_id = '".$bricks_id."' WHERE id = ".$id;
+		$this->db->query($sql);*/
+                $this->save($sequence_id, $bricks_id);
 	}
 }

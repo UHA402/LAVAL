@@ -21,7 +21,7 @@
                                    placeholder="Email" name="user[mail]" pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" required maxlength="40">
                         </div>
                             <div class="text-right creaCompteDiv">
-                                <button type="submit" class="btn btn-sm btn-material-teal-200">Valider</button>
+                                <button type="submit" class="btn btn-sm btn-material-teal-200">Submit</button>
                             </div>
                         </div>
                     </fieldset>

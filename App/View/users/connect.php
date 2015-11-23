@@ -4,7 +4,7 @@
         <div class="entete"></div>
         <div class="panel">
             <div class="panel-heading enteteFlou">
-                <h1>CONNEXION</h1>
+                <h1>LOG IN</h1>
                 <div class="cercle">
                     <img
                         src="<?php echo URL ?>public/img/connexion.png"
@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="panel-body panelCategorie">
-                <h1>Se connecter</h1>
+                <h1>Log In</h1>
                 <form method = "post" class="form-horizontal formConnexion" data-toggle="validator" role="form" action="<?php echo URL ?>user/index">
                     <fieldset>
                         <div class="form-group">
@@ -22,17 +22,17 @@
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" id="inputPassword"
-                                   placeholder="Password" name="user[password]" required maxlength="30"> <a href="/user/recovery"><span
-                                    class="help-block text-right"><small>Mot de passe oublié.</small></span></a>
+                                   placeholder="Password" name="user[password]" required maxlength="30"> <a href="<?php echo URL ?>user/recovery"><span
+                                    class="help-block text-right"><small>Forget password</small></span></a>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-6 creaCompteDiv">
-                                <button class="btn btn-raised btn-default btn-sm">
-                                    <a class="creaCompte" href="<?php echo URL ?>user/register">Créer un compte</a>
-                                </button>
+                                <a class="creaCompte" href="<?php echo URL ?>user/register">
+                                    <button type="button" class="btn btn-raised btn-default btn-sm">Sign Up</button>
+                                </a>
                             </div>
                             <div class="col-lg-6 text-right creaCompteDiv">
-                                <button type="submit" class="btn btn-sm btn-material-teal-200">Valider</button>
+                                <button type="submit" class="btn btn-sm btn-material-teal-200">Submit</button>
                             </div>
                         </div>
                     </fieldset>

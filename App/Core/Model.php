@@ -38,7 +38,7 @@ namespace App\Core\Model;
 	   */
 	  protected function query_construct($tab) {
 	    $sql="";
-	      $sql .= " (`".implode("`, `", array_keys($tab))."`)";
+	      $sql .= " (".implode(", ", array_keys($tab)).")";
 	    $sql .= " VALUES ('".implode("', '", $tab)."') ";
 	    return $sql;
 	  }
@@ -76,7 +76,7 @@ namespace App\Core\Model;
 	         $sql .= $this->query_update($data);
 	        $sql .= " WHERE id=".$id;
 	      }
-
+              
 	      return $this->db->query($sql);
 	  }
 

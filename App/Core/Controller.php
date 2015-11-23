@@ -49,5 +49,16 @@ Session::init();
      public function formatToJson($tab){
         return json_encode($tab);
      }
+     
+    public function verifConnexion()
+    {
+        if (!isset($_SESSION['user'])) {
+            $this->setFlash("You need to be connected to access in this page", 'danger');
+            $this->view->redirect_to('user/connect');
+            return false;
+        } else {
+            return true;
+        }
+    }
 
  }

@@ -48,7 +48,7 @@
 			<div class="entete"></div>
 			<div class="panel">
 				<div class="panel-heading enteteFlou">
-					<h1>SIGN IN</h1>
+					<h1>LOG IN</h1>
 					<div class="cercle">
 						<img
 							src="<?php echo URL ?>public/img/connexion.png"
@@ -67,13 +67,13 @@
 							<div class="form-group">
 								<input type="password" class="form-control" id="inputPassword"
 									placeholder="Password" name="user[password]" required maxlength="30"><span
-									class="help-block text-right"><a href="user/recovery"><small>forget password ?</small></a></span>
+									class="help-block text-right"><a href="<?php echo URL ?>user/recovery"><small>forget password ?</small></a></span>
 							</div>
 							<div class="form-group">
 								<div class="col-sm-6 creaCompteDiv">
-									<button class="btn btn-raised btn-default btn-sm">
-										<a class="creaCompte" href="user/register">Sign Up</a>
-									</button>
+									<a class="creaCompte" href="<?php echo URL ?>user/register">
+                                                                            <button type="button" class="btn btn-raised btn-default btn-sm">Sign Up</button>
+                                                                        </a>
 								</div>
 								<div class="col-sm-6 text-right creaCompteDiv">
 									<button type="submit" class="btn btn-sm btn-material-teal-200">connect</button>

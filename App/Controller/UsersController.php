@@ -16,6 +16,7 @@ class UsersController extends Controller
     function __construct()
     {
         parent::__construct();
+        $this->loadModel("session");
     }
 
     /*
@@ -26,8 +27,8 @@ class UsersController extends Controller
 	if (isset($_SESSION['user'])) {
             $username = $_SESSION['user']['firstName'];
             $this->view->username = $username;
+            $this->defaultSessionInformation();
             $this->view->render('users/index');
-
             } elseif (!Validator::array_has_empty($user)) {
 
             // Si les champs ont été remplis
@@ -35,8 +36,10 @@ class UsersController extends Controller
                 if ($user = $this->User->fetchValidUser($user)){
                     // Création de la session
                     Session::set('user', $user);
-                    $this->setFlash("Vous êtes connecté !", 'success');
-
+                    $this->setFlash("Log In successfull !", 'success');
+                    
+                    $this->defaultSessionInformation();
+                    
                     // Redirection en fonction des roles
                     if ($user['role'] == "admin") {
                     		$this->view->redirect_to('user/admin_index');
@@ -45,13 +48,39 @@ class UsersController extends Controller
 			 $this->view->redirect_to('user/index');
 		}
                 } else {
-                    $this->setFlash("L'email et le mot de passe ne correspondent pas", 'danger');
+                    $this->setFlash("Email and password doesn't match", 'danger');
                     $this->view->redirect_to('');
                 }
         } else {
-            $this->setFlash("Vous devez vous connecter avant de pouvoir acceder à cette partie", 'danger');
-            $this->view->render('users/connect');
+            $this->setFlash("You need to be connected to access in this page", 'danger');
+            $this->view->redirect_to('user/connect');
         }
+    }
+    
+    private function defaultSessionInformation()
+    {
+        if ($this->verifConnexion())
+        {
+            $result = array();
+
+            $_SESSION["nbSession"] = $this->Session->ReadNumberSessions();
+
+            $nbSession = $this->Session->ReadNumberSessions();
+            $tabTitleSession = $this->Session->ReadAllTitleSessions();
+
+            for ($i = 0; $i < $nbSession; $i++)
+            {
+                $result[$tabTitleSession[$i]["id"]]["title"] = $tabTitleSession[$i]["title"];
+                $result[$tabTitleSession[$i]["id"]]["nbLessons"] = $this->Session->ReadNumberLessonsSession($tabTitleSession[$i]["id"]);
+            }
+
+            $_SESSION["AllSessions"] = $result;
+        }
+    }
+    
+    public function connect()
+    {
+        $this->view->render('users/connect');
     }
 
   /*
@@ -68,7 +97,7 @@ class UsersController extends Controller
 
        			// Si l'email existe déjà dans la db -> erreur
        			if ($this->User->findByMail($data['mail'])) {
-       				$this->setFlash("Un utilisateur utilise déjà cet e-mail", 'warning');
+       				$this->setFlash("This email is already used", 'warning');
        				$this->view->render('users/register');
        			}
        			// Sinon on crée l'utilisateur et on le redirige vers l'index
@@ -78,18 +107,18 @@ class UsersController extends Controller
                                 $_SESSION['user'] = $data;
                                 $_SESSION['user']['role'] = "member";
                                 unset($_SESSION['user']['password'], $_SESSION['user']['password2']);
-       				$this->setFlash("Votre inscription a bien été prise en compte", 'success');
+       				$this->setFlash("You are successfully registered", 'success');
        				//$this->login();
-       				$this->view->redirect_to('/user/index');
+       				$this->view->redirect_to('user/index');
        			}
 
        		} else {
-       			$this->setFlash("Les mots de passes renseignés ne sont pas identiques", 'warning');
+       			$this->setFlash("Not same passwords", 'warning');
        			$this->view->render('users/register');
        		}
 
        	} elseif($data && Validator::array_has_empty($data)) {
-                      $this->setFlash("Veuillez renseigner tous les champs", 'warning');
+                      $this->setFlash("Please fill all the fields", 'warning');
                       $this->view->render('users/register');
 
              } else {
@@ -102,15 +131,16 @@ class UsersController extends Controller
      */
     public function admin_index()
     {
-        if (isset($_SESSION['user']) && $_SESSION['user']['role'] == "admin") {
-            $username = $_SESSION['user']['firstName'];
-            $this->view->username = $username;
-            $this->view->render('users/admin/index');
-        } else {
-            $this->setFlash("Vous devez être administrateur pour pouvoir acceder à cette partie", 'danger');
-
-            //header('Location: /user/login'); exit();
-            $this->view->render('users/login');
+        if ($this->verifConnexion())
+        {
+            if (isset($_SESSION['user']) && $_SESSION['user']['role'] == "admin") {
+                $username = $_SESSION['user']['firstName'];
+                $this->view->username = $username;
+                $this->view->render('users/admin/index');
+            } else {
+                $this->setFlash("You need to be administrator to access in this page", 'danger');
+                $this->view->render('users/login');
+            }
         }
     }
 
@@ -121,8 +151,7 @@ class UsersController extends Controller
 	public function logout()
 	{
 	Session::destroy('user');
-	$this->setFlash("Vous êtes bien deconnecté", 'success');
-	//$this->view->render('index/index');
+	$this->setFlash("Log Out successfull !", 'success');
 	$this->view->redirect_to('');
 	}
 
@@ -131,7 +160,6 @@ class UsersController extends Controller
      */
     public function recovery()
     {
-
         $this->view->render('users/recovery');
     }
 
@@ -141,7 +169,7 @@ class UsersController extends Controller
 
     public function admin_brick()
     {
-
+        
     }
 
     public function admin_users()

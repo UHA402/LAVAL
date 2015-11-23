@@ -22,9 +22,9 @@
                         <form class="form-horizontal"
                               data-toggle="validator"
                               method="post"
-                              action="/sequence/edit<?php if (isset($this->sequence)): echo "/".$this->sequence['id'];?>
+                              action="<?php echo URL ?>sequence/edit<?php if (isset($this->sequence)): echo "/".$this->sequence['id'];?>
 
-                        <?php endif; ?>">
+                            <?php endif; ?>">
                             <fieldset>
                                 <span class="text-right">
                                         <div class="togglebutton togglebutton-material-green">
@@ -59,7 +59,6 @@
                                                    required>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
@@ -116,22 +115,21 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="form-group text-center">
+                                        <!--<div class="form-group text-center">
                                             <button type="button" id="sequence[save]" class="btn btn-sm btn-info">Add
                                             </button>
-                                        </div>
+                                        </div>-->
                                     </div>
-
                                 </div>
-                                <h1>Brick in the sequence</h1>
+                                <!--<h1>Brick in the sequence</h1>
                                 <table id="sort" class="table table-striped table-hover text-center">
                                     <thead>
                                     <tr>
                                         <th class="text-center">#</th>
-                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Title</th>
                                         <th class="text-center">Type</th>
                                         <th class="text-center">Media</th>
-                                        <th class="text-center">Action</th>
+                                        <!--<th class="text-center">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -143,7 +141,7 @@
                                             <td><?php echo $brick['type'] ?></td>
                                             <td><?php echo $brick['data'] ?></td>
                                             <td>
-                                                <a href="<?php echo URL ?>sequence/delete/<?php echo $brick['id']; ?>">
+                                                <a href="<?php echo URL ?>brick/delete/<?php echo $brick['id']; ?>">
                                                     <button type="button"
                                                             class="btn btn-flat btn-warning btn-sm btn-td">delete
                                                     </button>
@@ -155,7 +153,7 @@
                                     </tbody>
                                 </table>
                                 <div class="pagingBrick"></div>
-                                <input id="sequence[BrickPos]" value=""/>
+                                <input id="sequence[BrickPos]" value=""/>-->
 
                                 <div class="form-group text-right">
                                     <button type="submit" id="sequence[save]" class="btn btn-primary">Save
@@ -170,8 +168,8 @@
                 <table id="lessonTable" class="table table-striped table-hover text-center">
                     <thead>
                     <tr>
-                        <th class="text-center">#</th>
                         <th class="text-center">Title</th>
+                        <th class="text-center">Brick's number</th>
                         <th class="text-center">Action</th>
                     </tr>
                     </thead>
@@ -180,6 +178,7 @@
                         <tr>
                             <td><?php echo $sequence['id'] ?></td>
                             <td><?php echo $sequence['title'] ?></td>
+                            <td><?php echo $sequence['nbBrick'] ?></td>
                             <td>
                                 <a href="<?php echo URL ?>sequence/edit/<?php echo $sequence['id']; ?>">
                                     <button type="button" class="btn btn-flat btn-info btn-sm btn-td">Edit</button>
@@ -190,12 +189,10 @@
                             </td>
                         </tr>
                     <?php endforeach; ?>
-
                     </tbody>
                 </table>
                 <div class="pagingLesson"></div>
             </div>
-
         </div>
     </div>
 </div>

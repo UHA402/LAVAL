@@ -17,14 +17,14 @@
                 <div class="panel panel-default">
                     <div class="panel-body containerEditForm">
                         
-                         <?php 
+                        <?php 
                             if(isset($this->currentBrick)){
                                 echo "<h1>Edit Brick</h1>";      
-                                echo ' <form class="form-horizontal" data-toggle="validator" method="post" action="'.URL.'brick/UpdateBrick/'.$this->currentBrick['id'].'">';
+                                echo ' <form class="form-horizontal"  enctype="multipart/form-data" data-toggle="validator" method="post" action="'.URL.'brick/UpdateBrick/'.$this->currentBrick['id'].'">';
                             }
                             else {
                                 echo "<h1>Add Brick</h1>";
-                                echo ' <form class="form-horizontal" data-toggle="validator" method="post" action="'.URL.'brick/CreateBrick">';
+                                echo ' <form class="form-horizontal"  enctype="multipart/form-data" data-toggle="validator" method="post" action="'.URL.'brick/CreateBrick">';
                             }
                         ?> 
 
@@ -51,7 +51,7 @@
                                             <select class="form-control" id="brickTypeSelector" name="brick[type]">
                                                 <option value="WAVE" <?php if(isset($this->currentBrick['type']) && $this->currentBrick['type']=="WAVE" ) echo "selected='selected'";?>>Stimuli auditif enregistré</option>
                                                 <option value="TTS" <?php if(isset($this->currentBrick['type']) && $this->currentBrick['type']=="TTS" ) echo "selected='selected'";?>>Stimuli auditif généré</option>
-                                                <option value="TEXT" <?php if(isset($this->currentBrick['type']) && $this->currentBrick['type']=="TEXT" ) echo "selected='selected'";?>>Stimuli visuel textuel</option>
+                                                <option value="TXT" <?php if(isset($this->currentBrick['type']) && $this->currentBrick['type']=="TXT" ) echo "selected='selected'";?>>Stimuli visuel textuel</option>
                                                 <option value="IMG" <?php if(isset($this->currentBrick['type']) && $this->currentBrick['type']=="IMG" ) echo "selected='selected'";?>>Stimuli visuel imagé</option>
                                                 <option value="RESP" <?php if(isset($this->currentBrick['type']) && $this->currentBrick['type']=="RESP" ) echo "selected='selected'";?>>Record user's voice</option>
                                             </select>
@@ -63,17 +63,18 @@
                                     <div class="rows col-lg-6">
                                         <div class="form-group">
                                             <input id="brick[data]" name="brick[data]" type="text"
-                                                                       readonly="" class="form-control floating-label"
+                                                                       <?php if (!isset($this->currentBrick) || ($this->currentBrick['type'] == 'IMG' || $this->currentBrick['type'] == 'WAVE')): ?>readonly=""<?php endif; ?> class="form-control floating-label"
 
                                                                        placeholder="<?php if (isset($this->currentBrick)) {
                                                    echo $this->currentBrick['data'];
-                                               } else echo "Upload File..."?>" value="<?php if (isset($this->currentBrick)) {
+                                               } else { echo "Upload File..."; } ?>" value="<?php if (isset($this->currentBrick)) {
                                                    echo $this->currentBrick['data'];
                                                }?>"> 
-                                               <input type="file" id="inputFile"  required>
-
-                                                                      
-
+                                            <?php if (isset($this->currentBrick) && $this->currentBrick['type'] == 'IMG'): ?>
+                                               <input type="file" name="inputFile[]" id="inputFile" multiple="" required>
+                                            <?php elseif(!isset($this->currentBrick) || $this->currentBrick['type'] == 'WAVE'): ?>
+                                               <input type="file" name="inputFile" id="inputFile" required>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -105,8 +106,8 @@
                                 <td><?php echo $brick['type']; ?></td>
                                 <td><?php echo $brick['data']; ?></td>
                                 <td>
-                                    <a href="<? echo URL ?>brick/edit/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button></a>
-                                    <a href="<? echo URL ?>brick/delete/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button></a>
+                                    <a href="<?php echo URL ?>brick/edit/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-info btn-sm btn-td">edit</button></a>
+                                    <a href="<?php echo URL ?>brick/delete/<?php echo $brick['id']; ?>"><button type="button" class="btn btn-flat btn-warning btn-sm btn-td">delete</button></a>
                                 </td>
                     </tr>
                     <?php endforeach;?>
