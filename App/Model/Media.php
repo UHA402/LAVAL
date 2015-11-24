@@ -74,6 +74,11 @@ class Media extends Model {
         return $tabId;
     }
     
+    public function readMedia($id){
+        $sql = "SELECT * FROM tmedias WHERE id='".$id."';";
+        return $this->db->query($sql);
+    }
+    
     public function upload($index, $destination, $maxSize = false, $extensions = false)
     {
         $file = $_FILES[$index];
@@ -117,11 +122,16 @@ class Media extends Model {
             if (!file_exists($destination)) {
                 mkdir($destination);
             }
-
-            $path = $destination.'/'.$file['name'];
-            $tabFileName[$id] = (move_uploaded_file($file['tmp_name'], $path) ? $path : -4);
-        }
             
+            $path = $destination.'/'.$file['name'];
+            
+            if (!file_exists($path)) {
+                $tabFileName[$id] = (move_uploaded_file($file['tmp_name'], $path) ? $path : -4);
+            } else {
+                $tabFileName[$id] = $path;
+            }
+        }
+        
         return $tabFileName;
     }
 }

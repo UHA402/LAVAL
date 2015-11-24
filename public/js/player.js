@@ -1,3 +1,9 @@
+/* global brick, url, speechSynthesis, brickJson */
+
+var currentSequence = 0;
+var nbSequence = 0;
+var tabBrick = new Array();
+
 $(function () {
 
     //DEBUG
@@ -7,13 +13,62 @@ $(function () {
     var brick3 = {id: 3, name: "Brick 3", type: "IMG", data: "http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158,http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158,http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158,http://vignette2.wikia.nocookie.net/desencyclopedie/images/b/b3/Chat_cool.jpg/revision/latest?cb=20130412102158" };
     var brick4 = {id: 4, name: "Brick 4", type: "WAVE", data: url+"public/media/test.wav"};*/
     var brickList = [];
+    var mediaTemp = "";
     
-    var tabBrick = JSON.parse(brickJson);
+    tabBrick = JSON.parse(brickJson);
     console.log(tabBrick);
     
-    for (brick of tabBrick)
+    nbSequence = tabBrick.tabSequence.length;
+    console.log(nbSequence);
+    
+    /*for (brick of tabBrick.tabSequence[currentSequence].tabBrick)
     {
-        temp = {id: parseInt(brick.bricks_id), name: brick.title, type: brick.type, data: brick.data};
+        mediaTemp = "";
+        var temp = "";
+        
+        if (brick.type === "IMG" || brick.type === "WAVE"){
+            for (var i = 0; i < brick.medias.length - 1; i++){
+                mediaTemp += brick.medias[i]["0"].url + ",";
+            }
+            mediaTemp += brick.medias[brick.medias.length - 1]["0"].url;
+            temp = {id: parseInt(brick.bricks_id), name: brick.title, type: brick.type, data: mediaTemp};
+        }else{
+            temp = {id: parseInt(brick.bricks_id), name: brick.title, type: brick.type, data: brick.data};
+        }
+        brickList.push(temp);
+    }
+    console.log(brickList);
+    
+    
+
+    //Initialisation du player
+    var player = new Player(brickList);
+    console.log('--- Player Initialisation ---');
+    //Start Player
+    console.log('Player Start...');
+    player.start();*/
+    
+    nextSequence();
+
+});
+
+function nextSequence () {
+    var brickList = [];
+    
+    for (brick of tabBrick.tabSequence[currentSequence].tabBrick)
+    {
+        mediaTemp = "";
+        var temp = "";
+        
+        if (brick.type === "IMG" || brick.type === "WAVE"){
+            for (var i = 0; i < brick.medias.length - 1; i++){
+                mediaTemp += brick.medias[i]["0"].url + ",";
+            }
+            mediaTemp += brick.medias[brick.medias.length - 1]["0"].url;
+            temp = {id: parseInt(brick.bricks_id), name: brick.title, type: brick.type, data: mediaTemp};
+        }else{
+            temp = {id: parseInt(brick.bricks_id), name: brick.title, type: brick.type, data: brick.data};
+        }
         brickList.push(temp);
     }
     
@@ -24,9 +79,9 @@ $(function () {
     console.log('--- Player Initialisation ---');
     //Start Player
     console.log('Player Start...');
+    currentSequence++;
     player.start();
-
-});
+}
 
 var Player = function (brickList) {
 
@@ -44,12 +99,13 @@ var Player = function (brickList) {
     // Start le Player
     this.start = function () {
         //Charge l'event sur le bouton next
+        $("#next-brique").off("click");
         $('#next-brique').click(function () {
             loadBrick();
         });
         //Charge la premiere brick
         loadBrick();
-    }
+    };
 
 
     //position dans la list
@@ -70,10 +126,19 @@ var Player = function (brickList) {
         if (posList === getNbrBrick()) {
             $('#next-brique').removeClass("btn-success");
             $('#next-brique').addClass("btn-info");
-            $('#next-brique').text("Finish");
+            if (currentSequence < nbSequence) {
+                $('#next-brique').text("Next Sequence");
+            } else {
+                $('#next-brique').text("Finish");
+            }
             $("#next-brique").off("click");
             $("#next-brique").click(function () {
                 sequenceDone();
+                if (currentSequence < nbSequence) {
+                    nextSequence();
+                } else {
+                    document.location.href= url + "user/index";
+                }
             });
         }
     }
@@ -94,14 +159,16 @@ var Player = function (brickList) {
     //Fin de la séquence envoi des données au controller PHP
     function sequenceDone() {
         var methodcall = url + 'player/save/';
-        var result = "";
+        var result = "session=" + tabBrick.session + "&sequence=" + currentSequence;
         var i = 0;
-        for (i; i < brick.length - 1; i++)
-        {
-            result += brick[i].name + "=" + brick[i].result + ";";
+        
+        for (i; i < brick.length; i++) {
+            if (brick[i].result !== undefined) {
+                result += "&" + brick[i].id + "=" + brick[i].result;
+            }
         }
-        result += brick[i].name + "=" + brick[i].result;
         console.log(result);
+        
         $.ajax({
             type: 'POST',
             url: methodcall,
@@ -112,7 +179,7 @@ var Player = function (brickList) {
             }
         });
     }
-}
+};
 
 var Brick = function (value) {
     this.id = value.id;
@@ -123,14 +190,14 @@ var Brick = function (value) {
 
     this.loadModel = function () {
         var model = new Model(this);
-        console.log('Load Model...')
+        console.log('Load Model...');
         return model.load();
-    }
+    };
 
     this.setResult = function (value) {
         this.result = value;
-    }
-}
+    };
+};
 
 var Model = function (brick) {
     var type = brick.type;
@@ -223,6 +290,6 @@ var Model = function (brick) {
                 });
             });
         }
-    }
-}
+    };
+};
 

@@ -10,6 +10,8 @@ class PlayersController extends Controller
         $this->loadModel("session");
         $this->loadModel("sequence");
         $this->loadModel("brick");
+        $this->loadModel("media");
+        $this->loadModel("media_brick");
     }
     
     public function index()
@@ -27,42 +29,38 @@ class PlayersController extends Controller
     
     public function start($id)
     {
-        if ($this->verifConnexion())
-        {
-            $sessionTitle = $this->Session->ReadTitleSession($id);
-            $sessionTabSequence = $this->Session->ReadLessonsSession($id);
-            $sequenceTabBrick = array();
-            
-            //var_dump($sessionTitle);
-            //echo '</br>';
-            //var_dump($sessionTabSequence);
-            //echo '</br>';
-            
-            foreach ($sessionTabSequence as $id=>$seq)
-            {
-                $sequence = $this->Sequence->findById(intval($seq));
-                $temp = $this->Sequence->findSequenceBricks(intval($seq));
-            
-                //var_dump(intval($seq));
-                //echo '</br>';
-                //var_dump($sequence);
-                //echo '</br>';
-                //var_dump($temp);
-                //echo '</br>';
-                foreach ($temp as $id=>$val)
-                    array_push($sequenceTabBrick, $val);
-            }
-            
-            /*foreach($sequenceTabBrick as $id=>$val)
-            {
-                var_dump($val);
-                echo '</br>';
-            }*/
-            
-            $_SESSION["playerTabBrick"] = $sequenceTabBrick;
-            $this->view->msg = json_encode($sequenceTabBrick);
-            $this->view->render('players/index');
+        if (!$this->verifConnexion()) {
+            return -1;
         }
+        $sessionTitle = $this->Session->ReadTitleSession($id);
+        $sessionTabSequence = $this->Session->ReadLessonsSession($id);
+        $player = array();
+        $player["session"] = $id;
+        
+        foreach ($sessionTabSequence as $idSequence=>$seq) {
+            $sequence = $this->Sequence->findById(intval($seq));
+            $temp = $this->Sequence->findSequenceBricks(intval($seq));
+
+            $player["tabSequence"][$idSequence]["id"] = $sequence[0]["id"];
+            $player["tabSequence"][$idSequence]["tabBrick"] = array();
+            
+            foreach ($temp as $idBrick => $brick) {
+                $brickTemp = $brick;
+                
+                if ($brick["type"] === "IMG" || $brick["type"] === "WAVE") {
+                    $tabIdMedia = $this->Media_brick->readTabMediaByBrick($brick["bricks_id"]);
+                    
+                    foreach ($tabIdMedia as $idMedia => $idTabMedia) {
+                        $media = $this->Media->readMedia($idTabMedia["id_Medias"]);
+                        $brickTemp["medias"][$idMedia] = $media;
+                    }
+                }
+                $player["tabSequence"][$idSequence]["tabBrick"][$idBrick] = $brickTemp;
+            }
+        }
+        
+        $this->view->msg = json_encode($player);
+        $this->view->render('players/index');
     }
     
     public function save()
@@ -109,7 +107,7 @@ class PlayersController extends Controller
                     }
 
             }
-            
+            var_dump($_POST);
             echo json_encode($_POST);
             //$this->view->load_layout('players/index');
         }

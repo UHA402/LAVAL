@@ -56,16 +56,16 @@ class BricksController extends Controller {
         $type= Request::input('type');
         $media= Request::input('data');
         $data = Request::all();
-        
-        
         $bricks= $this->Brick->FindIDBrickByTitle($name);
-        // Title doesn't exists
-        if ($bricks == 0) {
-            //var_dump($_FILES);
-            //$this->Media->upload('inputFile', 'public/uploads/medias');
-            //die();
+        
+        if ($this->data["type"] === "IMG" && count(explode(', ', $this->data["data"])) != 4) {
+            $this->setFlash("4 pictures needed to create brick", "warning");
+            $this->view->redirect_to('brick/edit');
+        } else if ($this->data["type"] === "TXT" && count(explode(', ', $this->data["data"])) != 4) {
+            $this->setFlash("4 words needed to create brick", "warning");
+            $this->view->redirect_to('brick/edit');
+        } else if (($this->data["type"] === "IMG" || $this->data["type"] === "WAVE") && $bricks == 0) {
             $this->Media->setTitle(explode(', ', $media));
-            //$this->Media->setUrl(URL.'medias/'.$media);
             $tabMedia = $this->Media->upload('inputFile', 'public/uploads/medias');
             
             foreach ($tabMedia as $id=>$media) {
@@ -80,13 +80,21 @@ class BricksController extends Controller {
                 $this->Brick->create($data);
                 $tabId = $this->Media->createMedia();
                 $this->Media_Brick->set_id_Bricks($this->Brick->FindIDBrickByTitle($name));
-                //$this->Media_Brick->set_id_Medias($this->Media->retrieveId('title', $media));
                 $this->Media_Brick->set_id_Medias($tabId);
-                $this->Media_Brick->setFields();
-                //create pivot table link elements
                 $this->Media_Brick->createMediaBricks();
-                $this->setFlash("You have created your new brick !", 'success');
+                if($tabId["verif"] === false) {
+                    $this->setFlash("You have created your new brick !", 'success');
+                } else {
+                    $this->setFlash("You have created your new brick but one picture or more is already uploaded !", 'warning');
+                }
                 // create media
+            } else {
+                $this->setFlash("Failure", 'danger');
+            }
+        } else if ($bricks == 0) {
+            if($data) {
+                $this->Brick->create($data);
+                $this->setFlash("You have created your new brick !", 'success');
             } else {
                 $this->setFlash("Failure", 'danger');
             }
@@ -130,7 +138,31 @@ class BricksController extends Controller {
         }
         
         $this->data = Request::all();
-        if($this->Brick->update($id, $this->data )){
+        
+        if ($this->data["type"] === "IMG" && count(explode(', ', $this->data["data"])) != 4) {
+            $this->setFlash("4 pictures needed to update brick", "warning");
+            $this->view->redirect_to('brick/edit');
+        } else if ($this->data["type"] === "TXT" && count(explode(', ', $this->data["data"])) != 4) {
+            $this->setFlash("4 words needed to update brick", "warning");
+            $this->view->redirect_to('brick/edit');
+        } else if(($this->data["type"] === "IMG" || $this->data["type"] === "WAVE") && $this->Brick->update($id, $this->data)){
+            $this->Media->setTitle(explode(', ', $this->data['data']));
+            $tabMedia = $this->Media->upload('inputFile', 'public/uploads/medias');
+            
+            foreach ($tabMedia as $id=>$media) {
+                $tabMedia[$id] = URL.$media;
+            }
+            
+            $this->Media->setUrl($tabMedia);
+            $this->Media->setType($this->data['type']);
+            $tabId = $this->Media->createMedia();
+            $this->Media_Brick->set_id_Bricks($this->Brick->FindIDBrickByTitle($this->data['title']));
+            $this->Media_Brick->set_id_Medias($tabId);
+            $this->Media_Brick->createMediaBricks();
+            
+            $this->setFlash('The brick has been updated', "success");
+            $this->view->redirect_to('brick/edit');
+        } else if($this->Brick->update($id, $this->data)){
             $this->setFlash('The brick has been updated', "success");
             $this->view->redirect_to('brick/edit');
         } else {
